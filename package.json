@@ -8,19 +8,25 @@
         "build": "vite build",
         "preview": "vite preview",
         "prepare": "husky install",
-        "format": "prettier -w src"
+        "format": "prettier -w src",
+        "fix": "eslint"
     },
     "dependencies": {
         "clsx": "^1.2.1",
+        "phosphor-react": "^1.4.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "react-router-dom": "^6.4.0"
+        "react-router-dom": "^6.4.0",
+        "tailwind-merge": "^1.6.0"
     },
     "devDependencies": {
         "@types/react": "^18.0.17",
         "@types/react-dom": "^18.0.6",
         "@vitejs/plugin-react": "^2.1.0",
         "autoprefixer": "^10.4.12",
+        "eslint": "^8.23.1",
+        "eslint-config-next": "^12.3.1",
+        "eslint-plugin-react": "^7.31.8",
         "husky": "^8.0.0",
         "lint-staged": "^13.0.3",
         "postcss": "^8.4.16",
@@ -31,7 +37,8 @@
     },
     "lint-staged": {
         "src/**/*.{js,jsx,ts,tsx}": [
-            "prettier -w"
+            "eslint --max-warnings=0",
+            "prettier -w src"
         ]
     }
 }
