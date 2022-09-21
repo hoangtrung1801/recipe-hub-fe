@@ -1,11 +1,9 @@
-import { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+import Layout from "./components/layout";
+import AppRoutes from "./routes";
 
 function App() {
-  return (
-    <div className="">
-      <h1 className="text-lg text-green-600">hello world</h1>
-    </div>
-  );
+    return <AppRoutes />;
 }
 
 export default App;
