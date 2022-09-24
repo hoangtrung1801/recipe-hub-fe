@@ -16,7 +16,6 @@
     "plugins": ["react"],
     "rules": {
         "react/prop-types": "off",
-        "no-console": 0,
         "react/sort-comp": [
             1,
             {
@@ -28,6 +27,11 @@
                     "render"
                 ]
             }
-        ]
+        ],
+        "no-console": ["warn", { "allow": ["warn", "info", "error"] }],
+        "no-undef": "warn",
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "react/display-name": "off"
     }
 }

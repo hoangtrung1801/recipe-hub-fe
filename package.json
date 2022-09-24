@@ -9,7 +9,8 @@
         "preview": "vite preview",
         "prepare": "husky install",
         "format": "prettier -w src",
-        "fix": "eslint"
+        "lint": "eslint .",
+        "lint:fix": "eslint --fix"
     },
     "dependencies": {
         "clsx": "^1.2.1",
