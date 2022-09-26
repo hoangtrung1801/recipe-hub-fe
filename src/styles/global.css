@@ -40,6 +40,7 @@
     }
 
     .container {
-        @apply px-0 sm:px-4 md:px-8 2xl:px-0 mx-auto
+        /* @apply px-0 sm:px-4 md:px-8 2xl:px-0 mx-auto */
+        @apply px-0 mx-auto
     }
 }
