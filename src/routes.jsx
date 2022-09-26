@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/layout";
+import Page404 from "./components/pages/404";
+import ComponentsPage from "./components/pages/components";
 import HomePage from "./components/pages/HomePage";
 import RecipesPage from "./components/pages/RecipesPage";
 
@@ -15,6 +17,14 @@ const router = createBrowserRouter([
             {
                 path: "/recipes",
                 element: <RecipesPage />,
+            },
+            {
+                path: "/components",
+                element: <ComponentsPage />,
+            },
+            {
+                path: "/404",
+                element: <Page404 />,
             },
         ],
     },
