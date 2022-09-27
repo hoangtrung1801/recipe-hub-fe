@@ -3,7 +3,9 @@ import Layout from "./components/layout";
 import Page404 from "./components/pages/404";
 import ComponentsPage from "./components/pages/components";
 import HomePage from "./components/pages/HomePage";
+import LoginPage from "./components/pages/LoginPage";
 import RecipesPage from "./components/pages/RecipesPage";
+import SignUpPage from "./components/pages/SignUpPage";
 
 const router = createBrowserRouter([
     {
@@ -17,6 +19,14 @@ const router = createBrowserRouter([
             {
                 path: "/recipes",
                 element: <RecipesPage />,
+            },
+            {
+                path: "/login",
+                element: <LoginPage />,
+            },
+            {
+                path: "/signup",
+                element: <SignUpPage />,
             },
             {
                 path: "/components",
