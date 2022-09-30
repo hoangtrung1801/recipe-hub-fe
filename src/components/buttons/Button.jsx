@@ -44,9 +44,9 @@ const Button = React.forwardRef(
                     //#region  //*=========== Variants ===========
                     [
                         variant === "primary" && [
-                            "bg-primary-400 text-dark-0",
+                            "bg-primary-500 text-dark-0",
                             // "border border-primary-600",
-                            "hover:bg-primary-500 hover:text-dark-0",
+                            "hover:bg-primary-400 hover:text-dark-0",
                             "active:bg-primary-500",
                             "disabled:bg-primary-400 disabled:hover:bg-primary-400",
                         ],
@@ -66,7 +66,7 @@ const Button = React.forwardRef(
                         ],
                         variant === "light" && [
                             "rounded-md border border-transparent",
-                            "bg-primary-300 text-dark-0 hover:bg-primary-400",
+                            "bg-primary-300 text-dark-0 text-dark-1 hover:bg-primary-400",
                             "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2",
                         ],
                         // variant === "lighter" && [

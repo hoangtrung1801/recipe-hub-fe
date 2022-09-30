@@ -30,6 +30,7 @@
         ],
         "no-console": ["warn", { "allow": ["warn", "info", "error"] }],
         "no-undef": "warn",
+        "no-unused-vars": "warn",
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
         "react/display-name": "off"
