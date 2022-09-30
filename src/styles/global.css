@@ -32,6 +32,10 @@
     body {
         @apply bg-primary-200
     }
+
+    hr {
+        @apply border-dark-0 my-12
+    }
 }
 
 @layer utilities {
@@ -40,6 +44,11 @@
     }
 
     .container {
-        @apply px-0 sm:px-4 md:px-8 2xl:px-0 mx-auto
+        /* @apply px-0 sm:px-4 md:px-8 2xl:px-0 mx-auto */
+        @apply px-0 mx-auto
+    }
+
+    .circle-outline {
+        @apply flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary-500 transition hover:bg-primary-500/30
     }
 }
