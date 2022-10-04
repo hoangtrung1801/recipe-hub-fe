@@ -52,3 +52,17 @@
         @apply flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary-500 transition hover:bg-primary-500/30
     }
 }
+
+.underline-animate {
+    border-bottom-width: 0;
+    background-image: linear-gradient(hsla(var(--tw-color-primary-500)), hsla(var(--tw-color-primary-500))), linear-gradient(hsla(var(--tw-color-primary-500)), hsla(var(--tw-color-primary-500)));
+    background-size: 0 8px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size .5s ease;
+}
+
+.underline-animate:hover {
+    background-size: 100% 8px;
+    background-position: 0 100%
+}
