@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import Button from "../buttons/Button";
 // import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
@@ -11,6 +12,7 @@ const LoginPage = () => {
     } = useForm();
 
     const onSubmit = (data) => {
+        // eslint-disable-next-line no-console
         console.log(data);
     };
 
@@ -125,12 +127,13 @@ const LoginPage = () => {
                         </div>
 
                         <div>
-                            <button
+                            <Button
+                                variant="primary"
                                 type="submit"
-                                className="group relative flex w-full justify-center border border-transparent bg-primary-300 py-2 px-4 text-sm font-medium text-dark-0 hover:bg-primary-500 focus:outline-none focus:ring-2  focus:ring-offset-2"
+                                className="w-full"
                             >
                                 Sign in
-                            </button>
+                            </Button>
                         </div>
                     </form>
                 </div>

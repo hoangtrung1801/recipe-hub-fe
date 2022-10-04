@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import Button from "../buttons/Button";
 
 const SignUpPage = () => {
     const {
@@ -8,6 +9,7 @@ const SignUpPage = () => {
     } = useForm();
 
     const onSubmit = (data) => {
+        // eslint-disable-next-line no-console
         console.log(data);
     };
 
@@ -114,13 +116,13 @@ const SignUpPage = () => {
                     </div>
 
                     <div>
-                        <button
+                        <Button
+                            variant="primary"
                             type="submit"
-                            className="group relative flex w-full justify-center  border border-transparent bg-primary-300 py-2 px-4 text-sm font-medium text-dark-0 hover:bg-primary-500 focus:outline-none focus:ring-2  focus:ring-offset-2"
+                            className="w-full"
                         >
-                            <span className="absolute inset-y-0 left-0 flex items-center pl-3"></span>
-                            Sign Up
-                        </button>
+                            Sign up
+                        </Button>
                     </div>
                 </form>
             </div>
