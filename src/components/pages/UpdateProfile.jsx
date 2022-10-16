@@ -53,8 +53,8 @@ const UpdateProfile = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="p-2 py-2 md:w-1/4">
-                        <div className="h-[250px] w-[250px] overflow-hidden">
+                    <div className="w-[250px] p-2 py-2 md:w-1/4">
+                        <div className="w-full overflow-hidden">
                             <img
                                 className="mx-auto h-full w-full rounded-full"
                                 src="https://avatars.githubusercontent.com/u/94124019?v=4"
