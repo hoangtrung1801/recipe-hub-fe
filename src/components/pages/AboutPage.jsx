@@ -4,6 +4,7 @@ import React, { Fragment } from "react";
 import { useState } from "react";
 import { Listbox } from "@headlessui/react";
 import CardComponent from "./CardComponent";
+import { Link } from "react-router-dom";
 
 const recipeList = [
     {
@@ -51,7 +52,12 @@ const AboutPage = () => {
                 </div>
                 <div className="mt-3 flex flex-col gap-3 px-2">
                     <p className="font-semibold text-dark-0">Username</p>
-                    <Button variant="outline">Edit profile</Button>
+                    <Link
+                        to={"/update"}
+                        className="inline-flex items-center justify-center rounded bg-primary-500 px-4 py-2 text-sm font-medium text-dark-0 shadow-sm transition-colors duration-75 hover:bg-primary-400 hover:text-dark-0 focus:outline-none focus:ring-4 focus:ring-primary-300 focus-visible:ring focus-visible:ring-primary-500 active:bg-primary-500 disabled:bg-primary-400 disabled:hover:bg-primary-400"
+                    >
+                        Edit profile
+                    </Link>
                     <span className="font-semibold text-dark-0">
                         Yours recipes: {myRecipe.reduce((a) => (a += 1), 0)}
                     </span>

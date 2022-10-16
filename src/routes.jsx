@@ -9,6 +9,7 @@ import RecipesPage from "./components/pages/RecipesPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import AboutPage from "./components/pages/AboutPage";
 import CardComponent from "./components/pages/CardComponent";
+import UpdateProfile from "./components/pages/UpdateProfile";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path: "/about",
                 element: <AboutPage />,
+            },
+            {
+                path: "/update",
+                element: <UpdateProfile />,
             },
             {
                 path: "/recipes",
