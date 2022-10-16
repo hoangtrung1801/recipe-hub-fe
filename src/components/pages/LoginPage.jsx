@@ -22,7 +22,7 @@ const LoginPage = () => {
                 <div className="w-full max-w-md space-y-8">
                     <div>
                         <h1 className="text-center text-4xl font-bold">
-                            Stryve
+                            RecipeHub
                         </h1>
                         <h2 className="mt-6 text-center text-xl font-semibold tracking-tight text-gray-900">
                             Sign in to your account
@@ -45,7 +45,7 @@ const LoginPage = () => {
                                     type="text"
                                     autoComplete="email"
                                     className="relative block w-full appearance-none rounded-none  border border-gray-300 bg-primary-100 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-dark-0 focus:outline-none focus:ring-dark-0 sm:text-sm"
-                                    placeholder="email"
+                                    placeholder="Email"
                                     {...register("email", {
                                         required: true,
                                         pattern: /^\S+@\S+$/i,
@@ -81,7 +81,7 @@ const LoginPage = () => {
                                     type="password"
                                     autoComplete="password"
                                     className="relative block w-full appearance-none border border-gray-300 bg-primary-100 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-dark-0 focus:outline-none focus:ring-dark-0 sm:text-sm"
-                                    placeholder="password"
+                                    placeholder="Password"
                                     {...register("password", {
                                         required: true,
                                         validate: (value) => {

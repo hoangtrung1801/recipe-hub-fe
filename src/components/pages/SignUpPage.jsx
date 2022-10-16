@@ -17,7 +17,9 @@ const SignUpPage = () => {
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md space-y-8">
                 <div>
-                    <h1 className="text-center text-4xl font-bold">Stryve</h1>
+                    <h1 className="text-center text-4xl font-bold">
+                        RecipeHub
+                    </h1>
                     <h2 className="mt-6 text-center text-xl font-semibold tracking-tight text-gray-900">
                         Register
                     </h2>

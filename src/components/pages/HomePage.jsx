@@ -1,3 +1,24 @@
+import CardComponent from "./CardComponent";
+
+const recipes = [
+    {
+        text: "Tomato & pesto pasta",
+        linkBg: "imgWrapper lg:h-[360px] md:h-[270px] h-[240px] bg-[url(https://images.prismic.io/stryve/3d40b6ec-7d41-4d48-bd3a-5bf78ca5b303_tomato-pesto-pasta.png?auto=compress%2Cformat&fm=webp&lossless=false&q=75&w=450%20450w)] bg-cover bg-no-repeat bg-center",
+    },
+    {
+        text: "Nutty, apple & date porridge",
+        linkBg: "imgWrapper lg:h-[360px] md:h-[270px] h-[240px] bg-[url(https://images.prismic.io/stryve/2be94b3a-3084-4aa0-817d-7af87596bd74_pulled-jackfruit-loaded-fries.png?auto=compress%2Cformat&fm=webp&lossless=false&q=75&w=450%20450w)] bg-cover bg-no-repeat bg-center",
+    },
+    {
+        text: "Mushroom & kale macaroni",
+        linkBg: "imgWrapper lg:h-[360px] md:h-[270px] h-[240px] bg-[url(https://images.prismic.io/stryve/fad9e994-32e9-4511-b620-5b3a6287009f_mushroom-spinach-pesto-toasted-sandwich.png?auto=compress%2Cformat&fm=webp&lossless=false&q=75&w=450%20450w)] bg-cover bg-no-repeat bg-center",
+    },
+    {
+        text: "Griddled courgette & asparagus pasta",
+        linkBg: "imgWrapper lg:h-[360px] md:h-[270px] h-[240px] bg-[url(https://images.prismic.io/stryve/7ac06668-07b3-4dbb-ac42-850aa27a7ec3_mushroom-stroganoff.png?auto=compress%2Cformat&fm=webp&lossless=false&q=75&w=450%20450w)] bg-cover bg-no-repeat bg-center",
+    },
+];
+
 const HomePage = () => {
     return (
         <div>
@@ -10,269 +31,29 @@ const HomePage = () => {
                     />
                     <div className="home-page__banner-text  absolute inset-0 flex h-full w-full flex-col items-center justify-center">
                         <span className="w-[55%] text-center text-7xl font-bold leading-[95px] text-black">
-                            {" "}
-                            Tasty plant - based recipes & more{" "}
-                        </span>{" "}
+                            Tasty plant - based recipes & more
+                        </span>
                         <span className="mt-8 w-[57%] text-center text-3xl font-light">
-                            {" "}
                             Discover some tasty plant - based recipes🥙 explore
                             topics around physical🚵‍♂️ & mental health🧠 all
-                            whilst trying to look after our planet🌍{" "}
-                        </span>{" "}
-                    </div>{" "}
-                </div>{" "}
+                            whilst trying to look after our planet🌍
+                        </span>
+                    </div>
+                </div>
             </banner>
             <menu className="pt-[120px] pb-[80px]">
                 <div className="home-page__menu grid grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-4">
-                    <div className="home-page__menu-item flex flex-col gap-5 pb-8">
-                        <img
-                            // className="h-full w-full object-cover "
-                            src="https://images.prismic.io/stryve/338b523d-73cc-439a-acd0-d02eaff6ba7e_nutty-apple-date-porridge.png?auto=compress,format&fm=webp&lossless=false&q=75&w=375%20375w,%20https://images.prismic.io/stryve/338b523d-73cc-439a-acd0-d02eaff6ba7e_nutty-apple-date-porridge.png?auto=compress,format&fm=webp&lossless=false&q=75&w=450%20450w"
-                            alt="image"
-                        />
-                        <div>
-                            <a className="" href="#">
-                                <span className="text-center text-3xl font-semibold md:text-left ">
-                                    {" "}
-                                    Nutty, apple date porridge{" "}
-                                </span>{" "}
-                            </a>{" "}
-                        </div>{" "}
-                        <div className="flex gap-3 text-base font-normal">
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                        <path d="M8 13.875a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M8 8.375 10.475 5.9M6.5.875h3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                        </svg> */}{" "}
-                                <span className="">10 m </span>{" "}
-                            </div>{" "}
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                            <path d="M10 6L2.5 13.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M4.00006 12C1.00006 7.00001 5.00006 2 13.5001 2.5C14.0001 11 9.00005 15 4.00006 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                            </svg> */}{" "}
-                                <span className="">6 plants </span>{" "}
-                            </div>{" "}
+                    {recipes.map((recipe) => (
+                        <div key={recipe.text}>
+                            <CardComponent card={recipe} />
                         </div>
-                    </div>{" "}
-                    <div className="home-page__menu-item flex flex-col gap-5 pb-8">
-                        <img
-                            // className="h-full w-full object-cover "
-                            src="https://images.prismic.io/stryve/3d40b6ec-7d41-4d48-bd3a-5bf78ca5b303_tomato-pesto-pasta.png?auto=compress,format&fm=webp&lossless=false&q=75&w=450"
-                            alt="image"
-                        />
-                        <div>
-                            <a className="" href="#">
-                                <span className="text-center text-3xl font-semibold md:text-left ">
-                                    {" "}
-                                    Tomato & pesto pasta{" "}
-                                </span>{" "}
-                            </a>{" "}
-                        </div>{" "}
-                        <div className="flex gap-3 text-base font-normal">
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                        <path d="M8 13.875a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M8 8.375 10.475 5.9M6.5.875h3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                        </svg> */}{" "}
-                                <span className="">10 m </span>{" "}
-                            </div>{" "}
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                            <path d="M10 6L2.5 13.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M4.00006 12C1.00006 7.00001 5.00006 2 13.5001 2.5C14.0001 11 9.00005 15 4.00006 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                            </svg> */}{" "}
-                                <span className="">6 plants </span>{" "}
-                            </div>{" "}
+                    ))}
+                    {recipes.map((recipe) => (
+                        <div key={recipe.text}>
+                            <CardComponent card={recipe} />
                         </div>
-                    </div>{" "}
-                    <div className="home-page__menu-item flex flex-col gap-5 pb-8">
-                        <img
-                            // className="h-full w-full object-cover "
-                            src="https://images.prismic.io/stryve/fad9e994-32e9-4511-b620-5b3a6287009f_mushroom-spinach-pesto-toasted-sandwich.png?auto=compress,format&fm=webp&lossless=false&q=75&w=450"
-                            alt="image"
-                        />
-                        <div>
-                            <a className="" href="#">
-                                <span className="text-center text-3xl font-semibold md:text-left ">
-                                    {" "}
-                                    Mushroom, spinach & pesto toasted sandwich{" "}
-                                </span>{" "}
-                            </a>{" "}
-                        </div>{" "}
-                        <div className="flex gap-3 text-base font-normal">
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                        <path d="M8 13.875a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M8 8.375 10.475 5.9M6.5.875h3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                        </svg> */}{" "}
-                                <span className="">10 m </span>{" "}
-                            </div>{" "}
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                            <path d="M10 6L2.5 13.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M4.00006 12C1.00006 7.00001 5.00006 2 13.5001 2.5C14.0001 11 9.00005 15 4.00006 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                            </svg> */}{" "}
-                                <span className="">6 plants </span>{" "}
-                            </div>{" "}
-                        </div>
-                    </div>{" "}
-                    <div className="home-page__menu-item flex flex-col gap-5 pb-8">
-                        <img
-                            // className="h-full w-full object-cover "
-                            src="https://images.prismic.io/stryve/7ac06668-07b3-4dbb-ac42-850aa27a7ec3_mushroom-stroganoff.png?auto=compress,format&fm=webp&lossless=false&q=75&w=450"
-                            alt="image"
-                        />
-                        <div>
-                            <a className="" href="#">
-                                <span className="text-center text-3xl font-semibold md:text-left ">
-                                    {" "}
-                                    Mushroom stroganoff{" "}
-                                </span>{" "}
-                            </a>{" "}
-                        </div>{" "}
-                        <div className="flex gap-3 text-base font-normal">
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                        <path d="M8 13.875a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M8 8.375 10.475 5.9M6.5.875h3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                        </svg> */}{" "}
-                                <span className="">10 m </span>{" "}
-                            </div>{" "}
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                            <path d="M10 6L2.5 13.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M4.00006 12C1.00006 7.00001 5.00006 2 13.5001 2.5C14.0001 11 9.00005 15 4.00006 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                            </svg> */}{" "}
-                                <span className="">6 plants </span>{" "}
-                            </div>{" "}
-                        </div>
-                    </div>{" "}
-                    <div className="home-page__menu-item flex flex-col gap-5 pb-8">
-                        <img
-                            // className="h-full w-full object-cover "
-                            src="https://images.prismic.io/stryve/6888281e-7d9d-4f83-abcb-6c1ac5eaf88c_chickpea-mayo-sandwhich.png?auto=compress,format&fm=webp&lossless=false&q=75&w=450"
-                            alt="image"
-                        />
-                        <div>
-                            <a className="" href="#">
-                                <span className="text-center text-3xl font-semibold md:text-left ">
-                                    {" "}
-                                    Chickpea mayo sandwich{" "}
-                                </span>{" "}
-                            </a>{" "}
-                        </div>{" "}
-                        <div className="flex gap-3 text-base font-normal">
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                        <path d="M8 13.875a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M8 8.375 10.475 5.9M6.5.875h3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                        </svg> */}{" "}
-                                <span className="">10 m </span>{" "}
-                            </div>{" "}
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                            <path d="M10 6L2.5 13.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M4.00006 12C1.00006 7.00001 5.00006 2 13.5001 2.5C14.0001 11 9.00005 15 4.00006 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                            </svg> */}{" "}
-                                <span className="">6 plants </span>{" "}
-                            </div>{" "}
-                        </div>
-                    </div>{" "}
-                    <div className="home-page__menu-item flex flex-col gap-5 pb-8">
-                        <img
-                            // className="h-full w-full object-cover "
-                            src="https://images.prismic.io/stryve/079be1b2-fb5d-4e64-9a98-5f5f231e8c63_mushroom-kale-macaroni.png?auto=compress,format&fm=webp&lossless=false&q=75&w=450"
-                            alt="image"
-                        />
-                        <div>
-                            <a className="" href="#">
-                                <span className="text-center text-3xl font-semibold md:text-left ">
-                                    {" "}
-                                    Mushroom & kale macaroni{" "}
-                                </span>{" "}
-                            </a>{" "}
-                        </div>{" "}
-                        <div className="flex gap-3 text-base font-normal">
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                        <path d="M8 13.875a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M8 8.375 10.475 5.9M6.5.875h3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                        </svg> */}{" "}
-                                <span className="">10 m </span>{" "}
-                            </div>{" "}
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                            <path d="M10 6L2.5 13.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M4.00006 12C1.00006 7.00001 5.00006 2 13.5001 2.5C14.0001 11 9.00005 15 4.00006 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                            </svg> */}{" "}
-                                <span className="">6 plants </span>{" "}
-                            </div>{" "}
-                        </div>
-                    </div>{" "}
-                    <div className="home-page__menu-item flex flex-col gap-5 pb-8">
-                        <img
-                            // className="h-full w-full object-cover "
-                            src="https://images.prismic.io/stryve/ec561102-09de-4fab-b60f-338101ca20c5_squash-kale-risotto.png?auto=compress,format&fm=webp&lossless=false&q=75&w=450"
-                            alt="image"
-                        />
-                        <div>
-                            <a className="" href="#">
-                                <span className="text-center text-3xl font-semibold md:text-left ">
-                                    {" "}
-                                    Squash & kale risotto{" "}
-                                </span>{" "}
-                            </a>{" "}
-                        </div>{" "}
-                        <div className="flex gap-3 text-base font-normal">
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                        <path d="M8 13.875a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M8 8.375 10.475 5.9M6.5.875h3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                        </svg> */}{" "}
-                                <span className="">10 m </span>{" "}
-                            </div>{" "}
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                            <path d="M10 6L2.5 13.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M4.00006 12C1.00006 7.00001 5.00006 2 13.5001 2.5C14.0001 11 9.00005 15 4.00006 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                            </svg> */}{" "}
-                                <span className="">6 plants </span>{" "}
-                            </div>{" "}
-                        </div>
-                    </div>{" "}
-                    <div className="home-page__menu-item flex flex-col gap-5 pb-8">
-                        <img
-                            // className="h-full w-full object-cover "
-                            src="https://images.prismic.io/stryve/7ac06668-07b3-4dbb-ac42-850aa27a7ec3_mushroom-stroganoff.png?auto=compress,format&fm=webp&lossless=false&q=75&w=450"
-                            alt="image"
-                        />
-                        <div>
-                            <a className="" href="#">
-                                <span className="text-center text-3xl font-semibold md:text-left ">
-                                    {" "}
-                                    Pulled jackfruit loaded fries{" "}
-                                </span>{" "}
-                            </a>{" "}
-                        </div>{" "}
-                        <div className="flex gap-3 text-base font-normal">
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                        <path d="M8 13.875a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M8 8.375 10.475 5.9M6.5.875h3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                        </svg> */}{" "}
-                                <span className="">10 m </span>{" "}
-                            </div>{" "}
-                            <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                            <path d="M10 6L2.5 13.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M4.00006 12C1.00006 7.00001 5.00006 2 13.5001 2.5C14.0001 11 9.00005 15 4.00006 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                            </svg> */}{" "}
-                                <span className="">6 plants </span>{" "}
-                            </div>{" "}
-                        </div>
-                    </div>{" "}
-                </div>{" "}
+                    ))}
+                </div>
             </menu>
             <description>
                 <div className="h-auto items-center bg-primary-300 py-20 ">
@@ -291,7 +72,7 @@ const HomePage = () => {
                     </div>
                 </div>{" "}
             </description>
-            <article className="pt-[120px]">
+            {/* <article className="pt-[120px]">
                 <div className="grid grid-cols-1 gap-9 md:grid-cols-3 lg:grid-cols-4">
                     <div className="home-page__menu-item flex flex-col gap-5 pb-8">
                         <img
@@ -310,11 +91,7 @@ const HomePage = () => {
                         </div>{" "}
                         <div className="text-base font-normal">
                             <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                            <path d="M8 13.875a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M8 8.375 10.475 5.9M6.5.875h3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                            </svg> */}{" "}
-                                <span className="">5 mins read </span>{" "}
+                                <span className="">5 mins read </span>
                             </div>
                         </div>
                     </div>{" "}
@@ -335,10 +112,6 @@ const HomePage = () => {
                         </div>{" "}
                         <div className="text-base font-normal">
                             <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                            <path d="M8 13.875a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M8 8.375 10.475 5.9M6.5.875h3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                            </svg> */}{" "}
                                 <span className="">5 mins read </span>{" "}
                             </div>
                         </div>
@@ -359,10 +132,6 @@ const HomePage = () => {
                         </div>{" "}
                         <div className="text-base font-normal">
                             <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                            <path d="M8 13.875a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M8 8.375 10.475 5.9M6.5.875h3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                            </svg> */}{" "}
                                 <span className="">4 mins read </span>{" "}
                             </div>
                         </div>
@@ -385,16 +154,12 @@ const HomePage = () => {
                         </div>{" "}
                         <div className="text-base font-normal">
                             <div>
-                                {" "}
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="1em" height="1em" className="RecipeCard_metaIcon__RH7hh">
-                                            <path d="M8 13.875a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M8 8.375 10.475 5.9M6.5.875h3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-                                            </svg> */}{" "}
-                                <span className="">4 mins read </span>{" "}
+                               <span className="">4 mins read </span>{" "}
                             </div>
                         </div>
                     </div>{" "}
                 </div>{" "}
-            </article>{" "}
+            </article> */}
         </div>
     );
 };

@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import clsxm from "~/libs/clsxm";
 
-const UnderlineLink = ({ className, to, icon, children }) => {
+const UnderlineLink = ({
+    className,
+    to,
+    icon,
+    children,
+    multiline = false,
+}) => {
     return (
         <Link
             to={to}
@@ -11,15 +17,19 @@ const UnderlineLink = ({ className, to, icon, children }) => {
             )}
         >
             <span className="text-2xl">{icon && icon}</span>
-            <span
+            <a
+                href="#"
                 className={clsxm(
-                    "relative flex py-1",
-                    "after:absolute after:bottom-1 after:left-0 after:right-0 after:h-[3px] after:w-0 after:bg-primary-500 after:transition-all after:duration-300 group-hover:after:w-full"
-                    // "after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-[3px] after:w-full after:rounded-sm after:bg-white after:transition-all after:duration-300 after:content-[''] hover:text-white hover:after:w-full"
+                    !multiline &&
+                        "relative flex py-1 after:absolute after:bottom-1 after:left-0 after:right-0 after:h-[3px] after:w-0 after:bg-primary-500 after:transition-all after:duration-300 group-hover:after:w-full",
+                    // // "after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-[3px] after:w-full after:rounded-sm after:bg-white after:transition-all after:duration-300 after:content-[''] hover:text-white hover:after:w-full"
+                    className
                 )}
             >
-                {children}
-            </span>
+                <span className={clsxm(multiline && "underline-animate ")}>
+                    {children}
+                </span>
+            </a>
         </Link>
     );
 };
