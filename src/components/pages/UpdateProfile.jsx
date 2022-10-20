@@ -16,7 +16,7 @@ const UpdateProfile = () => {
 
     const onCrop = (view) => {
         setavatar(view);
-        setFileSize([...view]);
+        setFileSize([view]);
     };
 
     const onClose = () => {
