@@ -1,7 +1,7 @@
 import Button from "../buttons/Button";
-import Avatar from "react-avatar-edit";
-import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
+import EditAvaModal from "../AvatarModal";
+import InputComponent from "../InputComponent";
 
 const UpdateProfile = () => {
     const img =
@@ -47,65 +47,14 @@ const UpdateProfile = () => {
                 <div className="mt-3 flex flex-col-reverse gap-3 md:flex-row">
                     <div className="py-2 md:w-3/4 md:pr-10">
                         <h1 className="text-4xl font-bold ">Public Profile</h1>
-                        <div className="w-full space-y-8">
-                            <input type="hidden" name="remember" value="true" />
-                            <div className="flex flex-col gap-3 -space-y-px ">
-                                <div>
-                                    <label>Name</label>
-                                    <input
-                                        name="name"
-                                        type="text"
-                                        autoComplete="name"
-                                        className="relative block w-full appearance-none rounded-none  border border-gray-300 bg-primary-100 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-dark-0 focus:outline-none focus:ring-dark-0 sm:text-sm"
-                                        placeholder="Name"
-                                        value={name}
-                                        onChange={(e) =>
-                                            setName(e.target.value)
-                                        }
-                                    />
-                                    <p className="max-w-[500px] text-[#9ba6b0]">
-                                        Your name may appear around GitHub where
-                                        you contribute or are mentioned. You can
-                                        remove it at any time.
-                                    </p>
-                                </div>
-                                <div>
-                                    <label>Phone</label>
-                                    <input
-                                        name="text"
-                                        type="text"
-                                        autoComplete="email"
-                                        className="relative block w-full appearance-none rounded-none  border border-gray-300 bg-primary-100 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-dark-0 focus:outline-none focus:ring-dark-0 sm:text-sm"
-                                        placeholder="Phone number"
-                                        value={phone}
-                                        onChange={(e) =>
-                                            setPhone(e.target.value)
-                                        }
-                                    />
-                                </div>
-                                <div>
-                                    <label>Address</label>
-                                    <input
-                                        name="text"
-                                        type="text"
-                                        autoComplete="email"
-                                        className="relative block w-full appearance-none rounded-none  border border-gray-300 bg-primary-100 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-dark-0 focus:outline-none focus:ring-dark-0 sm:text-sm"
-                                        placeholder="Your address"
-                                        value={address}
-                                        onChange={(e) =>
-                                            setAddress(e.target.value)
-                                        }
-                                    />
-                                </div>
-                                <div>
-                                    <label>Bio</label>
-                                    <textarea
-                                        className="relative block h-[90px] w-full appearance-none border border-gray-300 bg-primary-100 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-dark-0 focus:outline-none focus:ring-dark-0 sm:text-sm"
-                                        placeholder="Your Bio . . ."
-                                    ></textarea>
-                                </div>
-                            </div>
-                        </div>
+                        <InputComponent
+                            name={name}
+                            setName={setName}
+                            address={address}
+                            setAddress={setAddress}
+                            phone={phone}
+                            setPhone={setPhone}
+                        />
                     </div>
                     <div className="w-[250px] p-2 py-2">
                         <div className="relative w-full overflow-hidden">
@@ -155,85 +104,3 @@ const UpdateProfile = () => {
 };
 
 export default UpdateProfile;
-
-const EditAvaModal = ({
-    isOpen,
-    setIsOpen,
-    onClose,
-    onCrop,
-    onBeforeFileLoad,
-    saveImg,
-    fileSize,
-}) => {
-    return (
-        <React.Fragment>
-            <Transition appear show={isOpen} as={Fragment}>
-                <Dialog
-                    as="div"
-                    className="relative z-50"
-                    onClose={() => setIsOpen(false)}
-                >
-                    <Transition.Child
-                        as={Fragment}
-                        enter="ease-out duration-300"
-                        enterFrom="opacity-0"
-                        enterTo="opacity-100"
-                        leave="ease-in duration-200"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
-                    >
-                        <div className="fixed inset-0 bg-black bg-opacity-25" />
-                    </Transition.Child>
-
-                    <div className="fixed inset-0 overflow-y-auto">
-                        <div className="flex min-h-full items-center justify-center p-4 text-center">
-                            <Transition.Child
-                                as={Fragment}
-                                enter="ease-out duration-300"
-                                enterFrom="opacity-0 scale-95"
-                                enterTo="opacity-100 scale-100"
-                                leave="ease-in duration-200"
-                                leaveFrom="opacity-100 scale-100"
-                                leaveTo="opacity-0 scale-95"
-                            >
-                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded bg-white p-6 text-left align-middle shadow-xl transition-all">
-                                    <Dialog.Title
-                                        as="h3"
-                                        className="text-lg font-medium leading-6 text-gray-900"
-                                    >
-                                        Edit your profile picture
-                                    </Dialog.Title>
-
-                                    <div className="mt-5 flex justify-center">
-                                        <Avatar
-                                            width={300}
-                                            height={300}
-                                            onClose={onClose}
-                                            onCrop={onCrop}
-                                            onBeforeFileLoad={onBeforeFileLoad}
-                                        />
-                                    </div>
-
-                                    <div className="mt-4">
-                                        {fileSize.length > 0 ? (
-                                            <Button
-                                                variant="primary"
-                                                onClick={saveImg}
-                                            >
-                                                Save
-                                            </Button>
-                                        ) : (
-                                            <Button variant="primary" disabled>
-                                                Save
-                                            </Button>
-                                        )}
-                                    </div>
-                                </Dialog.Panel>
-                            </Transition.Child>
-                        </div>
-                    </div>
-                </Dialog>
-            </Transition>
-        </React.Fragment>
-    );
-};
