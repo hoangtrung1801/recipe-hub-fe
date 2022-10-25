@@ -9,6 +9,8 @@ import RecipesPage from "./components/pages/RecipesPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import AboutPage from "./components/pages/AboutPage";
 import CardComponent from "./components/pages/CardComponent";
+import DivStart from "./components/pages/DivStart";
+import TestSlider from "./components/pages/TestSlider";
 
 const router = createBrowserRouter([
     {
@@ -50,6 +52,14 @@ const router = createBrowserRouter([
             {
                 path: "/temp",
                 element: <CardComponent />,
+            },
+            {
+                path: "/test",
+                element: <DivStart />,
+            },
+            {
+                path: "/slider",
+                element: <TestSlider />,
             },
         ],
     },

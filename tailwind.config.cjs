@@ -24,6 +24,7 @@ module.exports = {
                     'rn':'370px',
                    }
             },
+        
         },
     },
     plugins: [],

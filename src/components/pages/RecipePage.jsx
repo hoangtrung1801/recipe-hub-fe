@@ -1,6 +1,9 @@
 import { GitFork, Star } from "phosphor-react";
 import Button from "../buttons/Button";
 import Counter from "../Counter";
+import ButtonStartCook from "../buttons/ButtonStartCook";
+import { useState } from "react";
+import Footer from "../layout/Footer";
 
 const ingredients = [
     {
@@ -159,6 +162,7 @@ const RecipeIngredients = () => {
 };
 
 const RecipeDetail = () => {
+    const [visible, setVisible] = useState(false);
     return (
         <div className="space-y-8 pt-12">
             <div>
@@ -245,9 +249,14 @@ const RecipeDetail = () => {
                 </div>
             </div>
             <div>
-                <Button className="w-full py-5 text-2xl font-medium">
+                <ButtonStartCook
+                    onClick={() => setVisible(!visible)}
+                    className="w-full py-5 text-2xl font-medium"
+                >
                     Start cooking
-                </Button>
+                </ButtonStartCook>
+                <Footer />
+                {/* {visible && alert()} */}
             </div>
             <div>
                 <hr />
