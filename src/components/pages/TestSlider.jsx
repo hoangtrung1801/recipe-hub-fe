@@ -1,10 +1,10 @@
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import { ArrowLeft, X } from "phosphor-react";
+import { useRef } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import Counter from "../Counter";
 import IngredientsComponent from "./AboutComponent/IngredientsComponent";
-import { useRef } from "react";
 
 const ingredients = [
     {
@@ -99,6 +99,7 @@ const ingredients = [
         unit: "tbsp",
     },
 ];
+
 const settings = {
     dots: true,
     infinite: false,
@@ -118,150 +119,217 @@ const TestSlider = () => {
         ref.current.slickPrev();
     };
     return (
-        <div className="left-0  top-0  z-[100]  mx-32 bg-primary-200">
-            <div className="headerIngredients mt-4 flex border-b-[0.5px] border-black py-4">
-                <div className="headerIngredients_container grid grid-cols-[1fr,30fr,1fr]">
-                    <div
-                        onClick={() => previous()}
-                        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-primary-400 transition-colors hover:bg-primary-400/30"
-                    >
-                        <ArrowLeft className="h-6 w-6" />
+        <div className="absolute inset-0 z-[100] overflow-hidden">
+            <div className="flex h-full w-full flex-col bg-primary-200">
+                <div className="headerIngredients flex max-h-[80px] border-b-[0.5px] border-black py-4">
+                    <div className="headerIngredients_container grid grid-cols-[1fr,30fr,1fr]">
+                        <div
+                            onClick={() => previous()}
+                            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-primary-400 transition-colors hover:bg-primary-400/30"
+                        >
+                            <ArrowLeft className="h-6 w-6" />
+                        </div>
+                        <div className="tagPageIngredients flex items-center justify-center">
+                            <p className="text-base">1/4</p>
+                        </div>
+                        <div className="right-0 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-primary-400 transition-colors hover:bg-primary-400/30">
+                            <X className="h-6 w-6" />
+                        </div>
                     </div>
-                    <div className="tagPageIngredients flex items-center justify-center">
-                        <p className="text-base">1/4</p>
-                    </div>
-                    <div className="right-0 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-primary-400 transition-colors hover:bg-primary-400/30">
-                        <X className="h-6 w-6" />
-                    </div>
+                </div>
+                <div className="flex-1">
+                    <Slider ref={ref} {...settings} className="h-full w-full">
+                        {/* div1 */}
+                        {/* <div className="w-full h-full">
+                            <img
+                                src="https://images.unsplash.com/photo-1461696114087-397271a7aedc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                                alt=""
+                                />
+                        </div> */}
+                        {/* div2 */}
+                        <div className="flex h-[calc(100vh-80px)] w-full items-center justify-center text-center">
+                            <div className="slider-container h-full justify-between text-center">
+                                <div className="containerCookingItem slide grid h-full w-full origin-[center_center] snap-center grid-cols-2 justify-center border-black     ">
+                                    <div className="containerCookingItem_left border-r-[1px] border-black ">
+                                        <div className="containerCookingItem_left content flex flex-col pt-[32px] pr-[32px] pb-[107px]  text-left">
+                                            <h1 className="mt-14 mb-5 text-7xl font-medium">
+                                                Get Ready
+                                            </h1>
+                                            <p className="text-xl">
+                                                Before you start cooking, get
+                                                everything ready – chop, drain,
+                                                rinse your ingredients!
+                                            </p>
+                                            <div className="servesArea mt-7 flex flex-row  items-center ">
+                                                <p className="mr-3 text-lg">
+                                                    Serves{" "}
+                                                </p>
+                                                <Counter />
+                                            </div>
+                                            <button
+                                                onClick={() => next()}
+                                                className="fixed top-[650px] h-[72px] w-[640px] bg-black text-center text-xl font-bold text-white hover:opacity-70 "
+                                            >
+                                                Next Step
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="containerCookingItem_right max-h-full overflow-y-auto">
+                                        <div className="">
+                                            <div className="cookingIngredients ml-11 mt-16 flex flex-col font-medium">
+                                                <div className="cookingIngredients_header flex flex-row">
+                                                    <h1 className="text-3xl">
+                                                        Ingredients
+                                                    </h1>
+                                                </div>
+                                                <div className="cookingIngredients_ul py-[32px]">
+                                                    <ul>
+                                                        {ingredients.map(
+                                                            (ingredient) => (
+                                                                <div
+                                                                    key={
+                                                                        ingredient.text
+                                                                    }
+                                                                >
+                                                                    <IngredientsComponent
+                                                                        card={
+                                                                            ingredient
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                            )
+                                                        )}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex h-[calc(100vh-80px)] w-full items-center justify-center text-center">
+                            <div className="slider-container h-full justify-between text-center">
+                                <div className="containerCookingItem slide grid h-full w-full origin-[center_center] snap-center grid-cols-2 justify-center border-black     ">
+                                    <div className="containerCookingItem_left border-r-[1px] border-black ">
+                                        <div className="containerCookingItem_left content flex flex-col pt-[32px] pr-[32px] pb-[107px]  text-left">
+                                            <h1 className="mt-14 mb-5 text-7xl font-medium">
+                                                Get Ready
+                                            </h1>
+                                            <p className="text-xl">
+                                                Before you start cooking, get
+                                                everything ready – chop, drain,
+                                                rinse your ingredients!
+                                            </p>
+                                            <div className="servesArea mt-7 flex flex-row  items-center ">
+                                                <p className="mr-3 text-lg">
+                                                    Serves{" "}
+                                                </p>
+                                                <Counter />
+                                            </div>
+                                            <button
+                                                onClick={() => next()}
+                                                className="fixed top-[650px] h-[72px] w-[640px] bg-black text-center text-xl font-bold text-white hover:opacity-70 "
+                                            >
+                                                Next Step
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="containerCookingItem_right max-h-full overflow-y-auto">
+                                        <div className="">
+                                            <div className="cookingIngredients ml-11 mt-16 flex flex-col font-medium">
+                                                <div className="cookingIngredients_header flex flex-row">
+                                                    <h1 className="text-3xl">
+                                                        Ingredients
+                                                    </h1>
+                                                </div>
+                                                <div className="cookingIngredients_ul py-[32px]">
+                                                    <ul>
+                                                        {ingredients.map(
+                                                            (ingredient) => (
+                                                                <div
+                                                                    key={
+                                                                        ingredient.text
+                                                                    }
+                                                                >
+                                                                    <IngredientsComponent
+                                                                        card={
+                                                                            ingredient
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                            )
+                                                        )}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/*div3 */}
+                        {/* <div>
+                            <div className="slider-container justify-between text-center">
+                                <div className="containerCookingItem slide  grid h-full  w-full origin-[center_center] scale-100 snap-center grid-cols-2 justify-center border-black     ">
+                                    <div className="containerCookingItem_left border-r-[1px] border-black ">
+                                        <div className="containerCookingItem_left content flex flex-col pt-[32px] pr-[32px] pb-[107px]  text-left ">
+                                            <h1 className="mt-14 mb-5 text-7xl font-medium">
+                                                Get Ready
+                                            </h1>
+                                            <p className="text-xl">
+                                                Before you start cooking, get everything
+                                                ready – chop, drain, rinse your
+                                                ingredients!
+                                            </p>
+                                            <div className="servesArea mt-7 flex flex-row  items-center ">
+                                                <p className="mr-3 text-lg">Serves </p>
+                                                <Counter />
+                                            </div>
+                                            <button
+                                                onClick={() => next()}
+                                                className="fixed top-[650px] h-[72px] w-[640px] bg-black text-center text-xl font-bold text-white hover:opacity-70 "
+                                            >
+                                                Next Step
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="containerCookingItem_right overflow-hidden overflow-x-auto ">
+                                        <div className="h-[760px] overflow-y-scroll">
+                                            <div className="cookingIngredients ml-11 mt-16 flex flex-col font-medium">
+                                                <div className="cookingIngredients_header flex flex-row">
+                                                    <h1 className="text-3xl">
+                                                        Ingredients
+                                                    </h1>
+                                                </div>
+                                                <div className="cookingIngredients_ul py-[32px]">
+                                                    <ul>
+                                                        {ingredients.map(
+                                                            (ingredient) => (
+                                                                <div
+                                                                    key={
+                                                                        ingredient.text
+                                                                    }
+                                                                >
+                                                                    <IngredientsComponent
+                                                                        card={
+                                                                            ingredient
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                            )
+                                                        )}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> */}
+                    </Slider>
                 </div>
             </div>
-            <Slider ref={ref} {...settings}>
-                {/* div1 */}
-                <div className=" flex justify-center text-center">
-                    <img
-                        src="https://images.unsplash.com/photo-1461696114087-397271a7aedc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                        alt=""
-                    />
-                </div>
-                {/* div2 */}
-                <div className="flex items-center justify-center text-center ">
-                    <div className="slider-container justify-between text-center">
-                        <div className="containerCookingItem slide  grid h-full  w-full origin-[center_center] scale-100 snap-center grid-cols-2 justify-center border-black     ">
-                            <div className="containerCookingItem_left border-r-[1px] border-black ">
-                                <div className="containerCookingItem_left content flex flex-col pt-[32px] pr-[32px] pb-[107px]  text-left ">
-                                    <h1 className="mt-14 mb-5 text-7xl font-medium">
-                                        Get Ready
-                                    </h1>
-                                    <p className="text-xl">
-                                        Before you start cooking, get everything
-                                        ready – chop, drain, rinse your
-                                        ingredients!
-                                    </p>
-                                    <div className="servesArea mt-7 flex flex-row  items-center ">
-                                        <p className="mr-3 text-lg">Serves </p>
-                                        <Counter />
-                                    </div>
-                                    <button
-                                        onClick={() => next()}
-                                        className="fixed top-[650px] h-[72px] w-[640px] bg-black text-center text-xl font-bold text-white hover:opacity-70 "
-                                    >
-                                        Next Step
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="containerCookingItem_right overflow-hidden overflow-x-auto ">
-                                <div className="h-[760px] overflow-y-scroll">
-                                    <div className="cookingIngredients ml-11 mt-16 flex flex-col font-medium">
-                                        <div className="cookingIngredients_header flex flex-row">
-                                            <h1 className="text-3xl">
-                                                Ingredients
-                                            </h1>
-                                        </div>
-                                        <div className="cookingIngredients_ul py-[32px]">
-                                            <ul>
-                                                {ingredients.map(
-                                                    (ingredient) => (
-                                                        <div
-                                                            key={
-                                                                ingredient.text
-                                                            }
-                                                        >
-                                                            <IngredientsComponent
-                                                                card={
-                                                                    ingredient
-                                                                }
-                                                            />
-                                                        </div>
-                                                    )
-                                                )}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/*div3 */}
-                <div>
-                    <div className="slider-container justify-between text-center">
-                        <div className="containerCookingItem slide  grid h-full  w-full origin-[center_center] scale-100 snap-center grid-cols-2 justify-center border-black     ">
-                            <div className="containerCookingItem_left border-r-[1px] border-black ">
-                                <div className="containerCookingItem_left content flex flex-col pt-[32px] pr-[32px] pb-[107px]  text-left ">
-                                    <h1 className="mt-14 mb-5 text-7xl font-medium">
-                                        Get Ready
-                                    </h1>
-                                    <p className="text-xl">
-                                        Before you start cooking, get everything
-                                        ready – chop, drain, rinse your
-                                        ingredients!
-                                    </p>
-                                    <div className="servesArea mt-7 flex flex-row  items-center ">
-                                        <p className="mr-3 text-lg">Serves </p>
-                                        <Counter />
-                                    </div>
-                                    <button
-                                        onClick={() => next()}
-                                        className="fixed top-[650px] h-[72px] w-[640px] bg-black text-center text-xl font-bold text-white hover:opacity-70 "
-                                    >
-                                        Next Step
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="containerCookingItem_right overflow-hidden overflow-x-auto ">
-                                <div className="h-[760px] overflow-y-scroll">
-                                    <div className="cookingIngredients ml-11 mt-16 flex flex-col font-medium">
-                                        <div className="cookingIngredients_header flex flex-row">
-                                            <h1 className="text-3xl">
-                                                Ingredients
-                                            </h1>
-                                        </div>
-                                        <div className="cookingIngredients_ul py-[32px]">
-                                            <ul>
-                                                {ingredients.map(
-                                                    (ingredient) => (
-                                                        <div
-                                                            key={
-                                                                ingredient.text
-                                                            }
-                                                        >
-                                                            <IngredientsComponent
-                                                                card={
-                                                                    ingredient
-                                                                }
-                                                            />
-                                                        </div>
-                                                    )
-                                                )}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Slider>
         </div>
     );
 };
