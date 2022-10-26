@@ -1,11 +1,10 @@
 import Button from "../buttons/Button";
 import React, { useState } from "react";
 import EditAvaModal from "../AvatarModal";
-import InputComponent from "../InputComponent";
+import Input from "../Input";
 
 const UpdateProfile = () => {
-    const img =
-        "https://scontent.fdad4-1.fna.fbcdn.net/v/t39.30808-6/291608761_1438709426556013_2250799276497985239_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=3Cb_2LLgrZoAX_6kL--&tn=3-czYbbayq7b9asX&_nc_ht=scontent.fdad4-1.fna&oh=00_AT8PFHbQPovoWXxSr7vmSNu8mAbnsVQ51GOfzalL5_R37g&oe=63500304";
+    const img = "/profile.jpg";
 
     const [isOpen, setIsOpen] = useState(false);
     const [avatar, setavatar] = useState(null);
@@ -13,6 +12,27 @@ const UpdateProfile = () => {
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
+
+    const inputArray = [
+        {
+            state: name,
+            setState: setName,
+            placeHolder: "Your name",
+            label: "Name",
+        },
+        {
+            state: address,
+            setState: setAddress,
+            placeHolder: "Your Address",
+            label: "Address",
+        },
+        {
+            state: phone,
+            setState: setPhone,
+            placeHolder: "Your Phone Number",
+            label: "Phone",
+        },
+    ];
 
     const onCrop = (view) => {
         setavatar(view);
@@ -41,20 +61,24 @@ const UpdateProfile = () => {
         }
     };
 
+    // const props = {
+    //     state: name,
+    //     setState: setName,
+    //     placeHolder: "Your name",
+    //     label: "Name",
+    // };
+
     return (
         <div className="container">
             <form>
                 <div className="mt-3 flex flex-col-reverse gap-3 md:flex-row">
                     <div className="py-2 md:w-3/4 md:pr-10">
                         <h1 className="text-4xl font-bold ">Public Profile</h1>
-                        <InputComponent
-                            name={name}
-                            setName={setName}
-                            address={address}
-                            setAddress={setAddress}
-                            phone={phone}
-                            setPhone={setPhone}
-                        />
+                        <div className="flex flex-col gap-3 -space-y-px ">
+                            {inputArray.map((item, index) => (
+                                <Input {...item} key={index} />
+                            ))}
+                        </div>
                     </div>
                     <div className="w-[250px] p-2 py-2">
                         <div className="relative w-full overflow-hidden">
