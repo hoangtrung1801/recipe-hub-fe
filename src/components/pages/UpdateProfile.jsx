@@ -29,7 +29,7 @@ const UpdateProfile = () => {
         {
             state: phone,
             setState: setPhone,
-            placeHolder: "Your Phone Number",
+            placeHolder: "Your Phone Number . .",
             label: "Phone",
         },
     ];
