@@ -9,7 +9,7 @@ const router = [
         icon: <ForkKnife weight="light" />,
     },
     {
-        path: "/about",
+        path: "/profile",
         label: "About",
         icon: <User weight="light" />,
     },
