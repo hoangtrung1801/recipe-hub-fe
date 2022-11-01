@@ -24,6 +24,12 @@ module.exports = {
                     'rn':'370px',
                    }
             },
+            keyframes:{
+                slideUp:{
+                    '0%,50%' :{transform:'translateY(100%)'},
+                    '50%,100%':{transform:'translateY(0)'}
+                }
+            }
         
         },
     },

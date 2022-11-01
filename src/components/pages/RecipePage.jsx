@@ -4,6 +4,7 @@ import Counter from "../Counter";
 import ButtonStartCook from "../buttons/ButtonStartCook";
 import { useState } from "react";
 import Footer from "../layout/Footer";
+import TestSlider from "./TestSlider";
 
 const ingredients = [
     {
@@ -101,13 +102,15 @@ const instructions = [
 
 const RecipePage = () => {
     return (
-        <div className="container mt-12">
-            <div className="grid grid-cols-12 gap-x-12">
-                <div className="col-span-5">
-                    <RecipeIngredients />
-                </div>
-                <div className="col-span-7">
-                    <RecipeDetail />
+        <div>
+            <div className="container mt-12 ">
+                <div className="grid grid-cols-12 gap-x-12">
+                    <div className="col-span-5">
+                        <RecipeIngredients />
+                    </div>
+                    <div className="col-span-7">
+                        <RecipeDetail />
+                    </div>
                 </div>
             </div>
         </div>
@@ -162,9 +165,10 @@ const RecipeIngredients = () => {
 };
 
 const RecipeDetail = () => {
-    const [visible, setVisible] = useState(false);
+    const [show, setShow] = useState(false);
     return (
         <div className="space-y-8 pt-12">
+            {show ? <TestSlider /> : null};
             <div>
                 <h1 className="text-6xl font-medium">
                     Mushroom, spinach & pesto toasted sandwich
@@ -250,7 +254,7 @@ const RecipeDetail = () => {
             </div>
             <div>
                 <ButtonStartCook
-                    onClick={() => setVisible(!visible)}
+                    onClick={() => setShow(true)}
                     className="w-full py-5 text-2xl font-medium"
                 >
                     Start cooking

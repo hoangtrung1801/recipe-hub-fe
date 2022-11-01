@@ -97,6 +97,7 @@ const ingredients = [
 ];
 const DivStart = () => {
     // {h-[740px] w-[90%]  ml-[-120px] z-[100] absolute top-0}
+
     return (
         <div className=" fixed left-0  top-0  z-[100]  mx-32 bg-primary-200 ">
             <div className="headerIngredients mt-4 flex border-b-[0.5px] border-black py-4">
