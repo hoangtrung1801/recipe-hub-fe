@@ -9,28 +9,31 @@ const CardComponent = (props) => {
                 <div className="overflow-hidden">
                     <div
                         className={`${card.linkBg} duration-300 hover:scale-105`}
-                    ></div>
-                </div>
+                    ></div>{" "}
+                </div>{" "}
                 <div className="textWrapper text-left text-xl font-medium lg:text-3xl">
-                    <UnderlineLink multiline={true}>{card.text}</UnderlineLink>
-                </div>
+                    <UnderlineLink multiline={true}>
+                        {" "}
+                        {card.text}{" "}
+                    </UnderlineLink>{" "}
+                </div>{" "}
                 <div className="contentWrapper flex gap-3 text-sm">
                     <div className="flex items-center justify-center">
                         <img
                             className="mr-1 h-5 w-5"
                             src="https://img.icons8.com/windows/32/000000/clock--v1.png"
                         />
-                        <span>10m</span>+{" "}
-                    </div>
+                        <span> 10 m </span>+{" "}
+                    </div>{" "}
                     <div className="flex items-center justify-center">
                         <img
                             className="mr-1  h-5 w-5"
                             src="https://img.icons8.com/fluency-systems-regular/48/000000/leaf.png"
                         />
-                        <span>6 plants</span>
-                    </div>
-                </div>
-            </div>
+                        <span> 6 plants </span>{" "}
+                    </div>{" "}
+                </div>{" "}
+            </div>{" "}
         </div>
     );
 };

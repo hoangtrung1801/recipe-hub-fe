@@ -9,6 +9,7 @@ import RecipesPage from "./components/pages/RecipesPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import AboutPage from "./components/pages/AboutPage";
 import CardComponent from "./components/pages/CardComponent";
+import SearchPage from "./components/pages/SearchPage";
 
 const router = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
             {
                 path: "/temp",
                 element: <CardComponent />,
+            },
+            {
+                path: "/search",
+                element: <SearchPage />,
             },
         ],
     },
