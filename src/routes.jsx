@@ -10,6 +10,7 @@ import SignUpPage from "./components/pages/SignUpPage";
 import AboutPage from "./components/pages/AboutPage";
 import CardComponent from "./components/pages/CardComponent";
 import SearchPage from "./components/pages/SearchPage";
+import UpdateProfile from "./components/pages/UpdateProfile";
 
 const router = createBrowserRouter([
     {
@@ -21,8 +22,12 @@ const router = createBrowserRouter([
                 element: <HomePage />,
             },
             {
-                path: "/about",
+                path: "/profile",
                 element: <AboutPage />,
+            },
+            {
+                path: "/profile/update",
+                element: <UpdateProfile />,
             },
             {
                 path: "/recipes",
