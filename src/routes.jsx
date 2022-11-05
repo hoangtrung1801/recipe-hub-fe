@@ -10,8 +10,6 @@ import SignUpPage from "./components/pages/SignUpPage";
 import AboutPage from "./components/pages/AboutPage";
 import CardComponent from "./components/pages/CardComponent";
 import DivStart from "./components/pages/DivStart";
-import TestSlider from "./components/pages/TestSlider";
-
 const router = createBrowserRouter([
     {
         path: "/",
@@ -56,10 +54,6 @@ const router = createBrowserRouter([
             {
                 path: "/test",
                 element: <DivStart />,
-            },
-            {
-                path: "/slider",
-                element: <TestSlider />,
             },
         ],
     },

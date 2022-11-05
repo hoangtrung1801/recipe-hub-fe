@@ -28,7 +28,15 @@ module.exports = {
                 slideUp:{
                     '0%,50%' :{transform:'translateY(100%)'},
                     '50%,100%':{transform:'translateY(0)'}
+                },
+                slideDown:{
+                    '100%,50%' :{transform:'translateY(100%)'},
+                    '50%,0%':{transform:'translateY(0)'}
                 }
+            },
+            animation:{
+                slideUp: 'slideUp 1s both',
+                slideDown: 'slideDown 1s both'
             }
         
         },
