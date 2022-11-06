@@ -8,6 +8,8 @@ import LoginPage from "./components/pages/LoginPage";
 import RecipesPage from "./components/pages/RecipesPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import AboutPage from "./components/pages/AboutPage";
+import CardComponent from "./components/pages/CardComponent";
+import DivStart from "./components/pages/DivStart";
 import UpdateProfile from "./components/pages/UpdateProfile";
 
 const router = createBrowserRouter([
@@ -50,6 +52,14 @@ const router = createBrowserRouter([
             {
                 path: "/404",
                 element: <Page404 />,
+            },
+            {
+                path: "/temp",
+                element: <CardComponent />,
+            },
+            {
+                path: "/test",
+                element: <DivStart />,
             },
         ],
     },

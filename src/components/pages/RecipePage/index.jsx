@@ -1,6 +1,11 @@
+import { Button } from "@material-tailwind/react";
 import { GitFork, Star } from "phosphor-react";
-import Button from "../buttons/Button";
-import Counter from "../Counter";
+import { useState } from "react";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import ButtonStartCook from "~/components/buttons/ButtonStartCook";
+import Counter from "~/components/Counter";
+import StartCookingModal from "./StartCookingModal";
 
 const ingredients = [
     {
@@ -98,13 +103,15 @@ const instructions = [
 
 const RecipePage = () => {
     return (
-        <div className="container mt-12">
-            <div className="grid grid-cols-12 gap-x-12">
-                <div className="col-span-5">
-                    <RecipeIngredients />
-                </div>
-                <div className="col-span-7">
-                    <RecipeDetail />
+        <div>
+            <div className="container mt-12 ">
+                <div className="grid grid-cols-12 gap-x-12">
+                    <div className="col-span-5">
+                        <RecipeIngredients />
+                    </div>
+                    <div className="col-span-7">
+                        <RecipeDetail />
+                    </div>
                 </div>
             </div>
         </div>
@@ -159,12 +166,19 @@ const RecipeIngredients = () => {
 };
 
 const RecipeDetail = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [stepNo, setStepNo] = useState(1);
+    function closeModal() {
+        setIsOpen(false);
+    }
+
+    function openModal() {
+        setIsOpen(true);
+    }
     return (
         <div className="space-y-8 pt-12">
             <div>
-                <h1 className="text-6xl font-medium">
-                    Mushroom, spinach & pesto toasted sandwich
-                </h1>
+                <h1 className="text-6xl font-medium">Mushroom, spinach & pesto toasted sandwich</h1>
 
                 {/* categories */}
                 <div className="mt-8 flex">
@@ -232,9 +246,7 @@ const RecipeDetail = () => {
                         <div key={instructions.id} className="flex space-x-6">
                             <div className="">
                                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-300">
-                                    <span className="text-xl font-medium">
-                                        {instruction.id}
-                                    </span>
+                                    <span className="text-xl font-medium">{instruction.id}</span>
                                 </div>
                             </div>
                             <div className="text-lg">
@@ -245,9 +257,19 @@ const RecipeDetail = () => {
                 </div>
             </div>
             <div>
-                <Button className="w-full py-5 text-2xl font-medium">
+                <ButtonStartCook onClick={openModal} className="w-full py-5 text-2xl font-medium">
                     Start cooking
-                </Button>
+                </ButtonStartCook>
+
+                {/* slider */}
+                <div>
+                    <StartCookingModal
+                        closeModal={closeModal}
+                        isOpen={isOpen}
+                        setStepNo={setStepNo}
+                        stepNo={stepNo}
+                    />
+                </div>
             </div>
             <div>
                 <hr />
@@ -266,17 +288,9 @@ const RecipeDetail = () => {
                     <div className="mt-2 flex-1">
                         <p className="font-semibold">hoangtrung1801</p>
                         <p className="mt-2">
-                            If you enjoyed this recipe share it with your
-                            friends and family who might also enjoy it
+                            If you enjoyed this recipe share it with your friends and family who
+                            might also enjoy it
                         </p>
-                        {/* <div className="mt-4 flex space-x-3">
-                            <button className="circle-outline text-xl">
-                                <Star />
-                            </button>
-                            <button className="circle-outline text-xl">
-                                <GitFork />
-                            </button>
-                        </div> */}
                     </div>
                 </div>
             </div>
