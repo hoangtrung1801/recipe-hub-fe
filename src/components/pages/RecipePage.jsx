@@ -1,12 +1,12 @@
-import { GitFork, Star, X, ArrowLeft } from "phosphor-react";
-import Button from "../buttons/Button";
-import Counter from "../Counter";
-import ButtonStartCook from "../buttons/ButtonStartCook";
-import { useState, Fragment } from "react";
-import Footer from "../layout/Footer";
 import { Dialog, Transition } from "@headlessui/react";
+import { ArrowLeft, GitFork, Star, X } from "phosphor-react";
+import { Fragment, useRef, useState } from "react";
 import Slider from "react-slick";
-import { useRef } from "react";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import Button from "../buttons/Button";
+import ButtonStartCook from "../buttons/ButtonStartCook";
+import Counter from "../Counter";
 import SlidersCompo from "./SliderComponent/SlidersCompo";
 
 const ingredients = [
@@ -322,29 +322,27 @@ const RecipeDetail = () => {
                                                     <div className="headerIngredients relative  flex border-b-[0.5px] border-black py-4 ">
                                                         <div className=" headerIngredients_container grid grid-cols-[1fr,30fr,1fr]">
                                                             <div
+                                                                onClick={(
+                                                                    ev
+                                                                ) => {
+                                                                    previous(
+                                                                        ev
+                                                                    ),
+                                                                        count >=
+                                                                        1
+                                                                            ? setCount(
+                                                                                  count -
+                                                                                      1
+                                                                              )
+                                                                            : null;
+                                                                }}
                                                                 className={`duration-700 ease-out ${
                                                                     count < 1
                                                                         ? "opacity-0"
                                                                         : "opacity-100"
                                                                 }`}
                                                             >
-                                                                <div
-                                                                    onClick={(
-                                                                        ev
-                                                                    ) => {
-                                                                        previous(
-                                                                            ev
-                                                                        ),
-                                                                            count >=
-                                                                            1
-                                                                                ? setCount(
-                                                                                      count -
-                                                                                          1
-                                                                                  )
-                                                                                : null;
-                                                                    }}
-                                                                    className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-primary-400 transition-colors hover:bg-primary-400/30"
-                                                                >
+                                                                <div className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-primary-400 transition-colors hover:bg-primary-400/30">
                                                                     <ArrowLeft className="h-6 w-6" />
                                                                 </div>
                                                             </div>
@@ -395,6 +393,7 @@ const RecipeDetail = () => {
                                                         <SlidersCompo />
                                                         <SlidersCompo />
                                                         <SlidersCompo />
+                                                        <SlidersCompo />
                                                     </Slider>
                                                 </div>
                                             </div>
@@ -405,7 +404,6 @@ const RecipeDetail = () => {
                         </Dialog>
                     </Transition>
                 </div>
-                <Footer />
                 {/* {visible && alert()} */}
             </div>
             <div>
