@@ -45,8 +45,7 @@ const RecipesPage = () => {
                                                         href="#"
                                                         className={clsxm(
                                                             "rounded-3xl border-y-2 border-x-2 border-primary-400 py-2 px-3 text-sm",
-                                                            category ===
-                                                                selectedCategory &&
+                                                            category === selectedCategory &&
                                                                 "bg-primary-500"
                                                         )}
                                                     >

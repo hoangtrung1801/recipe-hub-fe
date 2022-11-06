@@ -10,6 +10,7 @@ import SignUpPage from "./components/pages/SignUpPage";
 import AboutPage from "./components/pages/AboutPage";
 import CardComponent from "./components/pages/CardComponent";
 import SearchPage from "./components/pages/SearchPage";
+import DivStart from "./components/pages/DivStart";
 import UpdateProfile from "./components/pages/UpdateProfile";
 
 const router = createBrowserRouter([
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
             {
                 path: "/search",
                 element: <SearchPage />,
+            },
+            {
+                path: "/test",
+                element: <DivStart />,
             },
         ],
     },
