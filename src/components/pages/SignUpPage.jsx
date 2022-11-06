@@ -17,9 +17,7 @@ const SignUpPage = () => {
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md space-y-8">
                 <div>
-                    <h1 className="text-center text-4xl font-bold">
-                        RecipeHub
-                    </h1>
+                    <h1 className="text-center text-4xl font-bold">RecipeHub</h1>
                     <h2 className="mt-6 text-center text-xl font-semibold tracking-tight text-gray-900">
                         Register
                     </h2>
@@ -49,9 +47,7 @@ const SignUpPage = () => {
                             />
                         </div>
                         {errors.firstname?.type === "required" && (
-                            <p className="text-xs text-red-500">
-                                First name is required
-                            </p>
+                            <p className="text-xs text-red-500">First name is required</p>
                         )}
                         <div>
                             <label htmlFor="email-address" className="sr-only">
@@ -67,9 +63,7 @@ const SignUpPage = () => {
                             />
                         </div>
                         {errors.lastname?.type === "required" && (
-                            <p className="text-xs text-red-500">
-                                Last name is required
-                            </p>
+                            <p className="text-xs text-red-500">Last name is required</p>
                         )}
                         <div>
                             <label htmlFor="email-address" className="sr-only">
@@ -88,14 +82,10 @@ const SignUpPage = () => {
                             />
                         </div>
                         {errors.email?.type === "required" && (
-                            <p className="text-xs text-red-500">
-                                Email is required
-                            </p>
+                            <p className="text-xs text-red-500">Email is required</p>
                         )}
                         {errors.email?.type === "pattern" && (
-                            <p className="text-xs text-red-500">
-                                Invalid email syntax
-                            </p>
+                            <p className="text-xs text-red-500">Invalid email syntax</p>
                         )}
                         <div>
                             <label htmlFor="password" className="sr-only">
@@ -111,18 +101,12 @@ const SignUpPage = () => {
                             />
                         </div>
                         {errors.password?.type === "required" && (
-                            <p className="text-xs text-red-500">
-                                Password is required
-                            </p>
+                            <p className="text-xs text-red-500">Password is required</p>
                         )}
                     </div>
 
                     <div>
-                        <Button
-                            variant="primary"
-                            type="submit"
-                            className="w-full"
-                        >
+                        <Button variant="primary" type="submit" className="w-full">
                             Sign up
                         </Button>
                     </div>

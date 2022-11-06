@@ -27,11 +27,7 @@ const Header = () => {
                 </div>
                 <div className="flex space-x-8">
                     {router.map((route) => (
-                        <UnderlineLink
-                            to={route.path}
-                            icon={route.icon}
-                            key={route.label}
-                        >
+                        <UnderlineLink to={route.path} icon={route.icon} key={route.label}>
                             {route.label}
                         </UnderlineLink>
                     ))}

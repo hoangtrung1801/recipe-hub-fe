@@ -1,12 +1,5 @@
 import React from "react";
-const InputComponent = ({
-    name,
-    setName,
-    address,
-    setAddress,
-    phone,
-    setPhone,
-}) => {
+const InputComponent = ({ name, setName, address, setAddress, phone, setPhone }) => {
     return (
         <React.Fragment>
             <div className="w-full space-y-8">

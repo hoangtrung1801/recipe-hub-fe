@@ -21,9 +21,7 @@ const LoginPage = () => {
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="w-full max-w-md space-y-8">
                     <div>
-                        <h1 className="text-center text-4xl font-bold">
-                            RecipeHub
-                        </h1>
+                        <h1 className="text-center text-4xl font-bold">RecipeHub</h1>
                         <h2 className="mt-6 text-center text-xl font-semibold tracking-tight text-gray-900">
                             Sign in to your account
                         </h2>
@@ -50,27 +48,19 @@ const LoginPage = () => {
                                         required: true,
                                         pattern: /^\S+@\S+$/i,
                                         validate: (value) => {
-                                            return (
-                                                value === "example@gmail.com"
-                                            );
+                                            return value === "example@gmail.com";
                                         },
                                     })}
                                 />
                             </div>
                             {errors.email?.type === "required" && (
-                                <p className="text-xs text-red-500">
-                                    Email is required
-                                </p>
+                                <p className="text-xs text-red-500">Email is required</p>
                             )}
                             {errors.email?.type === "pattern" && (
-                                <p className="text-xs text-red-500">
-                                    Invalid email syntax
-                                </p>
+                                <p className="text-xs text-red-500">Invalid email syntax</p>
                             )}
                             {errors.email?.type === "validate" && (
-                                <p className="text-xs text-red-500">
-                                    Incorrect email
-                                </p>
+                                <p className="text-xs text-red-500">Incorrect email</p>
                             )}
                             <div>
                                 <label htmlFor="Password" className="sr-only">
@@ -91,24 +81,16 @@ const LoginPage = () => {
                                 />
                             </div>
                             {errors.password?.type === "required" && (
-                                <p className="text-xs text-red-500">
-                                    Password is required
-                                </p>
+                                <p className="text-xs text-red-500">Password is required</p>
                             )}
                             {errors.password?.type === "validate" && (
-                                <p className="text-xs text-red-500">
-                                    Incorrect password
-                                </p>
+                                <p className="text-xs text-red-500">Incorrect password</p>
                             )}
                         </div>
 
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
-                                <input
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className="h-4 w-4"
-                                />
+                                <input name="remember-me" type="checkbox" className="h-4 w-4" />
                                 <label
                                     htmlFor="remember-me"
                                     className="ml-2 block text-sm text-gray-900"
@@ -117,21 +99,14 @@ const LoginPage = () => {
                                 </label>
                             </div>
                             <div className="text-sm">
-                                <a
-                                    href="#"
-                                    className="font-medium hover:text-dark-0"
-                                >
+                                <a href="#" className="font-medium hover:text-dark-0">
                                     Forgot your password?
                                 </a>
                             </div>
                         </div>
 
                         <div>
-                            <Button
-                                variant="primary"
-                                type="submit"
-                                className="w-full"
-                            >
+                            <Button variant="primary" type="submit" className="w-full">
                                 Sign in
                             </Button>
                         </div>

@@ -9,8 +9,8 @@
         "preview": "vite preview",
         "prepare": "husky install",
         "format": "prettier -w src",
-        "lint": "eslint .",
-        "lint:fix": "eslint --fix"
+        "lint": "eslint src/ --max-warnings=0",
+        "lint:fix": "eslint src/ --max-warnings=0"
     },
     "dependencies": {
         "clsx": "^1.2.1",
@@ -43,8 +43,9 @@
     },
     "lint-staged": {
         "src/**/*.{js,jsx,ts,tsx}": [
-            "eslint --max-warnings=0",
-            "prettier -w src"
+            "eslint src/ --max-warnings=0",
+            "prettier -w src",
+            "git add"
         ]
     }
 }

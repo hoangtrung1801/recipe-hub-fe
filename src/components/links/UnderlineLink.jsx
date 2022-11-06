@@ -1,21 +1,9 @@
 import { Link } from "react-router-dom";
 import clsxm from "~/libs/clsxm";
 
-const UnderlineLink = ({
-    className,
-    to,
-    icon,
-    children,
-    multiline = false,
-}) => {
+const UnderlineLink = ({ className, to, icon, children, multiline = false }) => {
     return (
-        <Link
-            to={to}
-            className={clsxm(
-                "group group flex items-center space-x-1",
-                className
-            )}
-        >
+        <Link to={to} className={clsxm("group group flex items-center space-x-1", className)}>
             <span className="text-2xl">{icon && icon}</span>
             <a
                 href="#"
@@ -26,9 +14,7 @@ const UnderlineLink = ({
                     className
                 )}
             >
-                <span className={clsxm(multiline && "underline-animate ")}>
-                    {children}
-                </span>
+                <span className={clsxm(multiline && "underline-animate ")}>{children}</span>
             </a>
         </Link>
     );

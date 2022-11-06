@@ -69,10 +69,7 @@ const AboutPage = () => {
                         onChange={(e) => setSearchRecipe(e.target.value)}
                     />
                     <RecipleFilter />
-                    <Button
-                        variant={"dark"}
-                        className="max-h-[34px] w-full md:w-[63px]"
-                    >
+                    <Button variant={"dark"} className="max-h-[34px] w-full md:w-[63px]">
                         New
                     </Button>
                 </div>
@@ -80,11 +77,7 @@ const AboutPage = () => {
                     {myRecipe
                         .filter((val) => {
                             if (searchRecipe === "") return val;
-                            else if (
-                                val.text
-                                    .toLowerCase()
-                                    .includes(searchRecipe.toLowerCase())
-                            ) {
+                            else if (val.text.toLowerCase().includes(searchRecipe.toLowerCase())) {
                                 return val;
                             }
                         })
@@ -121,9 +114,7 @@ function RecipleFilter() {
                                     key={index}
                                     className={({ active }) =>
                                         `relative cursor-default select-none py-2 pl-2 font-semibold ${
-                                            active
-                                                ? "bg-primary-300 text-dark-0"
-                                                : "text-gray-900"
+                                            active ? "bg-primary-300 text-dark-0" : "text-gray-900"
                                         }`
                                     }
                                     value={item}
@@ -132,9 +123,7 @@ function RecipleFilter() {
                                         <React.Fragment>
                                             <span
                                                 className={`block truncate ${
-                                                    selected
-                                                        ? "font-medium"
-                                                        : "font-normal"
+                                                    selected ? "font-medium" : "font-normal"
                                                 }`}
                                             >
                                                 {item.text}

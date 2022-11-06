@@ -58,14 +58,8 @@ const ComponentsPage = () => {
             <section>
                 <h3 className="text-2xl font-medium">Modal</h3>
                 <div className="">
-                    <Button onClick={() => setOpenModal(true)}>
-                        Open modal
-                    </Button>
-                    <Modal
-                        isOpen={openModal}
-                        setIsOpen={setOpenModal}
-                        title={"Title modal"}
-                    >
+                    <Button onClick={() => setOpenModal(true)}>Open modal</Button>
+                    <Modal isOpen={openModal} setIsOpen={setOpenModal} title={"Title modal"}>
                         Body modal
                     </Modal>
                 </div>

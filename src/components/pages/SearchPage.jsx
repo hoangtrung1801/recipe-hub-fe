@@ -11,10 +11,7 @@ const SearchPage = () => {
                 </div>{" "}
                 <div className="basis-3/4">
                     <div className="mx-auto flex flex-col gap-8">
-                        <span className="text-3xl font-bold uppercase">
-                            {" "}
-                            result:{" "}
-                        </span>{" "}
+                        <span className="text-3xl font-bold uppercase"> result: </span>{" "}
                         <LoadBoard />{" "}
                     </div>{" "}
                 </div>{" "}

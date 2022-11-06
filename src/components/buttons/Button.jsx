@@ -54,15 +54,13 @@ const Button = React.forwardRef(
                             "bg-transparent text-dark-0",
                             "border-[3px] border-primary-400",
                             "hover:bg-primary-400 active:bg-primary-100 disabled:bg-primary-100",
-                            isDarkBg &&
-                                "hover:bg-gray-900 active:bg-gray-800 disabled:bg-gray-800",
+                            isDarkBg && "hover:bg-gray-900 active:bg-gray-800 disabled:bg-gray-800",
                         ],
                         variant === "ghost" && [
                             "text-dark-0",
                             "shadow-none",
                             "hover:bg-primary-300 active:bg-primary-100 disabled:bg-primary-100",
-                            isDarkBg &&
-                                "hover:bg-gray-900 active:bg-gray-800 disabled:bg-gray-800",
+                            isDarkBg && "hover:bg-gray-900 active:bg-gray-800 disabled:bg-gray-800",
                         ],
                         variant === "light" && [
                             "rounded-md border border-transparent",
@@ -94,14 +92,9 @@ const Button = React.forwardRef(
                         className={clsxm(
                             "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
                             {
-                                "text-white": ["primary", "dark"].includes(
-                                    variant
-                                ),
+                                "text-white": ["primary", "dark"].includes(variant),
                                 "text-black": ["light"].includes(variant),
-                                "text-primary-500": [
-                                    "outline",
-                                    "ghost",
-                                ].includes(variant),
+                                "text-primary-500": ["outline", "ghost"].includes(variant),
                             }
                         )}
                     >

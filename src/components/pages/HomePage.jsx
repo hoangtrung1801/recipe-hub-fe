@@ -34,9 +34,9 @@ const HomePage = () => {
                             Tasty plant - based recipes & more{" "}
                         </span>{" "}
                         <span className="mt-8 w-[57%] text-center text-3xl font-light">
-                            Discover some tasty plant - based recipes🥙 explore
-                            topics around physical🚵‍♂️ & mental health🧠 all
-                            whilst trying to look after our planet🌍{" "}
+                            Discover some tasty plant - based recipes🥙 explore topics around
+                            physical🚵‍♂️ & mental health🧠 all whilst trying to look after our
+                            planet🌍{" "}
                         </span>{" "}
                     </div>{" "}
                 </div>{" "}
@@ -60,16 +60,10 @@ const HomePage = () => {
                 <div className="h-auto items-center bg-primary-300 py-20 ">
                     <div className="mx-auto w-[66%] text-center text-4xl leading-[50px]">
                         Discover some tasty{" "}
-                        <span className="font-semibold">
-                            {" "}
-                            plant - based recipes{" "}
-                        </span>{" "}
-                        and explore topics around{" "}
-                        <span className="font-semibold">
-                            {" "}
-                            physical and mental health,{" "}
-                        </span>{" "}
-                        all whilst trying to look after our planet.{" "}
+                        <span className="font-semibold"> plant - based recipes </span> and explore
+                        topics around{" "}
+                        <span className="font-semibold"> physical and mental health, </span> all
+                        whilst trying to look after our planet.{" "}
                     </div>{" "}
                 </div>{" "}
             </description>{" "}

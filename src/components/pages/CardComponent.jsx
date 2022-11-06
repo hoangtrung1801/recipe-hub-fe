@@ -7,15 +7,10 @@ const CardComponent = (props) => {
         <div className="">
             <div className="article relative flex min-w-full cursor-pointer flex-col gap-3 overflow-hidden lg:mb-14">
                 <div className="overflow-hidden">
-                    <div
-                        className={`${card.linkBg} duration-300 hover:scale-105`}
-                    ></div>{" "}
+                    <div className={`${card.linkBg} duration-300 hover:scale-105`}></div>{" "}
                 </div>{" "}
                 <div className="textWrapper text-left text-xl font-medium lg:text-3xl">
-                    <UnderlineLink multiline={true}>
-                        {" "}
-                        {card.text}{" "}
-                    </UnderlineLink>{" "}
+                    <UnderlineLink multiline={true}> {card.text} </UnderlineLink>{" "}
                 </div>{" "}
                 <div className="contentWrapper flex gap-3 text-sm">
                     <div className="flex items-center justify-center">
