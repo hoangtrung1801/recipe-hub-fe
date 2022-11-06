@@ -13,13 +13,7 @@
         "lint:fix": "eslint --fix"
     },
     "dependencies": {
-        "@emotion/react": "^11.10.5",
-        "@emotion/styled": "^11.10.5",
-        "@material-tailwind/react": "^1.2.4",
-        "@mui/material": "^5.10.12",
-        "@mui/styled-engine-sc": "^5.10.6",
         "clsx": "^1.2.1",
-        "mobx-react": "^7.5.3",
         "phosphor-react": "^1.4.1",
         "react": "^18.2.0",
         "react-avatar-edit": "^1.2.0",
@@ -28,7 +22,6 @@
         "react-router-dom": "^6.4.0",
         "react-slick": "^0.29.0",
         "slick-carousel": "^1.8.1",
-        "styled-components": "^5.3.6",
         "tailwind-merge": "^1.6.0"
     },
     "devDependencies": {

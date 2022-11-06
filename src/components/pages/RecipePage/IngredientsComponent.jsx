@@ -23,9 +23,7 @@ const IngredientsComponent = (props) => {
                     </div>
                     <div className="formIngredients_content ml-1 mr-2 text-left">
                         <div>
-                            <span
-                                className={`text-[22px] font-normal ${lineText}`}
-                            >
+                            <span className={`text-[22px] font-normal ${lineText}`}>
                                 {card.text}
                             </span>
                         </div>

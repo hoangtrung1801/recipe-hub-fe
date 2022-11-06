@@ -1,10 +1,9 @@
-import { ArrowLeft, X } from "phosphor-react";
-import React, { Fragment } from "react";
-import { useRef } from "react";
-import { useState } from "react";
-import Slider from "react-slick";
 import { Dialog, Transition } from "@headlessui/react";
-import SlidersCompo from "./SliderComponent/SlidersCompo";
+import { ArrowLeft, X } from "phosphor-react";
+import { Fragment, useRef, useState } from "react";
+import Slider from "react-slick";
+import SlidersCompo from "./RecipePage/SlidersCompo";
+
 const settings = {
     dots: false,
     infinite: false,
@@ -76,19 +75,14 @@ const DivStart = () => {
                                                 <div className=" headerIngredients_container grid grid-cols-[1fr,30fr,1fr]">
                                                     <div
                                                         className={`${
-                                                            count < 1
-                                                                ? "opacity-0"
-                                                                : "opacity-100"
+                                                            count < 1 ? "opacity-0" : "opacity-100"
                                                         }`}
                                                     >
                                                         <div
                                                             onClick={(ev) => {
                                                                 previous(ev),
                                                                     count >= 1
-                                                                        ? setCount(
-                                                                              count -
-                                                                                  1
-                                                                          )
+                                                                        ? setCount(count - 1)
                                                                         : null;
                                                             }}
                                                             className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-primary-400 transition-colors hover:bg-primary-400/30"
@@ -98,15 +92,11 @@ const DivStart = () => {
                                                     </div>
                                                     <div
                                                         className={`mt-2 ${
-                                                            count < 1
-                                                                ? "opacity-0"
-                                                                : "opacity-100"
+                                                            count < 1 ? "opacity-0" : "opacity-100"
                                                         }`}
                                                     >
                                                         <div className="tagPageIngredients flex items-center justify-center ">
-                                                            <p className="text-base">
-                                                                {count}/4
-                                                            </p>
+                                                            <p className="text-base">{count}/4</p>
                                                         </div>
                                                     </div>
 
@@ -121,8 +111,7 @@ const DivStart = () => {
                                             <div className="ButtonContain absolute z-50">
                                                 <button
                                                     onClick={(ev) => {
-                                                        next(ev),
-                                                            setCount(count + 1);
+                                                        next(ev), setCount(count + 1);
                                                     }}
                                                     className="fixed top-[700px] h-[72px] w-[670px] bg-black text-center text-xl font-bold text-white hover:opacity-70 "
                                                 >

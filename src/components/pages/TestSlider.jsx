@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { ArrowLeft, X } from "phosphor-react";
 import Counter from "../Counter";
-import IngredientsComponent from "./AboutComponent/IngredientsComponent";
+import IngredientsComponent from "./RecipePage/IngredientsComponent";
 import { useRef } from "react";
 import { useState } from "react";
 const ingredients = [
@@ -126,8 +126,7 @@ const TestSlider = () => {
                     <div className=" headerIngredients_container grid grid-cols-[1fr,30fr,1fr]">
                         <div
                             onClick={(ev) => {
-                                previous(ev),
-                                    count >= 1 ? setCount(count - 1) : null;
+                                previous(ev), count >= 1 ? setCount(count - 1) : null;
                             }}
                             className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-primary-400 transition-colors hover:bg-primary-400/30"
                         >
@@ -152,14 +151,11 @@ const TestSlider = () => {
                                             Get Ready
                                         </h1>
                                         <p className="text-xl">
-                                            Before you start cooking, get
-                                            everything ready – chop, drain,
-                                            rinse your ingredients!
+                                            Before you start cooking, get everything ready – chop,
+                                            drain, rinse your ingredients!
                                         </p>
                                         <div className="servesArea mt-7 flex flex-row  items-center ">
-                                            <p className="mr-3 text-lg">
-                                                Serves{" "}
-                                            </p>
+                                            <p className="mr-3 text-lg">Serves </p>
                                             <Counter />
                                         </div>
                                         <button
@@ -176,27 +172,17 @@ const TestSlider = () => {
                                     <div className="h-[760px] overflow-y-scroll">
                                         <div className="cookingIngredients ml-11 mt-16 flex flex-col font-medium">
                                             <div className="cookingIngredients_header flex flex-row">
-                                                <h1 className="text-3xl">
-                                                    Ingredients
-                                                </h1>
+                                                <h1 className="text-3xl">Ingredients</h1>
                                             </div>
                                             <div className="cookingIngredients_ul py-[32px]">
                                                 <ul>
-                                                    {ingredients.map(
-                                                        (ingredient) => (
-                                                            <div
-                                                                key={
-                                                                    ingredient.text
-                                                                }
-                                                            >
-                                                                <IngredientsComponent
-                                                                    card={
-                                                                        ingredient
-                                                                    }
-                                                                />
-                                                            </div>
-                                                        )
-                                                    )}
+                                                    {ingredients.map((ingredient) => (
+                                                        <div key={ingredient.text}>
+                                                            <IngredientsComponent
+                                                                card={ingredient}
+                                                            />
+                                                        </div>
+                                                    ))}
                                                 </ul>
                                             </div>
                                         </div>
@@ -212,8 +198,8 @@ const TestSlider = () => {
                                 <div className="containerCookingItem_left border-r-[1px] border-black ">
                                     <div className="containerCookingItem_left content ml-5 flex flex-col pt-[32px] pr-[32px] pb-[110px]  text-left ">
                                         <p className="text-4xl tracking-wide">
-                                            In a large saucepan cook the pasta
-                                            according to instructions
+                                            In a large saucepan cook the pasta according to
+                                            instructions
                                         </p>
 
                                         <button
@@ -231,21 +217,13 @@ const TestSlider = () => {
                                         <div className="cookingIngredients ml-11 mt-16 flex flex-col font-medium">
                                             <div className="cookingIngredients_ul py-[32px]">
                                                 <ul>
-                                                    {ingredients.map(
-                                                        (ingredient) => (
-                                                            <div
-                                                                key={
-                                                                    ingredient.text
-                                                                }
-                                                            >
-                                                                <IngredientsComponent
-                                                                    card={
-                                                                        ingredient
-                                                                    }
-                                                                />
-                                                            </div>
-                                                        )
-                                                    )}
+                                                    {ingredients.map((ingredient) => (
+                                                        <div key={ingredient.text}>
+                                                            <IngredientsComponent
+                                                                card={ingredient}
+                                                            />
+                                                        </div>
+                                                    ))}
                                                 </ul>
                                             </div>
                                         </div>
@@ -265,14 +243,11 @@ const TestSlider = () => {
                                             Get Ready
                                         </h1>
                                         <p className="text-xl">
-                                            Before you start cooking, get
-                                            everything ready – chop, drain,
-                                            rinse your ingredients!
+                                            Before you start cooking, get everything ready – chop,
+                                            drain, rinse your ingredients!
                                         </p>
                                         <div className="servesArea mt-7 flex flex-row  items-center ">
-                                            <p className="mr-3 text-lg">
-                                                Serves{" "}
-                                            </p>
+                                            <p className="mr-3 text-lg">Serves </p>
                                             <Counter />
                                         </div>
                                         <button
@@ -289,27 +264,17 @@ const TestSlider = () => {
                                     <div className="h-[760px] overflow-y-scroll">
                                         <div className="cookingIngredients ml-11 mt-16 flex flex-col font-medium">
                                             <div className="cookingIngredients_header flex flex-row">
-                                                <h1 className="text-3xl">
-                                                    Ingredients
-                                                </h1>
+                                                <h1 className="text-3xl">Ingredients</h1>
                                             </div>
                                             <div className="cookingIngredients_ul py-[32px]">
                                                 <ul>
-                                                    {ingredients.map(
-                                                        (ingredient) => (
-                                                            <div
-                                                                key={
-                                                                    ingredient.text
-                                                                }
-                                                            >
-                                                                <IngredientsComponent
-                                                                    card={
-                                                                        ingredient
-                                                                    }
-                                                                />
-                                                            </div>
-                                                        )
-                                                    )}
+                                                    {ingredients.map((ingredient) => (
+                                                        <div key={ingredient.text}>
+                                                            <IngredientsComponent
+                                                                card={ingredient}
+                                                            />
+                                                        </div>
+                                                    ))}
                                                 </ul>
                                             </div>
                                         </div>
