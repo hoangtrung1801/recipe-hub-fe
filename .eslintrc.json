@@ -28,7 +28,7 @@
                 ]
             }
         ],
-        "no-console": ["warn", { "allow": ["warn", "info", "error"] }],
+        "no-console": "off",
         "no-undef": "warn",
         "no-unused-vars": "warn",
         "react/jsx-uses-react": "error",
