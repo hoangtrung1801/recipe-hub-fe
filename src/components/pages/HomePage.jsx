@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import constants from "~/libs/constants";
-import fetcher from "~/libs/fetcher";
 import CardComponent from "./CardComponent";
 
 const recipes = [
@@ -23,10 +20,6 @@ const recipes = [
 ];
 
 const HomePage = () => {
-    useEffect(() => {
-        fetcher(`${constants.BACKEND_URL}/auth`).then((data) => console.log(data));
-    });
-
     return (
         <div>
             <banner>

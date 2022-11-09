@@ -1,36 +1,17 @@
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import signUp from "~/libs/apis/signUp";
-import constants from "~/libs/constants";
 import Button from "../buttons/Button";
-import Input from "../Input";
 
 const SignUpPage = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors: formErrors },
+        formState: { errors },
     } = useForm();
 
-    const [errors, setErrors] = useState([]);
-
-    const navigate = useNavigate();
-
-    const onSubmit = async (data) => {
-        const response = await signUp(data);
-        if (response.status === constants.responseStatus.SUCCESS) {
-            navigate("/");
-        } else {
-            console.log(formErrors);
-            setErrors((errors) => [response.message, ...errors]);
-            console.error(response);
-        }
+    const onSubmit = (data) => {
+        // eslint-disable-next-line no-console
+        console.log(data);
     };
-
-    useEffect(() => {
-        console.log(formErrors);
-    }, [formErrors]);
 
     return (
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -44,69 +25,86 @@ const SignUpPage = () => {
                         Enter your information to register
                     </p>
                 </div>
-                <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                <form
+                    className="mt-8 space-y-6"
+                    action="#"
+                    method="POST"
+                    onSubmit={handleSubmit(onSubmit)}
+                >
                     <input type="hidden" name="remember" value="true" />
                     <div className="flex flex-col gap-3 -space-y-px rounded-md shadow-sm">
                         <div>
                             <label htmlFor="email-address" className="sr-only">
-                                Username
+                                First Name
                             </label>
-                            <Input
-                                name="username"
-                                id="username"
-                                placeholder={"Username"}
-                                {...register("username")}
+                            <input
+                                name="firstname"
+                                type="text"
+                                autoComplete="email"
+                                className="relative block w-full appearance-none rounded-none  border border-gray-300 bg-primary-100 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-dark-0 focus:outline-none focus:ring-dark-0 sm:text-sm"
+                                placeholder="First name"
+                                {...register("firstname", { required: true })}
                             />
                         </div>
-
+                        {errors.firstname?.type === "required" && (
+                            <p className="text-xs text-red-500">First name is required</p>
+                        )}
                         <div>
                             <label htmlFor="email-address" className="sr-only">
+                                Last Name
+                            </label>
+                            <input
+                                name="lastname"
+                                type="text"
+                                autoComplete="email"
+                                className="relative block w-full appearance-none rounded-none  border border-gray-300 bg-primary-100 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-dark-0 focus:outline-none focus:ring-dark-0 sm:text-sm"
+                                placeholder="Last name"
+                                {...register("lastname", { required: true })}
+                            />
+                        </div>
+                        {errors.lastname?.type === "required" && (
+                            <p className="text-xs text-red-500">Last name is required</p>
+                        )}
+                        <div>
+                            <label htmlFor="email-address" className="sr-only">
+                                Email address
+                            </label>
+                            <input
+                                name="email"
+                                type="text"
+                                autoComplete="email"
+                                className="relative block w-full appearance-none rounded-none  border border-gray-300 bg-primary-100 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-dark-0 focus:outline-none focus:ring-dark-0 sm:text-sm"
+                                placeholder="Email address"
+                                {...register("email", {
+                                    required: true,
+                                    pattern: /^\S+@\S+$/i,
+                                })}
+                            />
+                        </div>
+                        {errors.email?.type === "required" && (
+                            <p className="text-xs text-red-500">Email is required</p>
+                        )}
+                        {errors.email?.type === "pattern" && (
+                            <p className="text-xs text-red-500">Invalid email syntax</p>
+                        )}
+                        <div>
+                            <label htmlFor="password" className="sr-only">
                                 Password
                             </label>
-                            <Input
+                            <input
                                 name="password"
-                                placeholder={"Password"}
                                 type="password"
-                                {...register("password")}
+                                autoComplete="current-password"
+                                className="relative block w-full appearance-none rounded-none border border-gray-300 bg-primary-100 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-dark-0 focus:outline-none focus:ring-dark-0 sm:text-sm"
+                                placeholder="Password"
+                                {...register("password", { required: true })}
                             />
                         </div>
-
-                        <div>
-                            <label htmlFor="email-address" className="sr-only">
-                                Your name
-                            </label>
-                            <Input name="name" placeholder={"Your name"} {...register("name")} />
-                        </div>
-
-                        <div>
-                            <label htmlFor="email-address" className="sr-only">
-                                Your phone
-                            </label>
-                            <Input
-                                name="phone"
-                                placeholder={"Your phone"}
-                                type="phone"
-                                {...register("phone")}
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="email-address" className="sr-only">
-                                Your address
-                            </label>
-                            <Input
-                                name="address"
-                                placeholder={"Your address"}
-                                {...register("address")}
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        {errors.length > 0 && (
-                            // <p className="text-xs text-red-500">Username is required</p>
-                            <p className="text-xs text-red-500">{errors[0]}</p>
+                        {errors.password?.type === "required" && (
+                            <p className="text-xs text-red-500">Password is required</p>
                         )}
                     </div>
+
                     <div>
                         <Button variant="primary" type="submit" className="w-full">
                             Sign up

@@ -1,30 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import login from "~/libs/apis/logIn";
-import constants from "~/libs/constants";
 import Button from "../buttons/Button";
-import Input from "../Input";
+// import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+    // const navigate = useNavigate();
     const {
         register,
         handleSubmit,
-        formState: { errors: formErrors },
+        formState: { errors },
     } = useForm();
 
-    const navigate = useNavigate();
-
-    const [errors, setErrors] = useState([]);
-
-    const onSubmit = async (data) => {
-        const response = await login(data.username, data.password);
-        if (response.status === constants.responseStatus.SUCCESS) {
-            navigate("/");
-        } else {
-            // console.error(response);
-            setErrors((errors) => [...response.message, ...formErrors, ...errors]);
-        }
+    const onSubmit = (data) => {
+        // eslint-disable-next-line no-console
+        console.log(data);
     };
 
     return (
@@ -37,34 +26,15 @@ const LoginPage = () => {
                             Sign in to your account
                         </h2>
                     </div>
-                    <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                    <form
+                        className="mt-8 space-y-6"
+                        action=""
+                        method="POST"
+                        onSubmit={handleSubmit(onSubmit)}
+                    >
                         <input type="hidden" name="remember" value="true" />
                         <div className="flex flex-col gap-3 -space-y-px ">
                             <div>
-                                <label htmlFor="email-address" className="sr-only">
-                                    Username
-                                </label>
-                                <Input
-                                    name="username"
-                                    id="username"
-                                    placeholder={"Username"}
-                                    {...register("username", { required: true })}
-                                />
-                            </div>
-
-                            <div>
-                                <label htmlFor="email-address" className="sr-only">
-                                    Password
-                                </label>
-                                <Input
-                                    name="password"
-                                    placeholder={"Password"}
-                                    type="password"
-                                    {...register("password", { required: true })}
-                                />
-                            </div>
-
-                            {/* <div>
                                 <label htmlFor="Email" className="sr-only">
                                     Email
                                 </label>
@@ -115,13 +85,6 @@ const LoginPage = () => {
                             )}
                             {errors.password?.type === "validate" && (
                                 <p className="text-xs text-red-500">Incorrect password</p>
-                            )} */}
-                        </div>
-
-                        <div>
-                            {errors.length > 0 && (
-                                // <p className="text-xs text-red-500">Username is required</p>
-                                <p className="text-xs text-red-500">{errors[0]}</p>
                             )}
                         </div>
 
@@ -144,7 +107,7 @@ const LoginPage = () => {
 
                         <div>
                             <Button variant="primary" type="submit" className="w-full">
-                                Login
+                                Sign in
                             </Button>
                         </div>
                     </form>

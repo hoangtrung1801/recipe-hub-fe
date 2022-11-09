@@ -1,8 +1,8 @@
+import { Button } from "@material-tailwind/react";
 import { GitFork, Star } from "phosphor-react";
 import { useState } from "react";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import Button from "~/components/buttons/Button";
 import ButtonStartCook from "~/components/buttons/ButtonStartCook";
 import Counter from "~/components/Counter";
 import StartCookingModal from "./StartCookingModal";
