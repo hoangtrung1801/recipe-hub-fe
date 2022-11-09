@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import login from "~/libs/apis/logIn";
@@ -10,17 +10,20 @@ const LoginPage = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors: formErrors },
     } = useForm();
 
     const navigate = useNavigate();
+
+    const [errors, setErrors] = useState([]);
 
     const onSubmit = async (data) => {
         const response = await login(data.username, data.password);
         if (response.status === constants.responseStatus.SUCCESS) {
             navigate("/");
         } else {
-            console.error(response);
+            // console.error(response);
+            setErrors((errors) => [...response.message, ...formErrors, ...errors]);
         }
     };
 
@@ -48,9 +51,6 @@ const LoginPage = () => {
                                     {...register("username", { required: true })}
                                 />
                             </div>
-                            {errors.username?.type === "required" && (
-                                <p className="text-xs text-red-500">Username is required</p>
-                            )}
 
                             <div>
                                 <label htmlFor="email-address" className="sr-only">
@@ -63,9 +63,6 @@ const LoginPage = () => {
                                     {...register("password", { required: true })}
                                 />
                             </div>
-                            {errors.password?.type === "required" && (
-                                <p className="text-xs text-red-500">Password is required</p>
-                            )}
 
                             {/* <div>
                                 <label htmlFor="Email" className="sr-only">
@@ -119,6 +116,13 @@ const LoginPage = () => {
                             {errors.password?.type === "validate" && (
                                 <p className="text-xs text-red-500">Incorrect password</p>
                             )} */}
+                        </div>
+
+                        <div>
+                            {errors.length > 0 && (
+                                // <p className="text-xs text-red-500">Username is required</p>
+                                <p className="text-xs text-red-500">{errors[0]}</p>
+                            )}
                         </div>
 
                         <div className="flex items-center justify-between">

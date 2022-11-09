@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import signUp from "~/libs/apis/signUp";
@@ -9,8 +10,10 @@ const SignUpPage = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors: formErrors },
     } = useForm();
+
+    const [errors, setErrors] = useState([]);
 
     const navigate = useNavigate();
 
@@ -19,9 +22,15 @@ const SignUpPage = () => {
         if (response.status === constants.responseStatus.SUCCESS) {
             navigate("/");
         } else {
+            console.log(formErrors);
+            setErrors((errors) => [response.message, ...errors]);
             console.error(response);
         }
     };
+
+    useEffect(() => {
+        console.log(formErrors);
+    }, [formErrors]);
 
     return (
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -46,12 +55,9 @@ const SignUpPage = () => {
                                 name="username"
                                 id="username"
                                 placeholder={"Username"}
-                                {...register("username", { required: true })}
+                                {...register("username")}
                             />
                         </div>
-                        {errors.username?.type === "required" && (
-                            <p className="text-xs text-red-500">Username is required</p>
-                        )}
 
                         <div>
                             <label htmlFor="email-address" className="sr-only">
@@ -61,26 +67,16 @@ const SignUpPage = () => {
                                 name="password"
                                 placeholder={"Password"}
                                 type="password"
-                                {...register("password", { required: true })}
+                                {...register("password")}
                             />
                         </div>
-                        {errors.password?.type === "required" && (
-                            <p className="text-xs text-red-500">Password is required</p>
-                        )}
 
                         <div>
                             <label htmlFor="email-address" className="sr-only">
                                 Your name
                             </label>
-                            <Input
-                                name="name"
-                                placeholder={"Your name"}
-                                {...register("name", { required: true })}
-                            />
+                            <Input name="name" placeholder={"Your name"} {...register("name")} />
                         </div>
-                        {errors.name?.type === "required" && (
-                            <p className="text-xs text-red-500">Your name is required</p>
-                        )}
 
                         <div>
                             <label htmlFor="email-address" className="sr-only">
@@ -90,12 +86,9 @@ const SignUpPage = () => {
                                 name="phone"
                                 placeholder={"Your phone"}
                                 type="phone"
-                                {...register("phone", { required: true })}
+                                {...register("phone")}
                             />
                         </div>
-                        {errors.phone?.type === "required" && (
-                            <p className="text-xs text-red-500">Your phone is required</p>
-                        )}
 
                         <div>
                             <label htmlFor="email-address" className="sr-only">
@@ -104,11 +97,14 @@ const SignUpPage = () => {
                             <Input
                                 name="address"
                                 placeholder={"Your address"}
-                                {...register("address", { required: true })}
+                                {...register("address")}
                             />
                         </div>
-                        {errors.address?.type === "required" && (
-                            <p className="text-xs text-red-500">Address is required</p>
+                    </div>
+                    <div>
+                        {errors.length > 0 && (
+                            // <p className="text-xs text-red-500">Username is required</p>
+                            <p className="text-xs text-red-500">{errors[0]}</p>
                         )}
                     </div>
                     <div>
