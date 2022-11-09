@@ -1,4 +1,4 @@
-import UnderlineLink from "../links/UnderlineLink";
+import UnderlineLink from "./links/UnderlineLink";
 // const linkImage = "imgWrapper lg:h-[360px] md:h-[270px] h-[240px] bg-[url(https://images.prismic.io/stryve/338b523d-73cc-439a-acd0-d02eaff6ba7e_nutty-apple-date-porridge.png?auto=compress,format&fm=webp&lossless=false&q=75&w=375%20375w,%20https://images.prismic.io/stryve/338b523d-73cc-439a-acd0-d02eaff6ba7e_nutty-apple-date-porridge.png?auto=compress,format&fm=webp&lossless=false&q=75&w=450%20450w)] bg-cover bg-no-repeat bg-center";
 
 const CardComponent = (props) => {

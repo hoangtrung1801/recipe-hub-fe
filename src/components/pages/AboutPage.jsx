@@ -3,7 +3,7 @@ import { Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
 import { useState } from "react";
 import { Listbox } from "@headlessui/react";
-import CardComponent from "./CardComponent";
+import CardComponent from "../CardComponent";
 import { Link } from "react-router-dom";
 
 const recipeList = [

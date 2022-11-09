@@ -1,29 +1,13 @@
 import { useState } from "react";
+import useGetRecipes from "~/libs/apis/useGetRecipes";
 import clsxm from "~/libs/clsxm";
-import CardComponent from "./CardComponent";
+import RecipeCard from "../RecipeCard";
 
 const categories = ["All", "Vegan", "Vegetarian"];
 
-const recipes = [
-    {
-        text: "Tomato & pesto pasta",
-        linkBg: "imgWrapper lg:h-[360px] md:h-[270px] h-[240px] bg-[url(https://images.prismic.io/stryve/3d40b6ec-7d41-4d48-bd3a-5bf78ca5b303_tomato-pesto-pasta.png?auto=compress%2Cformat&fm=webp&lossless=false&q=75&w=450%20450w)] bg-cover bg-no-repeat bg-center",
-    },
-    {
-        text: "Nutty, apple & date porridge",
-        linkBg: "imgWrapper lg:h-[360px] md:h-[270px] h-[240px] bg-[url(https://images.prismic.io/stryve/2be94b3a-3084-4aa0-817d-7af87596bd74_pulled-jackfruit-loaded-fries.png?auto=compress%2Cformat&fm=webp&lossless=false&q=75&w=450%20450w)] bg-cover bg-no-repeat bg-center",
-    },
-    {
-        text: "Mushroom & kale macaroni",
-        linkBg: "imgWrapper lg:h-[360px] md:h-[270px] h-[240px] bg-[url(https://images.prismic.io/stryve/fad9e994-32e9-4511-b620-5b3a6287009f_mushroom-spinach-pesto-toasted-sandwich.png?auto=compress%2Cformat&fm=webp&lossless=false&q=75&w=450%20450w)] bg-cover bg-no-repeat bg-center",
-    },
-    {
-        text: "Griddled courgette & asparagus pasta",
-        linkBg: "imgWrapper lg:h-[360px] md:h-[270px] h-[240px] bg-[url(https://images.prismic.io/stryve/7ac06668-07b3-4dbb-ac42-850aa27a7ec3_mushroom-stroganoff.png?auto=compress%2Cformat&fm=webp&lossless=false&q=75&w=450%20450w)] bg-cover bg-no-repeat bg-center",
-    },
-];
-
 const RecipesPage = () => {
+    const { recipes } = useGetRecipes();
+
     const [selectedCategory] = useState(categories[0]);
 
     return (
@@ -75,13 +59,8 @@ const RecipesPage = () => {
                         </div>
                         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-4 lg:gap-8  ">
                             {recipes.map((recipe) => (
-                                <div key={recipe.text}>
-                                    <CardComponent card={recipe} />
-                                </div>
-                            ))}
-                            {recipes.map((recipe) => (
-                                <div key={recipe.text}>
-                                    <CardComponent card={recipe} />
+                                <div key={recipe.id}>
+                                    <RecipeCard recipe={recipe} />
                                 </div>
                             ))}
                         </div>
