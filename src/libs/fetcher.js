@@ -1,11 +1,20 @@
-const fetcher = (input, init) =>
-    fetch(input, {
-        method: "GET",
-        credentials: "include",
-        ...init,
-    }).then((res) => res.json());
+import axios from "axios";
+// const fetcher = (input, init) =>
+//     fetch(input, {
+//         method: "GET",
+//         credentials: "include",
+//         ...init,
+//     }).then((res) => res.json());
+const fetcherGet = (input, ...config) =>
+    axios
+        .get(input, {
+            withCredentials: true,
+            ...config,
+        })
+        .then((res) => res.data)
+        .catch((error) => error);
 
-export async function postData(url = "", data = {}) {
+export async function fetcherPost(url = "", data = {}) {
     // Default options are marked with *
     const response = await fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -24,4 +33,4 @@ export async function postData(url = "", data = {}) {
     return response.json(); // parses JSON response into native JavaScript objects
 }
 
-export default fetcher;
+export default fetcherGet;

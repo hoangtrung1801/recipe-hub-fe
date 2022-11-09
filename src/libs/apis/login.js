@@ -1,14 +1,13 @@
 import constants from "../constants";
-import { postData } from "../fetcher";
+import { fetcherPost } from "../fetcher";
 
 const endpoint = `${constants.BACKEND_URL}/auth/login`;
 
 export default async function login(username, password) {
-    const response = await postData(endpoint, {
+    const response = await fetcherPost(endpoint, {
         username,
         password,
     });
-    console.log(response);
 
     return response;
 }

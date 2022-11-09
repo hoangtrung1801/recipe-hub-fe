@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import constants from "~/libs/constants";
-import fetcher from "~/libs/fetcher";
+import fetcherGet from "~/libs/fetcher";
 import CardComponent from "./CardComponent";
 
 const recipes = [

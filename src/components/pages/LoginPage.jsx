@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import login from "~/libs/apis/logIn";
 import constants from "~/libs/constants";
+import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import Button from "../buttons/Button";
 import Input from "../Input";
 
@@ -10,20 +10,25 @@ const LoginPage = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors: formErrors },
+        // formState: { errors: formErrors },
     } = useForm();
 
     const navigate = useNavigate();
+    const login = useCurrentUserStore((state) => state.login);
+    const currentUser = useCurrentUserStore((state) => state.currentUser);
 
     const [errors, setErrors] = useState([]);
+
+    useEffect(() => {
+        if (currentUser !== null) navigate("/");
+    }, []);
 
     const onSubmit = async (data) => {
         const response = await login(data.username, data.password);
         if (response.status === constants.responseStatus.SUCCESS) {
             navigate("/");
         } else {
-            // console.error(response);
-            setErrors((errors) => [...response.message, ...formErrors, ...errors]);
+            setErrors((errors) => [response.message, ...errors]);
         }
     };
 

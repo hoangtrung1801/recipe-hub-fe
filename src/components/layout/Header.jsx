@@ -1,5 +1,8 @@
+import { Popover } from "@mantine/core";
 import { ForkKnife, MagnifyingGlass, User } from "phosphor-react";
 import { Link } from "react-router-dom";
+import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
+import Button from "../buttons/Button";
 import UnderlineLink from "../links/UnderlineLink";
 
 const router = [
@@ -17,7 +20,7 @@ const router = [
 
 const Header = () => {
     return (
-        <div className="container sticky top-0 z-50 h-[80px] border-b border-black bg-primary-200">
+        <div className="sticky top-0 z-50 h-[80px] border-b border-black bg-primary-200">
             <div className="flex h-full items-center justify-between">
                 <div className="flex-1">
                     {/* <h1 className="text-4xl font-bold ">Stryve</h1> */}
@@ -26,11 +29,7 @@ const Header = () => {
                     </Link>
                 </div>
                 <div className="flex space-x-8">
-                    {router.map((route) => (
-                        <UnderlineLink to={route.path} icon={route.icon} key={route.label}>
-                            {route.label}
-                        </UnderlineLink>
-                    ))}
+                    <HeaderMenu />
                 </div>
                 <div className="flex flex-1">
                     <HeeaderRight />
@@ -40,22 +39,87 @@ const Header = () => {
     );
 };
 
+const HeaderMenu = () => {
+    return (
+        <>
+            {router.map((route) => (
+                <UnderlineLink to={route.path} icon={route.icon} key={route.label}>
+                    {route.label}
+                </UnderlineLink>
+            ))}
+            <UnderlineLink to={"#"} icon={<MagnifyingGlass className="text-xl" weight="light" />}>
+                Search
+            </UnderlineLink>
+        </>
+    );
+};
+
 const HeeaderRight = () => {
+    const currentUser = useCurrentUserStore((state) => state.currentUser);
+
+    const logOut = useCurrentUserStore((state) => state.logOut);
+
+    const onLogOut = () => {
+        logOut();
+    };
+
     return (
         <div className="ml-auto flex space-x-4">
-            <div>
-                <Link
-                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary-500 transition hover:bg-primary-500/30"
-                    to="/login"
-                >
-                    <User className="text-xl" weight="light" />
-                </Link>
-            </div>
-            <div>
-                <Link className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary-500 transition hover:bg-primary-500/30">
-                    <MagnifyingGlass className="text-xl" weight="light" />
-                </Link>
-            </div>
+            {!currentUser && (
+                <div className="space-x-4">
+                    <Link to={"login"} className="italic">
+                        <span>Log in</span>
+                    </Link>
+
+                    <Link to={"signup"}>
+                        <Button variant="light">Sign up</Button>
+                    </Link>
+                    {/* <Link
+                        className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary-500 transition hover:bg-primary-500/30"
+                        to="/login"
+                    >
+                        <User className="text-xl" weight="light" />
+                    </Link> */}
+                </div>
+            )}
+            {currentUser && (
+                <div>
+                    <Popover>
+                        <Popover.Target>
+                            <div className="flex cursor-pointer select-none items-center space-x-2">
+                                <span>{currentUser.name}</span>
+                                <Link
+                                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary-500 transition hover:bg-primary-500/30"
+                                    to="/login"
+                                >
+                                    <User className="text-xl" weight="light" />
+                                </Link>
+                            </div>
+                        </Popover.Target>
+
+                        <Popover.Dropdown className="rounded-lg px-0 shadow-xl">
+                            <div className="w-40">
+                                <Link to={"/profile"}>
+                                    <div className="cursor-pointer py-1 px-6 text-dark-1 hover:bg-primary-300">
+                                        <span>Your profile</span>
+                                    </div>
+                                </Link>
+                                <Link to={"/profile"}>
+                                    <div className="cursor-pointer py-1 px-6 text-dark-1 hover:bg-primary-300">
+                                        <p>Your recipes</p>
+                                    </div>
+                                </Link>
+                                <hr className="m-0 my-2 border-dark-1" />
+                                <Link onClick={onLogOut}>
+                                    <div className="cursor-pointer py-1 px-6 text-dark-1 hover:bg-primary-300">
+                                        <p>Log out</p>
+                                    </div>
+                                </Link>
+                            </div>
+                        </Popover.Dropdown>
+                    </Popover>
+                </div>
+            )}
         </div>
     );
 };
