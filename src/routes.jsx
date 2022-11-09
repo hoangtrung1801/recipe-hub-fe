@@ -6,7 +6,7 @@ import ComponentsPage from "./components/pages/components";
 import HomePage from "./components/pages/HomePage/HomePage";
 import LoginPage from "./components/pages/LoginPage";
 import RecipePage from "./components/pages/RecipePage";
-import RecipesPage from "./components/pages/RecipesPage";
+import RecipesPage from "./components/pages/RecipesPage/RecipesPage";
 import SearchPage from "./components/pages/SearchPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import UpdateProfile from "./components/pages/UpdateProfile";
