@@ -1,5 +1,5 @@
 import React from "react";
-import CardComponent from "./CardComponent";
+import CardComponent from "../CardComponent";
 
 const SearchPage = () => {
     return (
