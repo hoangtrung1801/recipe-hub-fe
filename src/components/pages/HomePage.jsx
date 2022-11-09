@@ -23,6 +23,10 @@ const recipes = [
 ];
 
 const HomePage = () => {
+    useEffect(() => {
+        fetcher(`${constants.BACKEND_URL}/auth`).then((data) => console.log(data));
+    });
+
     return (
         <div>
             <banner>
