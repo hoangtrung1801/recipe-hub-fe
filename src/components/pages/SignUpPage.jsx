@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import signUp from "~/libs/apis/signUp";
 import constants from "~/libs/constants";
+import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import Button from "../buttons/Button";
 import Input from "../Input";
 
@@ -10,27 +10,27 @@ const SignUpPage = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors: formErrors },
+        // formState: { errors: formErrors },
     } = useForm();
 
     const [errors, setErrors] = useState([]);
 
     const navigate = useNavigate();
+    const signUp = useCurrentUserStore((state) => state.signUp);
+    const currentUser = useCurrentUserStore((state) => state.currentUser);
+
+    useEffect(() => {
+        if (currentUser !== null) navigate("/");
+    }, []);
 
     const onSubmit = async (data) => {
         const response = await signUp(data);
         if (response.status === constants.responseStatus.SUCCESS) {
             navigate("/");
         } else {
-            console.log(formErrors);
             setErrors((errors) => [response.message, ...errors]);
-            console.error(response);
         }
     };
-
-    useEffect(() => {
-        console.log(formErrors);
-    }, [formErrors]);
 
     return (
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
