@@ -11,11 +11,11 @@ const router = [
         label: "Recipes",
         icon: <ForkKnife weight="light" />,
     },
-    {
-        path: "/profile",
-        label: "About",
-        icon: <User weight="light" />,
-    },
+    // {
+    //     path: "/profile",
+    //     label: "About",
+    //     icon: <User weight="light" />,
+    // },
 ];
 
 const Header = () => {

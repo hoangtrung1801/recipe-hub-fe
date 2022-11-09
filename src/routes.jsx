@@ -1,16 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/layout";
 import Page404 from "./components/pages/404";
+import AboutPage from "./components/pages/AboutPage";
 import ComponentsPage from "./components/pages/components";
 import HomePage from "./components/pages/HomePage/HomePage";
-import RecipePage from "./components/pages/RecipePage";
 import LoginPage from "./components/pages/LoginPage";
+import RecipePage from "./components/pages/RecipePage";
 import RecipesPage from "./components/pages/RecipesPage";
-import SignUpPage from "./components/pages/SignUpPage";
-import AboutPage from "./components/pages/AboutPage";
-import CardComponent from "./components/CardComponent";
 import SearchPage from "./components/pages/SearchPage";
-import DivStart from "./components/pages/DivStart";
+import SignUpPage from "./components/pages/SignUpPage";
 import UpdateProfile from "./components/pages/UpdateProfile";
 
 const router = createBrowserRouter([
@@ -55,16 +53,8 @@ const router = createBrowserRouter([
                 element: <Page404 />,
             },
             {
-                path: "/temp",
-                element: <CardComponent />,
-            },
-            {
                 path: "/search",
                 element: <SearchPage />,
-            },
-            {
-                path: "/test",
-                element: <DivStart />,
             },
         ],
     },
