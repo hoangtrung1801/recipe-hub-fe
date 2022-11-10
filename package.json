@@ -9,8 +9,8 @@
         "preview": "vite preview",
         "prepare": "husky install",
         "format": "prettier -w src",
-        "lint": "eslint src/ --max-warnings=0",
-        "lint:fix": "eslint src/ --max-warnings=0"
+        "lint": "eslint --max-warnings=0 src/**/*.{js,jsx,ts,tsx}",
+        "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx}"
     },
     "dependencies": {
         "@emotion/react": "^11.10.5",

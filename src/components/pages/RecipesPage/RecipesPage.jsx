@@ -1,19 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useGetRecipes from "~/libs/apis/useGetRecipes";
 import RecipeCard from "../../RecipeCard";
 import ListCatalogs from "./ListCatalogs";
 
 const RecipesPage = () => {
-    const { recipes } = useGetRecipes();
-
     // Catalog 'All' is -1 (default)
-    const [selectedCatalogId, setSelectedCatalogId] = useState(-1);
+    const [selectedCatalog, setSelectedCatalog] = useState(-1);
+    const [filteredRecipes, setFileteredRecipes] = useState([]);
+
+    const { recipes } = useGetRecipes("", selectedCatalog === -1 ? "" : selectedCatalog);
+    console.log(recipes);
 
     return (
         <div className="container auto-rows-auto">
             <ListCatalogs
-                selectedCatalogId={selectedCatalogId}
-                setSelectedCatalogId={setSelectedCatalogId}
+                selectedCatalog={selectedCatalog}
+                setSelectedCatalog={setSelectedCatalog}
             />
 
             {/* recipes list */}

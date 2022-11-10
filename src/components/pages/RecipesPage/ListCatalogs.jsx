@@ -1,7 +1,7 @@
 import useGetCatalogs from "~/libs/apis/useGetCatalogs";
 import clsxm from "~/libs/clsxm";
 
-export default function ListCatalogs({ selectedCatalogId, setSelectedCatalogId }) {
+export default function ListCatalogs({ selectedCatalog, setSelectedCatalog }) {
     const { catalogs } = useGetCatalogs();
 
     return (
@@ -12,12 +12,12 @@ export default function ListCatalogs({ selectedCatalogId, setSelectedCatalogId }
                         <ul className="left-auto m-0 flex justify-center space-x-4 p-0 font-normal">
                             <li
                                 className="cursor-pointer items-center rounded-2xl bg-transparent py-4"
-                                onClick={() => setSelectedCatalogId(-1)}
+                                onClick={() => setSelectedCatalog(-1)}
                             >
                                 <div
                                     className={clsxm(
                                         "rounded-3xl border-y-2 border-x-2 border-primary-400 py-2 px-3 text-sm",
-                                        selectedCatalogId === -1 && "bg-primary-500"
+                                        selectedCatalog === -1 && "bg-primary-500"
                                     )}
                                 >
                                     <span className="text-md font-medium">All</span>
@@ -27,16 +27,19 @@ export default function ListCatalogs({ selectedCatalogId, setSelectedCatalogId }
                             {catalogs.map((catalog) => (
                                 <li
                                     className="cursor-pointer items-center  rounded-2xl bg-transparent py-4"
-                                    onClick={() => setSelectedCatalogId(catalog.id)}
+                                    onClick={() => setSelectedCatalog(catalog.name)}
                                     key={catalog.id}
                                 >
                                     <div
                                         className={clsxm(
                                             "rounded-3xl border-y-2 border-x-2 border-primary-400 py-2 px-3 text-sm",
-                                            catalog.id === selectedCatalogId && "bg-primary-500"
+                                            catalog.name === selectedCatalog && "bg-primary-500"
                                         )}
                                     >
-                                        <span className="text-md font-medium">{catalog.name}</span>
+                                        <span className="text-md font-medium">
+                                            {catalog.name.charAt(0).toUpperCase() +
+                                                catalog.name.slice(1)}
+                                        </span>
                                     </div>
                                 </li>
                             ))}

@@ -22,7 +22,7 @@ const RecipeCard = ({ recipe }) => {
                     </div>
                 </div>
                 <div className="textWrapper text-left text-xl font-medium lg:text-3xl">
-                    <UnderlineLink multiline={true} to={`/recipe/${recipe.id}`}>
+                    <UnderlineLink multiline={true} to={`/recipes/${recipe.id}`}>
                         {recipe.name[0].toUpperCase() + recipe.name.slice(1)}
                     </UnderlineLink>
                 </div>

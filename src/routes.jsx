@@ -5,7 +5,7 @@ import AboutPage from "./components/pages/AboutPage";
 import ComponentsPage from "./components/pages/components";
 import HomePage from "./components/pages/HomePage/HomePage";
 import LoginPage from "./components/pages/LoginPage";
-import RecipePage from "./components/pages/RecipePage";
+import RecipePage from "./components/pages/RecipePage/RecipePage";
 import RecipesPage from "./components/pages/RecipesPage/RecipesPage";
 import SearchPage from "./components/pages/SearchPage";
 import SignUpPage from "./components/pages/SignUpPage";
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
                 element: <RecipesPage />,
             },
             {
-                path: "/recipe",
+                path: "/recipes/:recipeId",
                 element: <RecipePage />,
             },
             {

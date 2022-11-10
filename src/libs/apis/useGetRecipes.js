@@ -1,9 +1,10 @@
 import useSWR from "swr";
 import constants from "../constants";
 
-const endpoint = `${constants.BACKEND_URL}/recipes`;
+export default function useGetRecipes(q = "", c = "") {
+    const searchQuery = !q && !c ? "" : `q=${q}&c=${c}`;
+    const endpoint = `${constants.BACKEND_URL}/recipes?${searchQuery}`;
 
-export default function useGetRecipes() {
     const { data, error } = useSWR(endpoint);
 
     return {
