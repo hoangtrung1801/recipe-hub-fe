@@ -5,6 +5,7 @@ import ButtonStartCook from "~/components/buttons/ButtonStartCook";
 import StartCookingModal from "./StartCookingModal";
 import useGetCurrentInstructions from "~/libs/apis/useGetCurrentInstructions";
 import * as _ from "lodash";
+import { Badge } from "@mantine/core";
 
 export default function RecipeDetail({ recipe }) {
     const { instructions } = useGetCurrentInstructions(recipe.id);
@@ -30,7 +31,7 @@ export default function RecipeDetail({ recipe }) {
                     {recipe.catalogs.map((catalog) => (
                         <div
                             key={catalog.id}
-                            className="rounded-3xl border-[3px] border-primary-400 py-1 px-4"
+                            className="select-none rounded-3xl border-[3px] border-primary-400 py-1 px-4"
                         >
                             <span>{_.capitalize(catalog.name)}</span>
                         </div>
@@ -56,10 +57,20 @@ export default function RecipeDetail({ recipe }) {
                     <Button variant="light" className="space-x-2">
                         <Star className="text-lg" />
                         <span>Star</span>
+                        <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
+                            {recipe.numberOfStar}
+                        </Badge>
+                        {/* <div>
+                            <span>0</span>
+                        </div> */}
                     </Button>
+
                     <Button variant="light" className="space-x-2">
                         <GitFork className="text-lg" />
                         <span>Fork</span>
+                        <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
+                            {recipe.numberOfFork}
+                        </Badge>
                     </Button>
                 </div>
             </div>
@@ -89,7 +100,7 @@ export default function RecipeDetail({ recipe }) {
                 <div className="mt-8 space-y-6">
                     {instructions &&
                         instructions.map((instruction) => (
-                            <div key={instructions.id} className="flex space-x-6">
+                            <div key={instruction.id} className="flex space-x-6">
                                 <div className="">
                                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-300">
                                         <span className="text-xl font-medium">
@@ -123,25 +134,31 @@ export default function RecipeDetail({ recipe }) {
                 <hr />
             </div>
             <div>
-                <div className="flex space-x-6">
-                    <div className="basis-24">
-                        <div className="aspect-square overflow-hidden rounded-full">
-                            <img
-                                src="https://randompicturegenerator.com/img/people-generator/gab5efb99b1f5b1ac18f8f302c793aaa28f5e881eb21d8ae4f7f64f55d3d800a5c77426e67b2e74c5e8d7c1787c13369f_640.jpg"
-                                alt="avatar"
-                                className="h-full w-full object-cover"
-                            />
-                        </div>
-                    </div>
-                    <div className="mt-2 flex-1">
-                        <p className="font-semibold">hoangtrung1801</p>
-                        <p className="mt-2">
-                            If you enjoyed this recipe share it with your friends and family who
-                            might also enjoy it
-                        </p>
-                    </div>
-                </div>
+                <RecipeAuthor user={recipe.user} />
             </div>
         </div>
     );
 }
+
+const RecipeAuthor = ({ user }) => {
+    return (
+        <div className="flex space-x-6">
+            <div className="basis-24">
+                <div className="aspect-square overflow-hidden rounded-full">
+                    <img
+                        src="https://randompicturegenerator.com/img/people-generator/gab5efb99b1f5b1ac18f8f302c793aaa28f5e881eb21d8ae4f7f64f55d3d800a5c77426e67b2e74c5e8d7c1787c13369f_640.jpg"
+                        alt="avatar"
+                        className="h-full w-full object-cover"
+                    />
+                </div>
+            </div>
+            <div className="mt-2 flex-1">
+                <p className="font-semibold">{user.name}</p>
+                <p className="mt-2">
+                    If you enjoyed this recipe share it with your friends and family who might also
+                    enjoy it
+                </p>
+            </div>
+        </div>
+    );
+};

@@ -1,4 +1,5 @@
 import { AspectRatio } from "@mantine/core";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
