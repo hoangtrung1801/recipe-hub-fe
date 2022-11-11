@@ -19,18 +19,21 @@ const UpdateProfile = () => {
             setState: setName,
             placeHolder: "Your name",
             label: "Name",
+            isVertical: true,
         },
         {
             state: address,
             setState: setAddress,
             placeHolder: "Your Address",
             label: "Address",
+            isVertical: true,
         },
         {
             state: phone,
             setState: setPhone,
             placeHolder: "Your Phone Number",
             label: "Phone",
+            isVertical: true,
         },
     ];
 

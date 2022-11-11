@@ -46,7 +46,7 @@ const AboutPage = () => {
                 <div className="mt-5 overflow-hidden">
                     <img
                         className="lg:h-45 lg:w-45 mx-auto rounded-full"
-                        src="https://avatars.githubusercontent.com/u/94124019?v=4"
+                        src="/profile.jpg"
                         alt="Randy Robertson"
                     />
                 </div>
@@ -68,13 +68,15 @@ const AboutPage = () => {
                         placeholder="Your recipe"
                         onChange={(e) => setSearchRecipe(e.target.value)}
                     />
-                    <RecipleFilter />
-                    <Button
-                        variant={"dark"}
-                        className="max-h-[34px] w-full md:w-[63px]"
-                    >
-                        New
-                    </Button>
+                    <RecipleCategory />
+                    <Link to={"/new"}>
+                        <Button
+                            variant={"dark"}
+                            className="max-h-[34px] w-full md:w-[63px]"
+                        >
+                            New
+                        </Button>
+                    </Link>
                 </div>
                 <div className="gird-cols-2 mt-6 grid gap-6 px-3 md:grid-cols-3">
                     {myRecipe
@@ -97,13 +99,13 @@ const AboutPage = () => {
     );
 };
 
-function RecipleFilter() {
+export function RecipleCategory() {
     const [selected, setSelected] = useState(recipeList[0]);
     return (
         <div className="z-10">
             <Listbox value={selected} onChange={setSelected}>
                 <div className="relative md:w-[145px]">
-                    <Listbox.Button className="relative w-full cursor-default rounded bg-white p-1.5 text-left shadow focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                    <Listbox.Button className="relative h-[38px] w-full cursor-default rounded bg-primary-300 p-1.5 text-left shadow focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                         <span className="block truncate text-center font-semibold uppercase">
                             {selected.text}
                         </span>

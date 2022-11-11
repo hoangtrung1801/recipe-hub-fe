@@ -1,10 +1,58 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import IngredientItem from "./IngredientItem";
+import RecipeIngredients from "./IngredientsPanel";
 
-const Modal = ({ isOpen, setIsOpen, title, children }) => {
+const ingredients = [
+    {
+        name: "Mushrooms",
+        amount: 200,
+        unit: "g",
+        // detail: 'sliced'
+    },
+    {
+        name: "Spinach",
+        amount: 60,
+        unit: "g",
+        // detail: 'sliced'
+    },
+    {
+        name: "Garlic cloves",
+        amount: 2,
+        unit: "",
+        // detail: 'sliced'
+    },
+    {
+        name: "Olive oil",
+        amount: 1,
+        unit: "tbsp",
+        // detail: 'sliced'
+    },
+    {
+        name: "Olive oil 2",
+        amount: 1,
+        unit: "tbsp",
+        // detail: 'sliced'
+    },
+    {
+        name: "Olive oil 3",
+        amount: 1,
+        unit: "tbsp",
+        // detail: 'sliced'
+    },
+];
+
+const ListModal = ({ isOpen, setIsOpen, title, children, setIngredients }) => {
     function closeModal() {
         setIsOpen(false);
     }
+
+    const addItem = (item) => {
+        setIngredients((prev) => [...prev, item]);
+        console.log(item.name);
+    };
 
     return (
         <Transition appear show={isOpen} as={Fragment}>
@@ -22,7 +70,7 @@ const Modal = ({ isOpen, setIsOpen, title, children }) => {
                 </Transition.Child>
 
                 <div className="fixed inset-0 overflow-y-auto">
-                    <div className="flex min-h-full items-center justify-center p-4 text-center">
+                    <div className="flex min-h-full items-center justify-center p-4 ">
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -32,18 +80,24 @@ const Modal = ({ isOpen, setIsOpen, title, children }) => {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded bg-white p-6 text-center align-middle shadow-xl transition-all">
+                            <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded bg-white px-6 py-3 shadow-xl transition-all">
                                 <Dialog.Title
                                     as="h3"
-                                    className="text-xl font-bold leading-6 text-gray-900"
+                                    className="text-center text-xl font-bold leading-6 text-gray-900"
                                 >
-                                    {title}
+                                    Ingredients
                                 </Dialog.Title>
-                                <div className="mt-2 text-sm text-gray-500">
-                                    {children}
+                                <div className="mt-2 max-h-[300px] space-y-3 overflow-y-auto px-6">
+                                    {ingredients.map((ingredient) => (
+                                        <IngredientItem
+                                            key={ingredient.name}
+                                            addItem={addItem}
+                                            {...ingredient}
+                                        />
+                                    ))}
                                 </div>
 
-                                <div className="mt-4">
+                                <div className="mt-4 flex justify-center">
                                     {/* <button
                                             type="button"
                                             className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
@@ -68,4 +122,4 @@ const Modal = ({ isOpen, setIsOpen, title, children }) => {
     );
 };
 
-export default Modal;
+export default ListModal;

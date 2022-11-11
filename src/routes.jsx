@@ -9,6 +9,7 @@ import RecipesPage from "./components/pages/RecipesPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import AboutPage from "./components/pages/AboutPage";
 import UpdateProfile from "./components/pages/UpdateProfile";
+import RecipeInit from "./components/pages/RecipeInit";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: "/profile/update",
                 element: <UpdateProfile />,
+            },
+            {
+                path: "/new",
+                element: <RecipeInit />,
             },
             {
                 path: "/recipes",
