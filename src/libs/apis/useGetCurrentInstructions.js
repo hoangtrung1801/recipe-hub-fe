@@ -3,11 +3,10 @@ import constants from "../constants";
 
 export default function useGetCurrentInstructions(recipeId) {
     const endpoint = `${constants.BACKEND_URL}/recipes/${recipeId}/instructions`;
-
     const { data, error } = useSWR(endpoint);
 
     return {
-        instrucions: data !== undefined ? data.data : null,
+        instructions: data !== undefined ? data.data : null,
         isLoading: !error && !data,
         error,
     };
