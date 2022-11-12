@@ -14,7 +14,7 @@ function App() {
     }, []);
 
     useEffect(() => {
-        console.log(currentUser);
+        console.log("current user", currentUser);
     }, [currentUser]);
 
     return (

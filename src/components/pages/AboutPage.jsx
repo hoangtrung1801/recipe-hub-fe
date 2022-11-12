@@ -1,10 +1,12 @@
 import Button from "../buttons/Button";
 import { Transition } from "@headlessui/react";
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 import { useState } from "react";
 import { Listbox } from "@headlessui/react";
 import CardComponent from "../CardComponent";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import useGetUser from "~/libs/apis/useGetUser";
+import RecipeCard from "../RecipeCard";
 
 const recipeList = [
     {
@@ -38,7 +40,19 @@ const myRecipe = [
 ];
 
 const AboutPage = () => {
+    const { username } = useParams();
     const [searchRecipe, setSearchRecipe] = useState("");
+
+    // const user = useMemo(() => {
+    //     if (!username) return null;
+    //     const { user } = useGetUser(username);
+
+    //     return user;
+    // }, [username]);
+
+    const { user, isLoading } = useGetUser(username);
+
+    if (isLoading) return <div></div>;
 
     return (
         <div className="container mt-3 flex flex-col gap-3 md:flex-row">
@@ -51,12 +65,12 @@ const AboutPage = () => {
                     />
                 </div>
                 <div className="mt-3 flex flex-col gap-3 px-2">
-                    <p className="font-semibold text-dark-0">Username</p>
+                    <p className="font-semibold text-dark-0">{user.username}</p>
                     <Link to={"/profile/update"}>
                         <Button className="w-full">Edit profile</Button>
                     </Link>
                     <span className="font-semibold text-dark-0">
-                        Yours recipes: {myRecipe.reduce((a) => (a += 1), 0)}
+                        Yours recipes: {user.recipes.length}
                     </span>
                 </div>
             </div>
@@ -74,7 +88,7 @@ const AboutPage = () => {
                     </Button>
                 </div>
                 <div className="gird-cols-2 mt-6 grid gap-6 px-3 md:grid-cols-3">
-                    {myRecipe
+                    {/* {myRecipe
                         .filter((val) => {
                             if (searchRecipe === "") return val;
                             else if (val.text.toLowerCase().includes(searchRecipe.toLowerCase())) {
@@ -83,7 +97,10 @@ const AboutPage = () => {
                         })
                         .map((item, index) => (
                             <CardComponent key={index} card={item} />
-                        ))}
+                        ))} */}
+                    {user.recipes.map((recipe) => (
+                        <RecipeCard recipe={recipe} key={recipe.id} />
+                    ))}
                 </div>
             </div>
         </div>

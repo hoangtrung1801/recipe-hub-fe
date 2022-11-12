@@ -21,10 +21,6 @@ const router = createBrowserRouter([
                 element: <HomePage />,
             },
             {
-                path: "/profile",
-                element: <AboutPage />,
-            },
-            {
                 path: "/profile/update",
                 element: <UpdateProfile />,
             },
@@ -55,6 +51,10 @@ const router = createBrowserRouter([
             {
                 path: "/search",
                 element: <SearchPage />,
+            },
+            {
+                path: "/:username",
+                element: <AboutPage />,
             },
         ],
     },
