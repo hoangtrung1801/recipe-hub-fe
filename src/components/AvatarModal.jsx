@@ -15,11 +15,7 @@ const EditAvaModal = ({
     return (
         <React.Fragment>
             <Transition appear show={isOpen} as={Fragment}>
-                <Dialog
-                    as="div"
-                    className="relative z-50"
-                    onClose={() => setIsOpen(false)}
-                >
+                <Dialog as="div" className="relative z-50" onClose={() => setIsOpen(false)}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -63,10 +59,7 @@ const EditAvaModal = ({
 
                                     <div className="mt-4">
                                         {fileSize.length > 0 ? (
-                                            <Button
-                                                variant="primary"
-                                                onClick={saveImg}
-                                            >
+                                            <Button variant="primary" onClick={saveImg}>
                                                 Save
                                             </Button>
                                         ) : (

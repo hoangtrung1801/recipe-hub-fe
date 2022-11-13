@@ -9,18 +9,27 @@
         "preview": "vite preview",
         "prepare": "husky install",
         "format": "prettier -w src",
-        "lint": "eslint .",
-        "lint:fix": "eslint --fix"
+        "lint": "eslint --max-warnings=0 src/**/*.{js,jsx,ts,tsx}",
+        "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx}"
     },
     "dependencies": {
+        "@emotion/react": "^11.10.5",
+        "@mantine/core": "^5.7.1",
+        "@mantine/hooks": "^5.7.1",
+        "axios": "^1.1.3",
         "clsx": "^1.2.1",
+        "lodash": "^4.17.21",
         "phosphor-react": "^1.4.1",
         "react": "^18.2.0",
         "react-avatar-edit": "^1.2.0",
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.36.1",
         "react-router-dom": "^6.4.0",
-        "tailwind-merge": "^1.6.0"
+        "react-slick": "^0.29.0",
+        "slick-carousel": "^1.8.1",
+        "swr": "^1.3.0",
+        "tailwind-merge": "^1.6.0",
+        "zustand": "^4.1.4"
     },
     "devDependencies": {
         "@headlessui/react": "^1.7.2",
@@ -41,7 +50,7 @@
     },
     "lint-staged": {
         "src/**/*.{js,jsx,ts,tsx}": [
-            "eslint --max-warnings=0",
+            "eslint src/",
             "prettier -w src"
         ]
     }

@@ -39,9 +39,7 @@ const Modal = ({ isOpen, setIsOpen, title, children }) => {
                                 >
                                     {title}
                                 </Dialog.Title>
-                                <div className="mt-2 text-sm text-gray-500">
-                                    {children}
-                                </div>
+                                <div className="mt-2 text-sm text-gray-500">{children}</div>
 
                                 <div className="mt-4">
                                     {/* <button

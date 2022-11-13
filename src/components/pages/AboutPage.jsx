@@ -3,7 +3,7 @@ import { Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
 import { useState } from "react";
 import { Listbox } from "@headlessui/react";
-import CardComponent from "./CardComponent";
+import CardComponent from "../CardComponent";
 import { Link } from "react-router-dom";
 
 const recipeList = [
@@ -68,25 +68,15 @@ const AboutPage = () => {
                         placeholder="Your recipe"
                         onChange={(e) => setSearchRecipe(e.target.value)}
                     />
-                    <RecipleCategory />
-                    <Link to={"/new"}>
-                        <Button
-                            variant={"dark"}
-                            className="max-h-[34px] w-full md:w-[63px]"
-                        >
-                            New
-                        </Button>
-                    </Link>
+                    <Button variant={"dark"} className="max-h-[34px] w-full md:w-[63px]">
+                        New
+                    </Button>
                 </div>
                 <div className="gird-cols-2 mt-6 grid gap-6 px-3 md:grid-cols-3">
                     {myRecipe
                         .filter((val) => {
                             if (searchRecipe === "") return val;
-                            else if (
-                                val.text
-                                    .toLowerCase()
-                                    .includes(searchRecipe.toLowerCase())
-                            ) {
+                            else if (val.text.toLowerCase().includes(searchRecipe.toLowerCase())) {
                                 return val;
                             }
                         })
@@ -123,9 +113,7 @@ export function RecipleCategory() {
                                     key={index}
                                     className={({ active }) =>
                                         `relative cursor-default select-none py-2 pl-2 font-semibold ${
-                                            active
-                                                ? "bg-primary-300 text-dark-0"
-                                                : "text-gray-900"
+                                            active ? "bg-primary-300 text-dark-0" : "text-gray-900"
                                         }`
                                     }
                                     value={item}
@@ -134,9 +122,7 @@ export function RecipleCategory() {
                                         <React.Fragment>
                                             <span
                                                 className={`block truncate ${
-                                                    selected
-                                                        ? "font-medium"
-                                                        : "font-normal"
+                                                    selected ? "font-medium" : "font-normal"
                                                 }`}
                                             >
                                                 {item.text}

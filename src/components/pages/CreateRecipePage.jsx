@@ -7,7 +7,7 @@ import Instructions from "./RecipeInit/Instruction";
 import RecipePanel from "./RecipeInit/RecipePanel";
 import { RecipleCategory } from "./AboutPage";
 
-const RecipeInit = () => {
+const CreateRecipePage = () => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [instructions, setInstructions] = useState([]);
@@ -153,9 +153,7 @@ const RecipeInit = () => {
 
     return (
         <div className="container">
-            <h1 className="mt-5 text-4xl font-extrabold">
-                Create your own recipe
-            </h1>
+            <h1 className="mt-5 text-4xl font-extrabold">Create your own recipe</h1>
             <form onSubmit={onSubmit}>
                 {/* Input name, description */}
                 {/* */}
@@ -188,9 +186,7 @@ const RecipeInit = () => {
                                         className="h-full w-full object-cover"
                                     />
                                 ) : (
-                                    <h1 className="text-center font-semibold">
-                                        Your image photo
-                                    </h1>
+                                    <h1 className="text-center font-semibold">Your image photo</h1>
                                 )}
                             </div>
                             <Button variant="dark">
@@ -216,19 +212,12 @@ const RecipeInit = () => {
                     ))}
                 </div>
                 <div className="mt-5 flex flex-col items-center justify-center gap-6 bg-primary-300 p-10">
-                    <h1 className="text-xl font-semibold">
-                        Add your Instructions
-                    </h1>
+                    <h1 className="text-xl font-semibold">Add your Instructions</h1>
                     <Button onClick={() => addInstructions()} variant="dark">
                         Add
                     </Button>
                 </div>
-                <Button
-                    variant="dark"
-                    className="mt-5"
-                    type="button"
-                    onClick={() => onSubmit()}
-                >
+                <Button variant="dark" className="mt-5" type="button" onClick={() => onSubmit()}>
                     Create
                 </Button>
             </form>
@@ -236,4 +225,4 @@ const RecipeInit = () => {
     );
 };
 
-export default RecipeInit;
+export default CreateRecipePage;

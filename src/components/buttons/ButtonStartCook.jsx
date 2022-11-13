@@ -16,7 +16,7 @@ import clsxm from "~/libs/clsxm";
 //     variant?: keyof typeof ButtonVariant;
 // } & React.ComponentPropsWithRef<"button">;
 
-const Button = React.forwardRef(
+const ButtonStartCook = React.forwardRef(
     (
         {
             children,
@@ -33,6 +33,7 @@ const Button = React.forwardRef(
 
         return (
             <button
+                //====================================================================================================================
                 ref={ref}
                 type="button"
                 disabled={disabled}
@@ -107,4 +108,4 @@ const Button = React.forwardRef(
     }
 );
 
-export default Button;
+export default ButtonStartCook;

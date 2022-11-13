@@ -50,7 +50,7 @@ const Footer = () => {
         <div className="container mt-24 h-[80px] border-t border-black">
             <div className="grid grid-cols-5 items-start py-12">
                 <div className="">
-                    <h1 className="text-4xl font-bold ">Logo here</h1>
+                    <h1 className="text-4xl font-bold ">Recipe Hub</h1>
                 </div>
                 <div className="col-span-2 grid grid-cols-2">
                     {router.map((route) => (

@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import constants from "~/libs/constants";
+import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import Button from "../buttons/Button";
-// import { useNavigate } from "react-router-dom";
+import Input from "../Input";
 
 const LoginPage = () => {
-    // const navigate = useNavigate();
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        // formState: { errors: formErrors },
     } = useForm();
 
-    const onSubmit = (data) => {
-        // eslint-disable-next-line no-console
-        console.log(data);
+    const navigate = useNavigate();
+    const login = useCurrentUserStore((state) => state.login);
+    const currentUser = useCurrentUserStore((state) => state.currentUser);
+
+    const [errors, setErrors] = useState([]);
+
+    useEffect(() => {
+        if (currentUser !== null) navigate("/");
+    }, []);
+
+    const onSubmit = async (data) => {
+        const response = await login(data.username, data.password);
+        if (response.status === constants.responseStatus.SUCCESS) {
+            navigate("/");
+        } else {
+            setErrors((errors) => [response.message, ...errors]);
+        }
     };
 
     return (
@@ -21,22 +37,39 @@ const LoginPage = () => {
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="w-full max-w-md space-y-8">
                     <div>
-                        <h1 className="text-center text-4xl font-bold">
-                            RecipeHub
-                        </h1>
+                        <h1 className="text-center text-4xl font-bold">RecipeHub</h1>
                         <h2 className="mt-6 text-center text-xl font-semibold tracking-tight text-gray-900">
                             Sign in to your account
                         </h2>
                     </div>
-                    <form
-                        className="mt-8 space-y-6"
-                        action=""
-                        method="POST"
-                        onSubmit={handleSubmit(onSubmit)}
-                    >
+                    <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
                         <input type="hidden" name="remember" value="true" />
                         <div className="flex flex-col gap-3 -space-y-px ">
                             <div>
+                                <label htmlFor="email-address" className="sr-only">
+                                    Username
+                                </label>
+                                <Input
+                                    name="username"
+                                    id="username"
+                                    placeholder={"Username"}
+                                    {...register("username", { required: true })}
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="email-address" className="sr-only">
+                                    Password
+                                </label>
+                                <Input
+                                    name="password"
+                                    placeholder={"Password"}
+                                    type="password"
+                                    {...register("password", { required: true })}
+                                />
+                            </div>
+
+                            {/* <div>
                                 <label htmlFor="Email" className="sr-only">
                                     Email
                                 </label>
@@ -50,27 +83,19 @@ const LoginPage = () => {
                                         required: true,
                                         pattern: /^\S+@\S+$/i,
                                         validate: (value) => {
-                                            return (
-                                                value === "example@gmail.com"
-                                            );
+                                            return value === "example@gmail.com";
                                         },
                                     })}
                                 />
                             </div>
                             {errors.email?.type === "required" && (
-                                <p className="text-xs text-red-500">
-                                    Email is required
-                                </p>
+                                <p className="text-xs text-red-500">Email is required</p>
                             )}
                             {errors.email?.type === "pattern" && (
-                                <p className="text-xs text-red-500">
-                                    Invalid email syntax
-                                </p>
+                                <p className="text-xs text-red-500">Invalid email syntax</p>
                             )}
                             {errors.email?.type === "validate" && (
-                                <p className="text-xs text-red-500">
-                                    Incorrect email
-                                </p>
+                                <p className="text-xs text-red-500">Incorrect email</p>
                             )}
                             <div>
                                 <label htmlFor="Password" className="sr-only">
@@ -91,24 +116,23 @@ const LoginPage = () => {
                                 />
                             </div>
                             {errors.password?.type === "required" && (
-                                <p className="text-xs text-red-500">
-                                    Password is required
-                                </p>
+                                <p className="text-xs text-red-500">Password is required</p>
                             )}
                             {errors.password?.type === "validate" && (
-                                <p className="text-xs text-red-500">
-                                    Incorrect password
-                                </p>
+                                <p className="text-xs text-red-500">Incorrect password</p>
+                            )} */}
+                        </div>
+
+                        <div>
+                            {errors.length > 0 && (
+                                // <p className="text-xs text-red-500">Username is required</p>
+                                <p className="text-xs text-red-500">{errors[0]}</p>
                             )}
                         </div>
 
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
-                                <input
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className="h-4 w-4"
-                                />
+                                <input name="remember-me" type="checkbox" className="h-4 w-4" />
                                 <label
                                     htmlFor="remember-me"
                                     className="ml-2 block text-sm text-gray-900"
@@ -117,22 +141,15 @@ const LoginPage = () => {
                                 </label>
                             </div>
                             <div className="text-sm">
-                                <a
-                                    href="#"
-                                    className="font-medium hover:text-dark-0"
-                                >
+                                <a href="#" className="font-medium hover:text-dark-0">
                                     Forgot your password?
                                 </a>
                             </div>
                         </div>
 
                         <div>
-                            <Button
-                                variant="primary"
-                                type="submit"
-                                className="w-full"
-                            >
-                                Sign in
+                            <Button variant="primary" type="submit" className="w-full">
+                                Login
                             </Button>
                         </div>
                     </form>
