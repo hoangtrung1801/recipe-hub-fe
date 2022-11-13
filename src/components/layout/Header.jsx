@@ -99,12 +99,12 @@ const HeeaderRight = () => {
 
                         <Popover.Dropdown className="rounded-lg px-0 shadow-xl">
                             <div className="w-40">
-                                <Link to={"/profile"}>
+                                <Link to={`/${currentUser.username}`}>
                                     <div className="cursor-pointer py-1 px-6 text-dark-1 hover:bg-primary-300">
                                         <span>Your profile</span>
                                     </div>
                                 </Link>
-                                <Link to={"/profile"}>
+                                <Link to={`/${currentUser.username}`}>
                                     <div className="cursor-pointer py-1 px-6 text-dark-1 hover:bg-primary-300">
                                         <p>Your recipes</p>
                                     </div>
