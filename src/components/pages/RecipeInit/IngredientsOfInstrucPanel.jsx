@@ -18,19 +18,11 @@ const IngredientsOfInstruction = () => {
                         <IngredientItem key={index} {...ingredient} />
                     ))}
                 </div>
-                <Button
-                    variant="dark"
-                    className="mt-3"
-                    onClick={() => setIsOpen(true)}
-                >
+                <Button variant="dark" className="mt-3" onClick={() => setIsOpen(true)}>
                     ADD
                 </Button>
             </div>
-            <ListModal
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-                setIngredients={setIngredients}
-            />
+            <ListModal isOpen={isOpen} setIsOpen={setIsOpen} setIngredients={setIngredients} />
         </div>
     ) : (
         <React.Fragment>
@@ -42,11 +34,7 @@ const IngredientsOfInstruction = () => {
                     ADD
                 </Button>
             </div>
-            <ListModal
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-                setIngredients={setIngredients}
-            />
+            <ListModal isOpen={isOpen} setIsOpen={setIsOpen} setIngredients={setIngredients} />
         </React.Fragment>
     );
 };
