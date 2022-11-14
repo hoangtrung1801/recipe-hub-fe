@@ -87,31 +87,38 @@ const HeeaderRight = () => {
                     <Popover>
                         <Popover.Target>
                             <div className="flex cursor-pointer select-none items-center space-x-2">
-                                <span>{currentUser.name}</span>
-                                <Link
-                                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary-500 transition hover:bg-primary-500/30"
-                                    to="/login"
-                                >
-                                    <User className="text-xl" weight="light" />
-                                </Link>
+                                {/* <span>{currentUser.name}</span> */}
+                                <div className="aspect-square h-10 w-10 overflow-hidden rounded-full border-2 shadow-sm">
+                                    <img
+                                        src={currentUser.avatarUrl || "/public/avatar-default.jpg"}
+                                        alt="Randy Robertson"
+                                    />
+                                </div>
                             </div>
                         </Popover.Target>
 
-                        <Popover.Dropdown className="rounded-lg px-0 shadow-xl">
-                            <div className="w-40">
+                        <Popover.Dropdown className="z-[101] rounded-lg px-0 shadow-xl">
+                            <div className="w-40 text-sm">
                                 <Link to={`/${currentUser.username}`}>
-                                    <div className="cursor-pointer py-1 px-6 text-dark-1 hover:bg-primary-300">
+                                    <div className="cursor-pointer py-1 px-3 text-dark-1 hover:bg-primary-300">
+                                        <p>Logged in as</p>
+                                        <p className="font-medium">{currentUser.username}</p>
+                                    </div>
+                                </Link>
+                                <hr className="m-0 my-2 border-dark-1" />
+                                <Link to={`/${currentUser.username}`}>
+                                    <div className="cursor-pointer py-1 px-3 text-dark-1 hover:bg-primary-300">
                                         <span>Your profile</span>
                                     </div>
                                 </Link>
                                 <Link to={`/${currentUser.username}`}>
-                                    <div className="cursor-pointer py-1 px-6 text-dark-1 hover:bg-primary-300">
+                                    <div className="cursor-pointer py-1 px-3 text-dark-1 hover:bg-primary-300">
                                         <p>Your recipes</p>
                                     </div>
                                 </Link>
                                 <hr className="m-0 my-2 border-dark-1" />
                                 <Link onClick={onLogOut}>
-                                    <div className="cursor-pointer py-1 px-6 text-dark-1 hover:bg-primary-300">
+                                    <div className="cursor-pointer py-1 px-3 text-dark-1 hover:bg-primary-300">
                                         <p>Log out</p>
                                     </div>
                                 </Link>

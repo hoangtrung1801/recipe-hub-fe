@@ -5,7 +5,7 @@ export default function ListCatalogs({ selectedCatalog, setSelectedCatalog }) {
     const { catalogs } = useGetCatalogs();
 
     return (
-        <div className="sticky top-[80px] z-50">
+        <div className="sticky top-[80px] z-10">
             <div className="flex flex-col justify-center align-middle">
                 <div className="w-full border-b-[1px] border-black">
                     <div className="bg-primary-200 py-2 ">

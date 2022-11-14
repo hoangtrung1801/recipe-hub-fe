@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useGetRecipes from "~/libs/apis/useGetRecipes";
 import RecipeCard from "../../RecipeCard";
 import ListCatalogs from "./ListCatalogs";
@@ -9,7 +9,6 @@ const RecipesPage = () => {
     const [filteredRecipes, setFileteredRecipes] = useState([]);
 
     const { recipes } = useGetRecipes("", selectedCatalog === -1 ? "" : selectedCatalog);
-    console.log(recipes);
 
     return (
         <div className="container auto-rows-auto">

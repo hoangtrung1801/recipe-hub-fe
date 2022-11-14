@@ -6,14 +6,14 @@ import Button from "~/components/buttons/Button";
 import ButtonStartCook from "~/components/buttons/ButtonStartCook";
 import postStar from "~/libs/apis/postStar";
 import postUnstar from "~/libs/apis/postUnstar";
-import useCurrentUser from "~/libs/apis/useCurrentUser";
 import useGetCurrentInstructions from "~/libs/apis/useGetCurrentInstructions";
 import constants from "~/libs/constants";
+import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import StartCookingModal from "./StartCookingModal";
 
 export default function RecipeDetail({ recipe }) {
     const { instructions } = useGetCurrentInstructions(recipe.id);
-    const { user } = useCurrentUser();
+    const currentUser = useCurrentUserStore((state) => state.useCurrentUser);
 
     const [isOpen, setIsOpen] = useState(false);
     const [stepNo, setStepNo] = useState(1);
@@ -53,8 +53,8 @@ export default function RecipeDetail({ recipe }) {
     };
 
     useEffect(() => {
-        setIsStarred(recipe.stars.some((userStarred) => userStarred.id === user?.id));
-    }, [recipe, user, setIsStarred]);
+        setIsStarred(recipe.stars.some((userStarred) => userStarred.id === currentUser?.id));
+    }, [recipe, currentUser, setIsStarred]);
 
     return (
         <div className="space-y-8 pt-12">
