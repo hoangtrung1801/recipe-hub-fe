@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import Button from "~/components/buttons/Button";
 import ButtonStartCook from "~/components/buttons/ButtonStartCook";
 import postStar from "~/libs/apis/postStar";
+import postUnstar from "~/libs/apis/postUnstar";
 import useCurrentUser from "~/libs/apis/useCurrentUser";
 import useGetCurrentInstructions from "~/libs/apis/useGetCurrentInstructions";
+import constants from "~/libs/constants";
 import StartCookingModal from "./StartCookingModal";
 
 export default function RecipeDetail({ recipe }) {
@@ -34,10 +36,19 @@ export default function RecipeDetail({ recipe }) {
         if (isStarred) {
             // unstar
             setIsStarred(false);
+            postUnstar(recipe.id).then((response) => {
+                if (response.status !== constants.responseStatus.SUCCESS) {
+                    setIsStarred(true);
+                }
+            });
         } else {
             // star
             setIsStarred(true);
-            postStar(recipe.id).then((response) => {});
+            postStar(recipe.id).then((response) => {
+                if (response.status !== constants.responseStatus.SUCCESS) {
+                    setIsStarred(false);
+                }
+            });
         }
     };
 
