@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { Badge } from "@mantine/core";
+import * as _ from "lodash";
 import { GitFork, Star } from "phosphor-react";
+import { useEffect, useState } from "react";
 import Button from "~/components/buttons/Button";
 import ButtonStartCook from "~/components/buttons/ButtonStartCook";
-import StartCookingModal from "./StartCookingModal";
+import postStar from "~/libs/apis/postStar";
+import useCurrentUser from "~/libs/apis/useCurrentUser";
 import useGetCurrentInstructions from "~/libs/apis/useGetCurrentInstructions";
-import * as _ from "lodash";
-import { Badge } from "@mantine/core";
+import StartCookingModal from "./StartCookingModal";
 
 export default function RecipeDetail({ recipe }) {
     const { instructions } = useGetCurrentInstructions(recipe.id);
+    const { user } = useCurrentUser();
 
     const [isOpen, setIsOpen] = useState(false);
     const [stepNo, setStepNo] = useState(1);
+    const [isStarred, setIsStarred] = useState();
 
     function closeModal() {
         setIsOpen(false);
@@ -20,6 +24,26 @@ export default function RecipeDetail({ recipe }) {
     function openModal() {
         setIsOpen(true);
     }
+
+    // const isStarred = useMemo(
+    //     () => recipe.stars.some((userStarred) => userStarred.id === user?.id),
+    //     [user, recipe]
+    // );
+
+    const onClickStar = () => {
+        if (isStarred) {
+            // unstar
+            setIsStarred(false);
+        } else {
+            // star
+            setIsStarred(true);
+            postStar(recipe.id).then((response) => {});
+        }
+    };
+
+    useEffect(() => {
+        setIsStarred(recipe.stars.some((userStarred) => userStarred.id === user?.id));
+    }, [recipe, user, setIsStarred]);
 
     return (
         <div className="space-y-8 pt-12">
@@ -54,11 +78,11 @@ export default function RecipeDetail({ recipe }) {
             </div>
             <div className="border-y border-dark-0">
                 <div className="flex space-x-4 py-6">
-                    <Button variant="light" className="space-x-2">
-                        <Star className="text-lg" />
+                    <Button variant="light" className="space-x-2" onClick={onClickStar}>
+                        <Star className="text-lg" weight={isStarred ? "fill" : "regular"} />
                         <span>Star</span>
                         <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
-                            {recipe.numberOfStar}
+                            {recipe.stars.length}
                         </Badge>
                         {/* <div>
                             <span>0</span>
@@ -69,7 +93,7 @@ export default function RecipeDetail({ recipe }) {
                         <GitFork className="text-lg" />
                         <span>Fork</span>
                         <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
-                            {recipe.numberOfFork}
+                            {/* {recipe.numberOfFork} */}0
                         </Badge>
                     </Button>
                 </div>
