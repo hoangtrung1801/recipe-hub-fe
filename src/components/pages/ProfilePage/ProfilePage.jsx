@@ -30,10 +30,7 @@ const ProfilePage = () => {
             <div className="py-2 md:max-h-[564px] md:w-1/4">
                 <div className="mt-5">
                     <div className="aspect-square overflow-hidden rounded-full border-2 shadow-md">
-                        <img
-                            src={user.avatarUrl || "/public/avatar-default.jpg"}
-                            alt="Randy Robertson"
-                        />
+                        <img src={user.avatarUrl || "/avatar-default.jpg"} alt="Randy Robertson" />
                     </div>
                 </div>
                 <div className="mt-3 flex flex-col gap-3 px-2">

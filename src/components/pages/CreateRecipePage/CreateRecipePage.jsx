@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
-import React, { useState } from "react";
-import Button from "../buttons/Button";
-import Input from "../Input";
-import Instructions from "./RecipeInit/Instruction";
-import RecipePanel from "./RecipeInit/RecipePanel";
-import { RecipleCategory } from "./AboutPage";
+import { useState } from "react";
+import Button from "../../buttons/Button";
+import Input from "../../Input";
+import { RecipleCategory } from "../ProfilePage/ProfilePage";
+import Instructions from "./Instruction";
+import RecipePanel from "./RecipePanel";
 
 const CreateRecipePage = () => {
     const [name, setName] = useState("");

@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/layout";
 import Page404 from "./components/pages/404";
 import ComponentsPage from "./components/pages/components";
+import CreateRecipePage from "./components/pages/CreateRecipePage/CreateRecipePage";
 import HomePage from "./components/pages/HomePage/HomePage";
 import LoginPage from "./components/pages/LoginPage";
 import ProfilePage from "./components/pages/ProfilePage/ProfilePage";
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
                 element: <RecipePage />,
             },
             {
+                path: "/recipes/create",
+                element: <CreateRecipePage />,
+            },
+            {
                 path: "/login",
                 element: <LoginPage />,
             },
@@ -45,16 +50,20 @@ const router = createBrowserRouter([
                 element: <ComponentsPage />,
             },
             {
-                path: "/404",
-                element: <Page404 />,
-            },
-            {
                 path: "/search",
                 element: <SearchPage />,
             },
             {
                 path: "/:username",
                 element: <ProfilePage />,
+            },
+            // {
+            //     path: "*",
+            //     element: <Page404 />,
+            // },
+            {
+                path: "/404",
+                element: <Page404 />,
             },
         ],
     },
