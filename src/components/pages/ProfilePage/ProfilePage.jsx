@@ -1,13 +1,9 @@
-/* eslint-disable no-unused-vars */
-import Button from "../buttons/Button";
-import { Transition } from "@headlessui/react";
-import React, { Fragment, useMemo } from "react";
-import { useState } from "react";
-import { Listbox } from "@headlessui/react";
-import CardComponent from "../CardComponent";
+import { Listbox, Transition } from "@headlessui/react";
+import React, { Fragment, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useGetUser from "~/libs/apis/useGetUser";
-import RecipeCard from "../RecipeCard";
+import Button from "../../buttons/Button";
+import RecipeCard from "../../RecipeCard";
 
 const recipeList = [
     {
@@ -21,49 +17,24 @@ const recipeList = [
     },
 ];
 
-const myRecipe = [
-    {
-        text: "Tomato & pesto pasta",
-        linkBg: "imgWrapper lg:h-[360px] md:h-[270px] h-[240px] bg-[url(https://images.prismic.io/stryve/3d40b6ec-7d41-4d48-bd3a-5bf78ca5b303_tomato-pesto-pasta.png?auto=compress%2Cformat&fm=webp&lossless=false&q=75&w=450%20450w)] bg-cover bg-no-repeat bg-center",
-    },
-    {
-        text: "Nutty, apple & date porridge",
-        linkBg: "imgWrapper lg:h-[360px] md:h-[270px] h-[240px] bg-[url(https://images.prismic.io/stryve/2be94b3a-3084-4aa0-817d-7af87596bd74_pulled-jackfruit-loaded-fries.png?auto=compress%2Cformat&fm=webp&lossless=false&q=75&w=450%20450w)] bg-cover bg-no-repeat bg-center",
-    },
-    {
-        text: "Mushroom & kale macaroni",
-        linkBg: "imgWrapper lg:h-[360px] md:h-[270px] h-[240px] bg-[url(https://images.prismic.io/stryve/fad9e994-32e9-4511-b620-5b3a6287009f_mushroom-spinach-pesto-toasted-sandwich.png?auto=compress%2Cformat&fm=webp&lossless=false&q=75&w=450%20450w)] bg-cover bg-no-repeat bg-center",
-    },
-    {
-        text: "Griddled courgette & asparagus pasta",
-        linkBg: "imgWrapper lg:h-[360px] md:h-[270px] h-[240px] bg-[url(https://images.prismic.io/stryve/7ac06668-07b3-4dbb-ac42-850aa27a7ec3_mushroom-stroganoff.png?auto=compress%2Cformat&fm=webp&lossless=false&q=75&w=450%20450w)] bg-cover bg-no-repeat bg-center",
-    },
-];
-
-const AboutPage = () => {
+const ProfilePage = () => {
     const { username } = useParams();
     const [searchRecipe, setSearchRecipe] = useState("");
 
-    // const user = useMemo(() => {
-    //     if (!username) return null;
-    //     const { user } = useGetUser(username);
+    const { user, isLoading: isLoadingUser } = useGetUser(username);
 
-    //     return user;
-    // }, [username]);
-
-    const { user, isLoading } = useGetUser(username);
-
-    if (isLoading) return <div></div>;
+    if (isLoadingUser) return <div></div>;
 
     return (
         <div className="container mt-3 flex flex-col gap-3 md:flex-row">
             <div className="py-2 md:max-h-[564px] md:w-1/4">
-                <div className="mt-5 overflow-hidden">
-                    <img
-                        className="lg:h-45 lg:w-45 mx-auto rounded-full"
-                        src="/profile.jpg"
-                        alt="Randy Robertson"
-                    />
+                <div className="mt-5">
+                    <div className="aspect-square overflow-hidden rounded-full border-2 shadow-md">
+                        <img
+                            src={user.avatarUrl || "/public/avatar-default.jpg"}
+                            alt="Randy Robertson"
+                        />
+                    </div>
                 </div>
                 <div className="mt-3 flex flex-col gap-3 px-2">
                     <p className="font-semibold text-dark-0">{user.username}</p>
@@ -83,21 +54,12 @@ const AboutPage = () => {
                         placeholder="Your recipe"
                         onChange={(e) => setSearchRecipe(e.target.value)}
                     />
+                    {/* <RecipleFilter /> */}
                     <Button variant={"dark"} className="max-h-[34px] w-full md:w-[63px]">
                         New
                     </Button>
                 </div>
                 <div className="gird-cols-2 mt-6 grid gap-6 px-3 md:grid-cols-3">
-                    {/* {myRecipe
-                        .filter((val) => {
-                            if (searchRecipe === "") return val;
-                            else if (val.text.toLowerCase().includes(searchRecipe.toLowerCase())) {
-                                return val;
-                            }
-                        })
-                        .map((item, index) => (
-                            <CardComponent key={index} card={item} />
-                        ))} */}
                     {user.recipes.map((recipe) => (
                         <RecipeCard recipe={recipe} key={recipe.id} />
                     ))}
@@ -157,4 +119,4 @@ export function RecipleCategory() {
     );
 }
 
-export default AboutPage;
+export default ProfilePage;

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import useSWR from "swr";
 import constants from "../constants";
 
