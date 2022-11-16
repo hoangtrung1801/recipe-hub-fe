@@ -3,7 +3,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import IngredientItem from "./IngredientItem";
-import RecipeIngredients from "./IngredientsPanel";
+import IngredientsSelectPanel from "./IngredientsSelectPanel";
 
 const ingredients = [
     {

@@ -1,178 +1,173 @@
-import { useState } from "react";
+import { MultiSelect, Select, Textarea, TextInput } from "@mantine/core";
+import * as _ from "lodash";
+import { useMemo, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import useGetCatalogs from "~/libs/apis/useGetCatalogs";
 import Button from "../../buttons/Button";
-import Input from "../../Input";
-import { RecipleCategory } from "../ProfilePage/ProfilePage";
-import Instructions from "./Instruction";
-import RecipePanel from "./RecipePanel";
+import CreateInstructionsPanel from "./CreateInstructionsPanel";
+import IngredientsSelectPanel from "./IngredientsSelectPanel";
+
+const modeInput = {
+    label: "Mode",
+    placeholder: "Pick one",
+    data: [
+        { value: "PUBLIC", label: "Public" },
+        { value: "PRIVATE", label: "Private" },
+    ],
+    field: "mode",
+};
 
 const CreateRecipePage = () => {
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [instructions, setInstructions] = useState([]);
-    const [instruction, setInstruction] = useState("");
-    // cook time
-    const [prep, setPrep] = useState(0);
-    const [chill, setChill] = useState(0);
-    const [cookT, setCookT] = useState(0);
-    const totalTime = prep + chill + cookT; //
-    // nutrition
-    const [calories, setCalories] = useState(0);
-    const [fiber, setFiber] = useState(0);
-    const [protein, setProtein] = useState(0);
-    const [carbs, setCarbs] = useState(0);
-    const [fats, setFats] = useState(0);
-    const [sugar, setSugar] = useState(0);
+    const {
+        register,
+        handleSubmit,
+        control,
+        formState: { errors },
+    } = useForm();
+
+    const { catalogs } = useGetCatalogs();
+
+    const [selectedCatalogs, setSelectedCatalogs] = useState([]);
+    const [ingredients, setIngredients] = useState([
+        {
+            id: _.uniqueId(),
+            value: null,
+            amount: null,
+            unit: null,
+        },
+    ]);
+
+    const dataCatalogs = useMemo(
+        () =>
+            catalogs.map((catalog) => ({
+                ...catalog,
+                value: catalog.id,
+                label: _.capitalize(catalog.name),
+            })),
+        [catalogs]
+    );
 
     // image
     const [imageRecipe, setImageRecipe] = useState("/profile.jpg");
 
-    const inputArray = [
+    const cookTimeInputs = [
         {
-            state: name,
-            setState: setName,
-            placeHolder: "Your name",
-            label: "Name",
-            isVertical: true,
-        },
-        {
-            state: description,
-            setState: setDescription,
-            placeHolder: "Discription",
-            label: "Discription",
-            isVertical: true,
-        },
-    ];
-
-    const numberInput = [
-        {
-            state: prep,
-            setState: setPrep,
             placeHolder: "Prep time",
             label: "Prep",
-            isVertical: true,
+            field: "prep",
         },
         {
-            state: chill,
-            setState: setChill,
             placeHolder: "Chill time",
             label: "Chill",
-            isVertical: true,
+            field: "chill",
         },
         {
-            state: cookT,
-            setState: setCookT,
             placeHolder: "Cook time",
             label: "Cook time",
-            isVertical: true,
-        },
-        {
-            state: calories,
-            setState: setCalories,
-            placeHolder: "Calories",
-            label: "Calo",
-            isVertical: true,
-        },
-        {
-            state: fiber,
-            setState: setFiber,
-            placeHolder: "Fiber",
-            label: "Fiber",
-            isVertical: true,
-        },
-        {
-            state: protein,
-            setState: setProtein,
-            placeHolder: "Protein",
-            label: "Protein",
-            isVertical: true,
-        },
-        {
-            state: carbs,
-            setState: setCarbs,
-            placeHolder: "Carbs",
-            label: "Carbs",
-            isVertical: true,
-        },
-        {
-            state: fats,
-            setState: setFats,
-            placeHolder: "Fats",
-            label: "Fats",
-            isVertical: true,
-        },
-        {
-            state: sugar,
-            setState: setSugar,
-            placeHolder: "Sugar",
-            label: "Sugar",
-            isVertical: true,
+            field: "cookTime",
         },
     ];
 
-    const addInstructions = () => {
-        const newItem = {
-            value: instruction,
-            setInstruction: setInstruction,
-            id: Math.floor(Math.random() * 1000),
-            removeInstruction: removeInstruction,
-        };
+    const nutritionInputs = [
+        {
+            placeHolder: "Calories",
+            label: "Calories",
+            field: "calories",
+        },
+        {
+            placeHolder: "Fiber",
+            label: "Fiber",
+            field: "fiber",
+        },
+        {
+            placeHolder: "Protein",
+            label: "Protein",
+            field: "protein",
+        },
+        {
+            placeHolder: "Carbs",
+            label: "Carbs",
+            field: "carbs",
+        },
+        {
+            placeHolder: "Fats",
+            label: "Fats",
+            field: "fats",
+        },
+        {
+            placeHolder: "Sugar",
+            label: "Sugar",
+            field: "sugar",
+        },
+    ];
 
-        setInstructions((prev) => [...prev, newItem]);
+    const onSubmit = (data) => {
+        console.log(data);
     };
 
-    const removeInstruction = (id) => {
-        const removed = instructions.filter((x) => x.id !== id);
-        setInstructions(removed);
-        console.log(removed);
-        // console.log('remove id:', );
-    };
-
-    const onSubmit = () => {
-        console.log({
-            name,
-            description,
-            instructions,
-            cookTime: {
-                prep,
-                chill,
-                cookT,
-                totalTime,
-            },
-            nutrition: {
-                calories,
-                fiber,
-                protein,
-                carbs,
-                fats,
-                sugar,
-            },
-        });
-    };
+    // useEffect(() => {
+    //     console.log(selectedCatalogs);
+    // }, [selectedCatalogs]);
 
     return (
         <div className="container">
-            <h1 className="mt-5 text-4xl font-extrabold">Create your own recipe</h1>
-            <form onSubmit={onSubmit}>
-                {/* Input name, description */}
-                {/* */}
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 ">
+            <div>
+                <h1 className="mt-5 text-3xl font-bold">New recipe</h1>
+                <h1 className="text-sm italic">Create your own recipe</h1>
+            </div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="grid grid-cols-1 gap-6 gap-y-4 md:grid-cols-2">
                     <div className="mt-3 flex flex-col gap-3 ">
                         <div className="flex flex-col">
                             <div className="flex flex-col gap-3 space-y-px">
-                                {inputArray.map((item, index) => (
-                                    <Input {...item} key={index} />
-                                ))}
+                                <div>
+                                    <TextInput
+                                        key={"name"}
+                                        label="Name"
+                                        placeholder={"Your name"}
+                                        {...register("name")}
+                                    />
+                                </div>
+                                <div>
+                                    <Textarea
+                                        key={"description"}
+                                        label={"Description"}
+                                        placeholder={"Description of this recipe"}
+                                        {...register("description")}
+                                    />
+                                </div>
+
+                                <div className="flex space-x-4">
+                                    <div className="flex-1">
+                                        <Select
+                                            label={modeInput.label}
+                                            placeholder={modeInput.placeholder}
+                                            data={modeInput.data}
+                                            defaultValue={"PUBLIC"}
+                                            {...register(modeInput.field)}
+                                            className="w-full"
+                                        />
+                                    </div>
+                                    <div className="flex-1">
+                                        <Controller
+                                            control={control}
+                                            name="catalogs"
+                                            render={({ field: { value, onChange } }) => (
+                                                <MultiSelect
+                                                    data={dataCatalogs}
+                                                    label="Catalogs"
+                                                    placeholder="Choose ingredients in this step"
+                                                    onChange={(e) => onChange(e)}
+                                                    value={value}
+                                                />
+                                            )}
+                                        />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex flex-row gap-3">
-                            <div className="flex flex-col">
-                                <RecipleCategory />
-                            </div>
-                        </div>
-                        <div className="bg-primary-300 p-5 pb-7">
-                            <RecipePanel isInstruction={false} />
                         </div>
                     </div>
+
                     {/* set avatar */}
                     <div className="flex flex-col justify-between gap-3">
                         <div className="flex flex-col gap-3">
@@ -194,28 +189,68 @@ const CreateRecipePage = () => {
                                 </label>
                             </Button>
                         </div>
-                        <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-                            {numberInput.map((item, index) => (
-                                <Input key={index} {...item} />
-                            ))}
+                    </div>
+
+                    <div className="space-y-4">
+                        <div>
+                            <div>
+                                <h3 className="-mb-1 text-lg font-medium">Cook time</h3>
+                                <span className="text-sm italic text-gray-500">
+                                    cook time is something
+                                </span>
+                            </div>
+                            <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+                                {cookTimeInputs.map((cookTime) => (
+                                    <TextInput
+                                        type="number"
+                                        key={cookTime.label}
+                                        label={cookTime.label}
+                                        placeholder={cookTime.placeHolder}
+                                        rightSection={
+                                            <span className="text-sm text-slate-500">m</span>
+                                        }
+                                        {...register(`cookTime.${cookTime.field}`)}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+
+                        <div>
+                            <div>
+                                <h3 className="-mb-1 text-lg font-medium">Nutrition</h3>
+                                <span className="text-sm italic text-gray-500">
+                                    Nutrition is something
+                                </span>
+                            </div>
+                            <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+                                {nutritionInputs.map((nutrition) => (
+                                    <TextInput
+                                        type="number"
+                                        key={nutrition.label}
+                                        label={nutrition.label}
+                                        placeholder={nutrition.placeHolder}
+                                        rightSection={
+                                            <span className="text-sm text-slate-500">g</span>
+                                        }
+                                        {...register(`nutrition.${nutrition.field}`)}
+                                    />
+                                ))}
+                            </div>
                         </div>
                     </div>
-                </div>
-                {/* instruction step */}
-                <div className="">
-                    {instructions.map((item, index) => (
-                        <div key={index} className="relative mt-5">
-                            <Instructions key={index} {...item} />
+
+                    <div>
+                        <div className="h-full bg-primary-300 p-5">
+                            <IngredientsSelectPanel control={control} />
                         </div>
-                    ))}
+                    </div>
+
+                    <div className="col-span-2">
+                        <CreateInstructionsPanel control={control} register={register} />
+                    </div>
                 </div>
-                <div className="mt-5 flex flex-col items-center justify-center gap-6 bg-primary-300 p-10">
-                    <h1 className="text-xl font-semibold">Add your Instructions</h1>
-                    <Button onClick={() => addInstructions()} variant="dark">
-                        Add
-                    </Button>
-                </div>
-                <Button variant="dark" className="mt-5" type="button" onClick={() => onSubmit()}>
+
+                <Button variant="dark" className="mt-5" type="submit">
                     Create
                 </Button>
             </form>

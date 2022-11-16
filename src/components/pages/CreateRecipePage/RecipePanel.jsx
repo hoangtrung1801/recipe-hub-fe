@@ -1,5 +1,5 @@
 import React from "react";
-import RecipeIngredients from "./IngredientsPanel";
+import IngredientsSelectPanel from "./IngredientsSelectPanel";
 import IngredientsOfInstruction from "./IngredientsOfInstrucPanel";
 
 const RecipePanel = ({ isInstruction }) => {
@@ -15,7 +15,7 @@ const RecipePanel = ({ isInstruction }) => {
         <div>
             <div className="flex flex-col gap-5">
                 <div className="h-[296px]">
-                    <RecipeIngredients />
+                    <IngredientsSelectPanel />
                 </div>
             </div>
         </div>
