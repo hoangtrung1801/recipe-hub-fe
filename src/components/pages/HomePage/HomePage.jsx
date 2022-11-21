@@ -5,8 +5,6 @@ import HomeBanner from "./HomeBanner";
 const HomePage = () => {
     const { recipes } = useGetRecipes();
 
-    console.log(recipes);
-
     return (
         <div>
             <HomeBanner />
@@ -18,12 +16,6 @@ const HomePage = () => {
                             <RecipeCard recipe={recipe} />
                         </div>
                     ))}
-
-                    {/* {recipes.map((recipe) => (
-                        <div key={recipe.text}>
-                            <CardComponent card={recipe} />
-                        </div>
-                    ))} */}
                 </div>
             </menu>
 
