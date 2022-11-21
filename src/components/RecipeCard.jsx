@@ -1,4 +1,3 @@
-import { AspectRatio, Image } from "@mantine/core";
 import { Clock, Leaf } from "phosphor-react";
 import UnderlineLink from "./links/UnderlineLink";
 

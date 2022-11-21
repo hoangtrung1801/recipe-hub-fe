@@ -90,7 +90,7 @@ const HeeaderRight = () => {
                                 {/* <span>{currentUser.name}</span> */}
                                 <div className="aspect-square h-10 w-10 overflow-hidden rounded-full border-2 shadow-sm">
                                     <img
-                                        src={currentUser.avatarUrl || "/public/avatar-default.jpg"}
+                                        src={currentUser.avatarUrl || "/avatar-default.jpg"}
                                         alt="Randy Robertson"
                                     />
                                 </div>

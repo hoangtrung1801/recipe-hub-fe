@@ -30,10 +30,7 @@ const ProfilePage = () => {
             <div className="py-2 md:max-h-[564px] md:w-1/4">
                 <div className="mt-5">
                     <div className="aspect-square overflow-hidden rounded-full border-2 shadow-md">
-                        <img
-                            src={user.avatarUrl || "/public/avatar-default.jpg"}
-                            alt="Randy Robertson"
-                        />
+                        <img src={user.avatarUrl || "/avatar-default.jpg"} alt="Randy Robertson" />
                     </div>
                 </div>
                 <div className="mt-3 flex flex-col gap-3 px-2">
@@ -54,7 +51,7 @@ const ProfilePage = () => {
                         placeholder="Your recipe"
                         onChange={(e) => setSearchRecipe(e.target.value)}
                     />
-                    <RecipleFilter />
+                    {/* <RecipleFilter /> */}
                     <Button variant={"dark"} className="max-h-[34px] w-full md:w-[63px]">
                         New
                     </Button>
@@ -69,13 +66,13 @@ const ProfilePage = () => {
     );
 };
 
-function RecipleFilter() {
+export function RecipleCategory() {
     const [selected, setSelected] = useState(recipeList[0]);
     return (
         <div className="z-10">
             <Listbox value={selected} onChange={setSelected}>
                 <div className="relative md:w-[145px]">
-                    <Listbox.Button className="relative w-full cursor-default rounded bg-white p-1.5 text-left shadow focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                    <Listbox.Button className="relative h-[38px] w-full cursor-default rounded bg-primary-300 p-1.5 text-left shadow focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                         <span className="block truncate text-center font-semibold uppercase">
                             {selected.text}
                         </span>

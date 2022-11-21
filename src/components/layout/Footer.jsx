@@ -25,7 +25,7 @@ const members = [
     },
     {
         name: "Trần Nguyên Anh",
-        code: "21IT013",
+        code: "21IT003",
         facebook: "https:/fb.com/trung181",
         github: "https://github.com/hoangtrung1801",
         instagram: "#",

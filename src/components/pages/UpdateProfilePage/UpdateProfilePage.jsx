@@ -1,10 +1,20 @@
-import Button from "../buttons/Button";
-import React, { useState } from "react";
-import EditAvaModal from "../EditAvatarModal";
-import Input from "../Input";
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { Navigate, redirect, useNavigate, useParams } from "react-router-dom";
+import constants from "~/libs/constants";
+import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
+import EditAvaModal from "../../EditAvatarModal";
+import Button from "../../buttons/Button";
+import Input from "../../Input";
 
-const UpdateProfile = () => {
-    const img = "/profile.jpg";
+const UpdateProfilePage = () => {
+    const currentUser = useCurrentUserStore((state) => state.currentUser);
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
     const [isOpen, setIsOpen] = useState(false);
     const [avatar, setavatar] = useState(null);
@@ -15,22 +25,22 @@ const UpdateProfile = () => {
 
     const inputArray = [
         {
-            state: name,
-            setState: setName,
-            placeHolder: "Your name",
             label: "Name",
+            placeHolder: "Your name",
+            defaultValue: currentUser?.name,
+            ...register("name"),
         },
         {
-            state: address,
-            setState: setAddress,
             placeHolder: "Your Address",
             label: "Address",
+            defaultValue: currentUser?.address,
+            ...register("address"),
         },
         {
-            state: phone,
-            setState: setPhone,
             placeHolder: "Your Phone Number",
+            defaultValue: currentUser?.phone,
             label: "Phone",
+            ...register("phone"),
         },
     ];
 
@@ -61,16 +71,13 @@ const UpdateProfile = () => {
         }
     };
 
-    // const props = {
-    //     state: name,
-    //     setState: setName,
-    //     placeHolder: "Your name",
-    //     label: "Name",
-    // };
+    const onSubmit = (data) => {
+        console.log(data);
+    };
 
     return (
         <div className="container">
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mt-3 flex flex-col-reverse gap-3 md:flex-row">
                     <div className="py-2 md:w-3/4 md:pr-10">
                         <h1 className="text-4xl font-bold ">Public Profile</h1>
@@ -85,8 +92,11 @@ const UpdateProfile = () => {
                             <img
                                 className="mx-auto h-full w-full rounded-full border-2"
                                 // set image
-                                src={avatar ? avatar : img}
-                                alt="Avatar"
+                                src={
+                                    (currentUser && currentUser.avatarUrl) ||
+                                    constants.avatarDefaultUrl
+                                }
+                                alt="User's avatar"
                             />
                             <Button
                                 onClick={() => setIsOpen(true)}
@@ -98,19 +108,7 @@ const UpdateProfile = () => {
                         </div>
                     </div>
                 </div>
-                <Button
-                    className="mt-5"
-                    variant="primary"
-                    onClick={() =>
-                        // eslint-disable-next-line no-console
-                        console.log({
-                            name,
-                            phone,
-                            address,
-                            avatar,
-                        })
-                    }
-                >
+                <Button className="mt-5" variant="primary" type="submit">
                     Save
                 </Button>
             </form>
@@ -127,4 +125,4 @@ const UpdateProfile = () => {
     );
 };
 
-export default UpdateProfile;
+export default UpdateProfilePage;

@@ -5,8 +5,6 @@ import HomeBanner from "./HomeBanner";
 const HomePage = () => {
     const { recipes } = useGetRecipes();
 
-    console.log(recipes);
-
     return (
         <div>
             <HomeBanner />

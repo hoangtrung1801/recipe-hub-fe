@@ -1,15 +1,25 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
 import Layout from "./components/layout";
 import Page404 from "./components/pages/404";
 import ComponentsPage from "./components/pages/components";
+import CreateRecipePage from "./components/pages/CreateRecipePage/CreateRecipePage";
 import HomePage from "./components/pages/HomePage/HomePage";
 import LoginPage from "./components/pages/LoginPage";
+import ProfilePage from "./components/pages/ProfilePage/ProfilePage";
 import RecipePage from "./components/pages/RecipePage/RecipePage";
 import RecipesPage from "./components/pages/RecipesPage/RecipesPage";
 import SearchPage from "./components/pages/SearchPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import UpdateProfile from "./components/pages/UpdateProfile";
-import ProfilePage from "./components/pages/ProfilePage/ProfilePage";
+import fetchUser from "./libs/apis/fetchUser";
+import constants from "./libs/constants";
+import useCurrentUserStore from "./libs/stores/useCurrentUserStore";
+
+const loader = async () => {
+    const currentUser = await useCurrentUserStore((state) => state.currentUser);
+    if (currentUser) return redirect("/");
+    return;
+};
 
 const router = createBrowserRouter([
     {
@@ -33,6 +43,18 @@ const router = createBrowserRouter([
                 element: <RecipePage />,
             },
             {
+                path: "/recipes/create",
+                element: <CreateRecipePage />,
+                loader: async () => {
+                    const response = await fetchUser();
+                    if (response.status === constants.responseStatus.SUCCESS) {
+                        return;
+                    } else {
+                        return redirect("/");
+                    }
+                },
+            },
+            {
                 path: "/login",
                 element: <LoginPage />,
             },
@@ -45,16 +67,20 @@ const router = createBrowserRouter([
                 element: <ComponentsPage />,
             },
             {
-                path: "/404",
-                element: <Page404 />,
-            },
-            {
                 path: "/search",
                 element: <SearchPage />,
             },
             {
                 path: "/:username",
                 element: <ProfilePage />,
+            },
+            // {
+            //     path: "*",
+            //     element: <Page404 />,
+            // },
+            {
+                path: "/404",
+                element: <Page404 />,
             },
         ],
     },
