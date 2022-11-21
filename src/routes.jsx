@@ -11,6 +11,7 @@ import RecipesPage from "./components/pages/RecipesPage/RecipesPage";
 import SearchPage from "./components/pages/SearchPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import UpdateProfilePageOld from "./components/pages/UpdateProfilePage/UpdateProfilePageOld";
+import UpdateRecipePage from "./components/pages/UpdateRecipePage";
 import fetchUser from "./libs/apis/fetchUser";
 import constants from "./libs/constants";
 
@@ -33,7 +34,16 @@ const router = createBrowserRouter([
             },
             {
                 path: "/recipes/:recipeId",
-                element: <RecipePage />,
+                children: [
+                    {
+                        index: true,
+                        element: <RecipePage />,
+                    },
+                    {
+                        path: "update",
+                        element: <UpdateRecipePage />,
+                    },
+                ],
             },
             {
                 path: "/recipes/create",

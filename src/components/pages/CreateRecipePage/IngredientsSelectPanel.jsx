@@ -1,5 +1,6 @@
 import { ActionIcon, Select, TextInput } from "@mantine/core";
 import { X } from "phosphor-react";
+import { useEffect } from "react";
 import { Controller, useFieldArray, useFormContext } from "react-hook-form";
 import Button from "~/components/buttons/Button";
 
@@ -65,10 +66,10 @@ const allIngredients = [
 
 const unitOfIngredients = ["g", "kg", "ml", "l", "tbsp"];
 
-const IngredientsSelectPanel = () => {
+const IngredientsSelectPanel = ({ defaultIngredients = [] }) => {
     const { getValues, control } = useFormContext();
 
-    const { fields, append, remove } = useFieldArray({ control, name: "ingredients" });
+    const { fields, append, remove, replace } = useFieldArray({ control, name: "ingredients" });
 
     const onAddIngredient = () => {
         append({
@@ -81,6 +82,10 @@ const IngredientsSelectPanel = () => {
     const onRemoveIngredient = (index) => {
         remove(index);
     };
+
+    useEffect(() => {
+        replace(defaultIngredients);
+    }, [defaultIngredients]);
 
     return (
         <div className="flex h-96 max-h-96 w-full flex-col space-y-4">

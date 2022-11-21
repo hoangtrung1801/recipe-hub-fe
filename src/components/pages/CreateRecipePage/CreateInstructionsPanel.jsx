@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import InstructionBlock from "./InstructionBlock";
 
-export default function CreateInstructionsPanel() {
-    const { control, register } = useFormContext();
-    const { append, fields, remove } = useFieldArray({ control, name: "instructions" });
+export default function CreateInstructionsPanel({ defaultInstructions = [] }) {
+    const { control } = useFormContext();
+    const { append, fields, remove, replace } = useFieldArray({ control, name: "instructions" });
 
     const onAddInstruction = () => {
         append({
@@ -16,6 +17,10 @@ export default function CreateInstructionsPanel() {
         // console.log(stepNo);
         remove(stepNo - 1);
     };
+
+    useEffect(() => {
+        replace(defaultInstructions);
+    }, []);
 
     return (
         <div className="space-y-4">

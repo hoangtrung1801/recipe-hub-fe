@@ -19,13 +19,6 @@ const RecipePage = () => {
                 <div className="grid grid-cols-12 gap-x-12">
                     <div className="col-span-5">
                         <div>
-                            {/* <div className="relative w-full pb-[140%]">
-                                <img
-                                    className="absolute inset-0 h-full w-full object-cover"
-                                    src="https://images.prismic.io/stryve/fad9e994-32e9-4511-b620-5b3a6287009f_mushroom-spinach-pesto-toasted-sandwich.png?auto=compress,format&fm=webp&lossless=false&q=75&w=768"
-                                    alt="image"
-                                />
-                            </div> */}
                             <AspectRatio ratio={7 / 9}>
                                 <img src={recipe.imageUrl} alt={recipe.name} />
                             </AspectRatio>

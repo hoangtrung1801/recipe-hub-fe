@@ -9,7 +9,7 @@ const Instructions = ({ stepNo, onRemoveInstruction }) => {
     const [ingredients, setIngredients] = useState([]);
 
     const onIngredientsFocus = () => {
-        const ingredientsData = getValues("ingredients");
+        const ingredientsData = getValues("ingredients") || [];
         setIngredients(
             ingredientsData.map((ingredientData) => ingredientTransform.toString(ingredientData))
         );

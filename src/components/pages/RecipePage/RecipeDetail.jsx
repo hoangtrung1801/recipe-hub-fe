@@ -1,8 +1,8 @@
 import { Badge } from "@mantine/core";
 import * as _ from "lodash";
-import { GitFork, Star } from "phosphor-react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { GitFork, Pencil, Star } from "phosphor-react";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import Button from "~/components/buttons/Button";
 import ButtonStartCook from "~/components/buttons/ButtonStartCook";
 import postStar from "~/libs/apis/postStar";
@@ -13,8 +13,10 @@ import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import StartCookingModal from "./StartCookingModal";
 
 export default function RecipeDetail({ recipe }) {
+    const { recipeId } = useParams();
+
     const { instructions } = useGetCurrentInstructions(recipe.id);
-    const currentUser = useCurrentUserStore((state) => state.useCurrentUser);
+    const currentUser = useCurrentUserStore((state) => state.currentUser);
 
     const [isOpen, setIsOpen] = useState(false);
     const [stepNo, setStepNo] = useState(1);
@@ -27,6 +29,11 @@ export default function RecipeDetail({ recipe }) {
     function openModal() {
         setIsOpen(true);
     }
+
+    const isOwnedOfCurrentUser = useMemo(() => {
+        if (!currentUser) return false;
+        return currentUser.recipes.some((recipe) => recipe.id === recipeId);
+    }, [currentUser]);
 
     // const isStarred = useMemo(
     //     () => recipe.stars.some((userStarred) => userStarred.id === user?.id),
@@ -89,25 +96,35 @@ export default function RecipeDetail({ recipe }) {
                 </p>
             </div>
             <div className="border-y border-dark-0">
-                <div className="flex space-x-4 py-6">
-                    <Button variant="light" className="space-x-2" onClick={onClickStar}>
-                        <Star className="text-lg" weight={isStarred ? "fill" : "regular"} />
-                        <span>Star</span>
-                        <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
-                            {recipe.stars.length}
-                        </Badge>
-                        {/* <div>
+                <div className="flex justify-between space-x-4 py-6">
+                    <div className="space-x-2">
+                        <Button variant="light" className="space-x-2" onClick={onClickStar}>
+                            <Star className="text-lg" weight={isStarred ? "fill" : "regular"} />
+                            <span>Star</span>
+                            <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
+                                {recipe.stars.length}
+                            </Badge>
+                            {/* <div>
                             <span>0</span>
                         </div> */}
-                    </Button>
+                        </Button>
 
-                    <Button variant="light" className="space-x-2">
-                        <GitFork className="text-lg" />
-                        <span>Fork</span>
-                        <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
-                            {/* {recipe.numberOfFork} */}0
-                        </Badge>
-                    </Button>
+                        <Button variant="light" className="space-x-2">
+                            <GitFork className="text-lg" />
+                            <span>Fork</span>
+                            <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
+                                {/* {recipe.numberOfFork} */}0
+                            </Badge>
+                        </Button>
+                    </div>
+                    <div>
+                        <Link to="update">
+                            <Button variant="light" className="space-x-2">
+                                <Pencil className="text-lg" />
+                                <span>Update</span>
+                            </Button>
+                        </Link>
+                    </div>
                 </div>
             </div>
             <div>
