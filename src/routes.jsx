@@ -10,16 +10,9 @@ import RecipePage from "./components/pages/RecipePage/RecipePage";
 import RecipesPage from "./components/pages/RecipesPage/RecipesPage";
 import SearchPage from "./components/pages/SearchPage";
 import SignUpPage from "./components/pages/SignUpPage";
-import UpdateProfile from "./components/pages/UpdateProfile";
+import UpdateProfilePageOld from "./components/pages/UpdateProfilePage/UpdateProfilePageOld";
 import fetchUser from "./libs/apis/fetchUser";
 import constants from "./libs/constants";
-import useCurrentUserStore from "./libs/stores/useCurrentUserStore";
-
-const loader = async () => {
-    const currentUser = await useCurrentUserStore((state) => state.currentUser);
-    if (currentUser) return redirect("/");
-    return;
-};
 
 const router = createBrowserRouter([
     {
@@ -32,7 +25,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/profile/update",
-                element: <UpdateProfile />,
+                element: <UpdateProfilePageOld />,
             },
             {
                 path: "/recipes",

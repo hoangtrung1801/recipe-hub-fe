@@ -177,7 +177,7 @@ const CreateRecipePage = () => {
 
                         {/* AVATAR */}
                         <div className="flex">
-                            <UploadImage />
+                            <UploadImage attributeName={"image"} />
                         </div>
 
                         <div className="space-y-4">

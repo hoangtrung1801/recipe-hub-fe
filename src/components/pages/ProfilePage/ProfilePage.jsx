@@ -44,7 +44,7 @@ const ProfilePage = () => {
                 </div>
             </div>
             <div className="p-2 py-2 md:w-3/4">
-                <div className="mt-2 flex flex-col gap-2 md:flex-row md:items-center md:justify-evenly ">
+                <div className="mt-2 flex items-center gap-2">
                     <input
                         type="text"
                         className="block w-full rounded border border-gray-300 bg-primary-100 p-1.5 pl-3 text-sm text-gray-900 focus:outline-none md:w-3/5"
@@ -52,9 +52,11 @@ const ProfilePage = () => {
                         onChange={(e) => setSearchRecipe(e.target.value)}
                     />
                     {/* <RecipleFilter /> */}
-                    <Button variant={"dark"} className="max-h-[34px] w-full md:w-[63px]">
-                        New
-                    </Button>
+                    <Link to="/recipes/create">
+                        <Button variant={"dark"} className="max-h-[34px] w-full md:w-[63px]">
+                            New
+                        </Button>
+                    </Link>
                 </div>
                 <div className="gird-cols-2 mt-6 grid gap-6 px-3 md:grid-cols-3">
                     {user.recipes.map((recipe) => (
