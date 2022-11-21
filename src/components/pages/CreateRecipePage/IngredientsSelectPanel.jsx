@@ -1,10 +1,7 @@
-import { ActionIcon, MultiSelect, Select, TextInput } from "@mantine/core";
+import { ActionIcon, Select, TextInput } from "@mantine/core";
 import { X } from "phosphor-react";
-import { useId } from "react";
-import { useState } from "react";
+import { Controller, useFieldArray, useFormContext } from "react-hook-form";
 import Button from "~/components/buttons/Button";
-import * as _ from "lodash";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
 
 // const ingredients = [
 //     {
@@ -68,7 +65,9 @@ const allIngredients = [
 
 const unitOfIngredients = ["g", "kg", "ml", "l", "tbsp"];
 
-const IngredientsSelectPanel = ({ control }) => {
+const IngredientsSelectPanel = () => {
+    const { getValues, control } = useFormContext();
+
     const { fields, append, remove } = useFieldArray({ control, name: "ingredients" });
 
     const onAddIngredient = () => {
@@ -110,7 +109,9 @@ const IngredientsSelectPanel = ({ control }) => {
                             <TextInput
                                 placeholder="00.00"
                                 type={"number"}
-                                {...control.register(`ingredients.${index}.amount`)}
+                                {...control.register(`ingredients.${index}.amount`, {
+                                    valueAsNumber: true,
+                                })}
                             />
                         </div>
                         <div className="flex-1">

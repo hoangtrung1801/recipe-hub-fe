@@ -1,9 +1,8 @@
-import { useEffect } from "react";
-import { useFieldArray } from "react-hook-form";
-import Button from "~/components/buttons/Button";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import InstructionBlock from "./InstructionBlock";
 
-export default function CreateInstructionsPanel({ control, register }) {
+export default function CreateInstructionsPanel() {
+    const { control, register } = useFormContext();
     const { append, fields, remove } = useFieldArray({ control, name: "instructions" });
 
     const onAddInstruction = () => {
@@ -24,14 +23,12 @@ export default function CreateInstructionsPanel({ control, register }) {
                 <h3 className="-mb-1 text-lg font-medium">Instructions</h3>
                 <span className="text-sm italic text-gray-500">Step-by-step</span>
             </div>
-            <div>
+            <div className="space-y-2">
                 {fields.map((item, index) => (
                     <InstructionBlock
                         key={item.id}
-                        register={register}
                         stepNo={index + 1}
                         onRemoveInstruction={onRemoveInstruction}
-                        control={control}
                     />
                 ))}
             </div>

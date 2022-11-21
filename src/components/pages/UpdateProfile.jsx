@@ -1,6 +1,6 @@
 import Button from "../buttons/Button";
 import React, { useState } from "react";
-import EditAvaModal from "../AvatarModal";
+import EditAvaModal from "../EditAvatarModal";
 import Input from "../Input";
 
 const UpdateProfile = () => {

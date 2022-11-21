@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Navigate, redirect, useNavigate, useParams } from "react-router-dom";
 import constants from "~/libs/constants";
 import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
-import EditAvaModal from "../../AvatarModal";
+import EditAvaModal from "../../EditAvatarModal";
 import Button from "../../buttons/Button";
 import Input from "../../Input";
 
