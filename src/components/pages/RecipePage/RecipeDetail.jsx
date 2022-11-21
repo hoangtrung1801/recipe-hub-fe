@@ -2,6 +2,7 @@ import { Badge } from "@mantine/core";
 import * as _ from "lodash";
 import { GitFork, Star } from "phosphor-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Button from "~/components/buttons/Button";
 import ButtonStartCook from "~/components/buttons/ButtonStartCook";
 import postStar from "~/libs/apis/postStar";
@@ -181,17 +182,24 @@ const RecipeAuthor = ({ user }) => {
             <div className="basis-24">
                 <div className="aspect-square overflow-hidden rounded-full">
                     <img
-                        src="https://randompicturegenerator.com/img/people-generator/gab5efb99b1f5b1ac18f8f302c793aaa28f5e881eb21d8ae4f7f64f55d3d800a5c77426e67b2e74c5e8d7c1787c13369f_640.jpg"
+                        src={user.avatarUrl || "/avatar-default.jpg"}
                         alt="avatar"
                         className="h-full w-full object-cover"
                     />
                 </div>
             </div>
             <div className="mt-2 flex-1">
-                <p className="font-semibold">{user.name}</p>
+                <div>
+                    <Link
+                        to={`/${user.username}`}
+                        className="underline-offset-2 transition hover:underline"
+                    >
+                        <p className="inline font-semibold">{user.name}</p>
+                    </Link>
+                </div>
                 <p className="mt-2">
-                    If you enjoyed this recipe share it with your friends and family who might also
-                    enjoy it
+                    {user.description ||
+                        "If you enjoyed this recipe share it with your friends and family who might also enjoy it"}
                 </p>
             </div>
         </div>
