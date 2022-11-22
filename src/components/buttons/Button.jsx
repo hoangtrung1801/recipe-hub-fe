@@ -23,24 +23,24 @@ const Button = React.forwardRef(
             children,
             className,
             disabled: buttonDisabled,
-            isLoading,
+            loading,
             variant = "primary",
             isDarkBg = false,
             ...rest
         },
         ref
     ) => {
-        const disabled = isLoading || buttonDisabled;
+        const disabled = loading || buttonDisabled;
 
         return (
-            <ButtonMantine
+            <button
                 ref={ref}
                 type="button"
                 disabled={disabled}
                 className={clsxm(
                     "inline-flex items-center justify-center rounded px-4 py-2 text-sm font-medium",
                     "focus:outline-none focus:ring-4 focus:ring-primary-300 focus-visible:ring focus-visible:ring-primary-500",
-                    "shadow-sm",
+                    "space-x-2 shadow-sm",
                     "transition-colors duration-75",
                     //#region  //*=========== Variants ===========
                     [
@@ -82,13 +82,13 @@ const Button = React.forwardRef(
                     ],
                     //#endregion  //*======== Variants ===========
                     "disabled:cursor-not-allowed",
-                    isLoading &&
+                    loading &&
                         "relative text-transparent transition-none hover:text-transparent disabled:cursor-wait",
                     className
                 )}
                 {...rest}
             >
-                {isLoading && (
+                {loading && (
                     <div
                         className={clsxm(
                             "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
@@ -103,7 +103,7 @@ const Button = React.forwardRef(
                     </div>
                 )}
                 {children}
-            </ButtonMantine>
+            </button>
         );
     }
 );

@@ -1,4 +1,5 @@
 import { Listbox, Transition } from "@headlessui/react";
+import { Image } from "@mantine/core";
 import React, { Fragment, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useGetUser from "~/libs/apis/useGetUser";
@@ -27,10 +28,21 @@ const ProfilePage = () => {
 
     return (
         <div className="container mt-3 flex flex-col gap-3 md:flex-row">
-            <div className="py-2 md:max-h-[564px] md:w-1/4">
+            <div className="py-2 md:w-1/4">
                 <div className="mt-5">
-                    <div className="aspect-square overflow-hidden rounded-full border-2 shadow-md">
-                        <img src={user.avatarUrl || "/avatar-default.jpg"} alt="Randy Robertson" />
+                    <div className="flex aspect-square w-full max-w-sm items-center justify-center overflow-hidden">
+                        <img
+                            src={user.avatarUrl || "/avatar-default.jpg"}
+                            className="h-full w-full rounded-full object-cover"
+                        />
+                        {/* <Image
+                            src={user.avatarUrl || "/avatar-default.jpg"}
+                            withPlaceholder
+                            width={240}
+                            height={240}
+                            fit="cover"
+                            className="overflow-hidden rounded-full"
+                        /> */}
                     </div>
                 </div>
                 <div className="mt-3 flex flex-col gap-3 px-2">
