@@ -1,15 +1,14 @@
 /* eslint-disable no-console */
-import { Badge } from "@mantine/core";
+import { Badge, Group, Modal, useMantineTheme } from "@mantine/core";
 import * as _ from "lodash";
 import { GitFork, Star } from "phosphor-react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "~/components/buttons/Button";
 import ButtonStartCook from "~/components/buttons/ButtonStartCook";
 import forkRecipe from "~/libs/apis/forkRecipe";
 import postStar from "~/libs/apis/postStar";
 import postUnstar from "~/libs/apis/postUnstar";
 import useGetCurrentInstructions from "~/libs/apis/useGetCurrentInstructions";
-import useGetRecipe from "~/libs/apis/useGetRecipe";
 import constants from "~/libs/constants";
 import fetcherGet from "~/libs/fetcher";
 import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
@@ -24,6 +23,15 @@ export default function RecipeDetail({ recipe }) {
     const [isForked, setIsForked] = useState(false);
     const [exist, setExist] = useState(false);
     const [userRecipes, setUserRecipes] = useState([]);
+    const [opened, setOpened] = useState(false);
+    const [accpetFork, setAcceptFork] = useState(true);
+    const props = {
+        opened,
+        setOpened,
+        accpetFork,
+        setAcceptFork,
+        recipe,
+    };
 
     function closeModal() {
         setIsOpen(false);
@@ -59,7 +67,7 @@ export default function RecipeDetail({ recipe }) {
     };
 
     const onClickFork = () => {
-        forkRecipe(recipe.id, recipe.name, recipe.description, recipe.mode);
+        setOpened(true);
     };
 
     useEffect(() => {
@@ -218,6 +226,9 @@ export default function RecipeDetail({ recipe }) {
             <div>
                 <RecipeAuthor user={recipe.user} />
             </div>
+            <React.Fragment>
+                <ValidateFork {...props} />
+            </React.Fragment>
         </div>
     );
 }
@@ -244,3 +255,35 @@ const RecipeAuthor = ({ user }) => {
         </div>
     );
 };
+
+function ValidateFork({ opened, setOpened, accpetFork, setAcceptFork, recipe }) {
+    const theme = useMantineTheme();
+
+    const accpet = () => {
+        setAcceptFork(true);
+        if (accpetFork) {
+            forkRecipe(recipe.id, recipe.name, recipe.description, recipe.mode);
+        }
+    };
+
+    return (
+        <>
+            <Modal
+                opened={opened}
+                onClose={() => setOpened(false)}
+                title="Do you want to change the name ,mode, description?"
+                overlayColor={
+                    theme.colorScheme === "dark" ? theme.colors.dark[9] : theme.colors.gray[2]
+                }
+                overlayOpacity={0.55}
+                overlayBlur={3}
+            >
+                {/* Modal content */}
+                <div className="flex flex-row justify-center gap-3">
+                    <Button onClick={() => setOpened(false)}>No</Button>
+                    <Button onClick={accpet}>Yes</Button>
+                </div>
+            </Modal>
+        </>
+    );
+}
