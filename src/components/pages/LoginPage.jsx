@@ -26,7 +26,7 @@ const LoginPage = () => {
     const onSubmit = async (data) => {
         const response = await login(data.username, data.password);
         if (response.status === constants.responseStatus.SUCCESS) {
-            navigate("/");
+            navigate("..");
         } else {
             setErrors((errors) => [response.message, ...errors]);
         }

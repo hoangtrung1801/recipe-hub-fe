@@ -6,12 +6,14 @@ import CreateRecipePage from "./components/pages/CreateRecipePage/CreateRecipePa
 import HomePage from "./components/pages/HomePage/HomePage";
 import LoginPage from "./components/pages/LoginPage";
 import ProfilePage from "./components/pages/ProfilePage/ProfilePage";
+import RecipeChangelogPage from "./components/pages/RecipeChangelog/RecipeChangelog";
+import RecipeChangelogSpecificPage from "./components/pages/RecipeChangelogSpecific/RecipeChangelogSpecific";
 import RecipePage from "./components/pages/RecipePage/RecipePage";
 import RecipesPage from "./components/pages/RecipesPage/RecipesPage";
 import SearchPage from "./components/pages/SearchPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import UpdateProfilePageOld from "./components/pages/UpdateProfilePage/UpdateProfilePageOld";
-import UpdateRecipePage from "./components/pages/UpdateRecipePage";
+import UpdateRecipePage from "./components/pages/UpdateRecipePage/UpdateRecipePage";
 import fetchUser from "./libs/apis/fetchUser";
 import constants from "./libs/constants";
 
@@ -42,6 +44,19 @@ const router = createBrowserRouter([
                     {
                         path: "update",
                         element: <UpdateRecipePage />,
+                    },
+                    {
+                        path: "changelog",
+                        children: [
+                            {
+                                index: true,
+                                element: <RecipeChangelogPage />,
+                            },
+                            {
+                                path: ":changelogId",
+                                element: <RecipeChangelogSpecificPage />,
+                            },
+                        ],
                     },
                 ],
             },

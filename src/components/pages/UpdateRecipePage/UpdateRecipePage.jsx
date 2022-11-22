@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import postChangelogs from "~/libs/apis/postChangelogs";
@@ -6,10 +5,9 @@ import useGetCurrentInstructions from "~/libs/apis/useGetCurrentInstructions";
 import useGetRecipe from "~/libs/apis/useGetRecipe";
 import compareInstructions from "~/libs/compareInstructions";
 import constants from "~/libs/constants";
-import Button from "../buttons/Button";
-import Input from "../Input";
-import CreateInstructionsPanel from "./CreateRecipePage/CreateInstructionsPanel";
-import IngredientsSelectPanel from "./CreateRecipePage/IngredientsSelectPanel";
+import Button from "../../buttons/Button";
+import Input from "../../Input";
+import CreateInstructionsPanel from "../CreateRecipePage/CreateInstructionsPanel";
 
 export default function UpdateRecipePage() {
     const methods = useForm();

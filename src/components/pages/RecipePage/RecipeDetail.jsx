@@ -117,14 +117,23 @@ export default function RecipeDetail({ recipe }) {
                             </Badge>
                         </Button>
                     </div>
-                    <div>
-                        <Link to="update">
-                            <Button variant="light" className="space-x-2">
-                                <Pencil className="text-lg" />
-                                <span>Update</span>
-                            </Button>
-                        </Link>
-                    </div>
+                    {isOwnedOfCurrentUser && (
+                        <div className="space-x-2">
+                            <Link to="changelog">
+                                <Button variant="light" className="space-x-2">
+                                    <Pencil className="text-lg" />
+                                    <span>Changelog</span>
+                                </Button>
+                            </Link>
+
+                            <Link to="update">
+                                <Button variant="light" className="space-x-2">
+                                    <Pencil className="text-lg" />
+                                    <span>Update</span>
+                                </Button>
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </div>
             <div>

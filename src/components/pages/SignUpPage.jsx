@@ -26,7 +26,7 @@ const SignUpPage = () => {
     const onSubmit = async (data) => {
         const response = await signUp(data);
         if (response.status === constants.responseStatus.SUCCESS) {
-            navigate("/");
+            navigate("..");
         } else {
             setErrors((errors) => [response.message, ...errors]);
         }
