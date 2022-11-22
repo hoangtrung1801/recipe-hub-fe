@@ -1,10 +1,12 @@
-import { Badge } from "@mantine/core";
+import { Badge, Modal, Select, TextInput, useMantineTheme } from "@mantine/core";
 import * as _ from "lodash";
 import { GitFork, Pencil, Star } from "phosphor-react";
 import { useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "~/components/buttons/Button";
 import ButtonStartCook from "~/components/buttons/ButtonStartCook";
+import postForkRecipe from "~/libs/apis/postForkRecipe";
 import postStar from "~/libs/apis/postStar";
 import postUnstar from "~/libs/apis/postUnstar";
 import useGetCurrentInstructions from "~/libs/apis/useGetCurrentInstructions";
@@ -13,6 +15,7 @@ import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import StartCookingModal from "./StartCookingModal";
 
 export default function RecipeDetail({ recipe }) {
+    const navigate = useNavigate();
     const { recipeId } = useParams();
 
     const { instructions } = useGetCurrentInstructions(recipe.id);
@@ -21,6 +24,7 @@ export default function RecipeDetail({ recipe }) {
     const [isOpen, setIsOpen] = useState(false);
     const [stepNo, setStepNo] = useState(1);
     const [isStarred, setIsStarred] = useState();
+    const [forkValidationOpen, setForkValidationOpen] = useState(false);
 
     function closeModal() {
         setIsOpen(false);
@@ -34,6 +38,13 @@ export default function RecipeDetail({ recipe }) {
         if (!currentUser) return false;
         return currentUser.recipes.some((recipe) => recipe.id === recipeId);
     }, [currentUser]);
+
+    const isForked = useMemo(() => {
+        if (!currentUser || !recipeId) return false;
+        return currentUser?.recipes.some(
+            (recipe) => recipe.forkFrom?.id === recipeId || recipe.id === recipeId
+        );
+    }, [currentUser, recipeId]);
 
     // const isStarred = useMemo(
     //     () => recipe.stars.some((userStarred) => userStarred.id === user?.id),
@@ -60,6 +71,22 @@ export default function RecipeDetail({ recipe }) {
         }
     };
 
+    const onFork = async (data) => {
+        try {
+            const response = await postForkRecipe(recipeId, data);
+
+            if (response.status === constants.responseStatus.SUCCESS) {
+                alert("Fork successfull");
+                const recipe = response.data;
+                navigate(`/recipes/${recipe.id}`);
+            } else {
+                console.error(response.message);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     useEffect(() => {
         setIsStarred(recipe.stars.some((userStarred) => userStarred.id === currentUser?.id));
     }, [recipe, currentUser, setIsStarred]);
@@ -67,7 +94,7 @@ export default function RecipeDetail({ recipe }) {
     return (
         <div className="space-y-8 pt-12">
             <div>
-                <h1 className="text-6xl font-medium">Mushroom, spinach & pesto toasted sandwich</h1>
+                <h1 className="text-6xl font-medium">{recipe?.name}</h1>
 
                 {/* categories */}
                 <div className="mt-8 flex">
@@ -109,31 +136,35 @@ export default function RecipeDetail({ recipe }) {
                         </div> */}
                         </Button>
 
-                        <Button variant="light" className="space-x-2">
+                        <Button
+                            variant="light"
+                            className="space-x-2"
+                            disabled={isForked}
+                            onClick={() => setForkValidationOpen(true)}
+                        >
                             <GitFork className="text-lg" />
                             <span>Fork</span>
                             <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
-                                {/* {recipe.numberOfFork} */}0
+                                {recipe.numberOfFork}
                             </Badge>
                         </Button>
                     </div>
-                    {isOwnedOfCurrentUser && (
-                        <div className="space-x-2">
-                            <Link to="changelog">
-                                <Button variant="light" className="space-x-2">
-                                    <Pencil className="text-lg" />
-                                    <span>Changelog</span>
-                                </Button>
-                            </Link>
-
+                    <div className="space-x-2">
+                        <Link to="changelog">
+                            <Button variant="light" className="space-x-2">
+                                <Pencil className="text-lg" />
+                                <span>Changelog</span>
+                            </Button>
+                        </Link>
+                        {isOwnedOfCurrentUser && (
                             <Link to="update">
                                 <Button variant="light" className="space-x-2">
                                     <Pencil className="text-lg" />
                                     <span>Update</span>
                                 </Button>
                             </Link>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
             <div>
@@ -198,6 +229,13 @@ export default function RecipeDetail({ recipe }) {
             <div>
                 <RecipeAuthor user={recipe.user} />
             </div>
+            <div>
+                <ForkRecipeValidation
+                    open={forkValidationOpen}
+                    setOpen={setForkValidationOpen}
+                    onFork={onFork}
+                />
+            </div>
         </div>
     );
 }
@@ -229,5 +267,83 @@ const RecipeAuthor = ({ user }) => {
                 </p>
             </div>
         </div>
+    );
+};
+
+const ForkRecipeValidation = ({ open, setOpen, onFork }) => {
+    const theme = useMantineTheme();
+    const methods = useForm();
+    const { register, handleSubmit, control } = methods;
+
+    const onSubmit = (data) => {
+        onFork(data);
+    };
+
+    const modeInput = {
+        label: "Mode",
+        placeholder: "Pick one",
+        data: [
+            { value: "PUBLIC", label: "PUBLIC" },
+            { value: "PRIVATE", label: "PRIVATE" },
+        ],
+        field: "mode",
+    };
+
+    return (
+        <Modal
+            opened={open}
+            onClose={() => setOpen(false)}
+            title={<p className="text-2xl font-semibold">Create a new fork</p>}
+            overlayColor={
+                theme.colorScheme === "dark" ? theme.colors.dark[9] : theme.colors.gray[2]
+            }
+            overlayOpacity={0.55}
+            overlayBlur={3}
+            size="400px"
+            centered
+        >
+            <div>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="space-y-2">
+                        <div>
+                            <TextInput
+                                title="Name"
+                                placeholder="Your new recipe name"
+                                label="Name"
+                                {...register("name")}
+                            />
+                        </div>
+                        <div>
+                            <TextInput
+                                title="Description"
+                                placeholder="Your new recipe description"
+                                label="Description"
+                                {...register("description")}
+                            />
+                        </div>
+                        <div>
+                            <Controller
+                                control={control}
+                                name="mode"
+                                render={({ field: { value, onChange } }) => (
+                                    <Select
+                                        label={modeInput.label}
+                                        placeholder={modeInput.placeholder}
+                                        data={modeInput.data}
+                                        value={value}
+                                        onChange={(e) => onChange(e)}
+                                    />
+                                )}
+                            />
+                        </div>
+                        <div className="flex justify-end">
+                            <Button type="submit" variant="dark" className="px-8">
+                                Fork
+                            </Button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </Modal>
     );
 };
