@@ -1,23 +1,29 @@
+/* eslint-disable no-console */
 import { Badge } from "@mantine/core";
 import * as _ from "lodash";
 import { GitFork, Star } from "phosphor-react";
 import { useEffect, useState } from "react";
 import Button from "~/components/buttons/Button";
 import ButtonStartCook from "~/components/buttons/ButtonStartCook";
+import forkRecipe from "~/libs/apis/forkRecipe";
 import postStar from "~/libs/apis/postStar";
 import postUnstar from "~/libs/apis/postUnstar";
 import useGetCurrentInstructions from "~/libs/apis/useGetCurrentInstructions";
+import useGetRecipe from "~/libs/apis/useGetRecipe";
 import constants from "~/libs/constants";
+import fetcherGet from "~/libs/fetcher";
 import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import StartCookingModal from "./StartCookingModal";
 
 export default function RecipeDetail({ recipe }) {
     const { instructions } = useGetCurrentInstructions(recipe.id);
-    const currentUser = useCurrentUserStore((state) => state.useCurrentUser);
-
+    const currentUser = useCurrentUserStore((state) => state.currentUser);
     const [isOpen, setIsOpen] = useState(false);
     const [stepNo, setStepNo] = useState(1);
     const [isStarred, setIsStarred] = useState();
+    const [isForked, setIsForked] = useState(false);
+    const [exist, setExist] = useState(false);
+    const [userRecipes, setUserRecipes] = useState([]);
 
     function closeModal() {
         setIsOpen(false);
@@ -52,9 +58,41 @@ export default function RecipeDetail({ recipe }) {
         }
     };
 
+    const onClickFork = () => {
+        forkRecipe(recipe.id, recipe.name, recipe.description, recipe.mode);
+    };
+
     useEffect(() => {
         setIsStarred(recipe.stars.some((userStarred) => userStarred.id === currentUser?.id));
-    }, [recipe, currentUser, setIsStarred]);
+        setExist(currentUser && currentUser.id === recipe.user.id ? true : false);
+    }, [recipe, currentUser, setIsStarred, exist]);
+
+    useEffect(() => {
+        const fetch = async () => {
+            if (!currentUser) return [];
+
+            const recipes = currentUser.recipes;
+            return await Promise.all(
+                recipes.map((recipe) => fetcherGet(`${constants.BACKEND_URL}/recipes/${recipe.id}`))
+            ).then((data) => data.map((res) => res.data));
+        };
+        fetch().then((data) => {
+            setUserRecipes(data);
+        });
+    }, []);
+
+    useEffect(() => {
+        const checkIsForked = userRecipes.map((item) => recipe.id === item.forkFrom.id);
+        const checkIsForked2 = checkIsForked.some((c) => {
+            return c === true ? true : false;
+        });
+        console.log(checkIsForked2);
+        if (checkIsForked2) {
+            setIsForked(true);
+        } else {
+            setIsForked(false);
+        }
+    }, [userRecipes]);
 
     return (
         <div className="space-y-8 pt-12">
@@ -99,14 +137,23 @@ export default function RecipeDetail({ recipe }) {
                             <span>0</span>
                         </div> */}
                     </Button>
-
-                    <Button variant="light" className="space-x-2">
-                        <GitFork className="text-lg" />
-                        <span>Fork</span>
-                        <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
-                            {/* {recipe.numberOfFork} */}0
-                        </Badge>
-                    </Button>
+                    {exist || isForked ? (
+                        <Button variant="light" className="space-x-2" disabled>
+                            <GitFork className="text-lg" />
+                            <span>Fork</span>
+                            <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
+                                {recipe.numberOfFork}
+                            </Badge>
+                        </Button>
+                    ) : (
+                        <Button variant="light" className="space-x-2" onClick={onClickFork}>
+                            <GitFork className="text-lg" />
+                            <span>Fork</span>
+                            <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
+                                {recipe.numberOfFork}
+                            </Badge>
+                        </Button>
+                    )}
                 </div>
             </div>
             <div>
