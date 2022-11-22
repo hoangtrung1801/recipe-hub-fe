@@ -1,14 +1,10 @@
-import useSWR from "swr";
 import constants from "../constants";
+import { fetcherPost } from "../fetcher";
 
-export default function postComments(recipeId) {
+export default async function postComments(recipeId, message) {
     const endpoint = `${constants.BACKEND_URL}/recipes/${recipeId}/comments`;
 
-    const { data, error } = useSWR(endpoint);
+    const response = await fetcherPost(endpoint, { message });
 
-    return {
-        comments: data !== undefined ? data.data : null,
-        isLoading: !error && !data,
-        error,
-    };
+    return response;
 }
