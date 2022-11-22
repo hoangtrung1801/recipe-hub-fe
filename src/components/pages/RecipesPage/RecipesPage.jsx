@@ -1,12 +1,13 @@
 import { useState } from "react";
 import useGetRecipes from "~/libs/apis/useGetRecipes";
 import RecipeCard from "../../RecipeCard";
+
 import ListCatalogs from "./ListCatalogs";
 
 const RecipesPage = () => {
     // Catalog 'All' is -1 (default)
     const [selectedCatalog, setSelectedCatalog] = useState(-1);
-    const [filteredRecipes, setFileteredRecipes] = useState([]);
+    // const [filteredRecipes, setFileteredRecipes] = useState([]);
 
     const { recipes } = useGetRecipes("", selectedCatalog === -1 ? "" : selectedCatalog);
 

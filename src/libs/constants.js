@@ -7,4 +7,6 @@ export default {
         FAIL: "fail",
         ERROR: "error",
     },
+
+    avatarDefault: "/avatar-default.jpg",
 };

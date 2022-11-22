@@ -16,12 +16,6 @@ const HomePage = () => {
                             <RecipeCard recipe={recipe} />
                         </div>
                     ))}
-
-                    {/* {recipes.map((recipe) => (
-                        <div key={recipe.text}>
-                            <CardComponent card={recipe} />
-                        </div>
-                    ))} */}
                 </div>
             </menu>
 
