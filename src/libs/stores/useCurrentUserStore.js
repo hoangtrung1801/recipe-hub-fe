@@ -6,7 +6,7 @@ import signUp from "../apis/signUp";
 import constants from "../constants";
 
 const useCurrentUserStore = create((set, get) => ({
-    currentUser: null,
+    currentUser: undefined,
     fetchUser: async () => {
         const response = await fetchUser();
         if (response.status === constants.responseStatus.SUCCESS) {

@@ -16,10 +16,6 @@ export default async function postRecipe(recipeData) {
     // MAP catalog Ids
     recipeData.catalogs = (recipeData?.catalogs && recipeData.catalogs.map((id) => ({ id }))) || [];
 
-    // REMOVE
-    // recipeData.imageUrl =
-    //     "http://res.cloudinary.com/vietnam-korea-university-of-information-and-communication-techonology/image/upload/v1667986949/recipe-hub/images/cvx3ahctdcx9xmkbij5v.png";
-
     // UPLOAD IMAGE AND GET URL
     const imageFormData = new FormData();
     const imageBlob = await fetch(URL.createObjectURL(recipeData.image)).then((res) => res.blob());

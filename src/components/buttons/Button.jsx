@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Spinner } from "phosphor-react";
 import clsxm from "~/libs/clsxm";
+import { Button as ButtonMantine } from "@mantine/core";
 
 // const ButtonVariant = [
 //     "primary",
@@ -32,7 +33,7 @@ const Button = React.forwardRef(
         const disabled = isLoading || buttonDisabled;
 
         return (
-            <button
+            <ButtonMantine
                 ref={ref}
                 type="button"
                 disabled={disabled}
@@ -102,7 +103,7 @@ const Button = React.forwardRef(
                     </div>
                 )}
                 {children}
-            </button>
+            </ButtonMantine>
         );
     }
 );

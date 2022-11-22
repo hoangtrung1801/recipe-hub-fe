@@ -12,7 +12,7 @@ import RecipePage from "./components/pages/RecipePage/RecipePage";
 import RecipesPage from "./components/pages/RecipesPage/RecipesPage";
 import SearchPage from "./components/pages/SearchPage";
 import SignUpPage from "./components/pages/SignUpPage";
-import UpdateProfilePageOld from "./components/pages/UpdateProfilePage/UpdateProfilePageOld";
+import UpdateProfilePage from "./components/pages/UpdateProfilePage/UpdateProfilePage";
 import UpdateRecipePage from "./components/pages/UpdateRecipePage/UpdateRecipePage";
 import fetchUser from "./libs/apis/fetchUser";
 import constants from "./libs/constants";
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/profile/update",
-                element: <UpdateProfilePageOld />,
+                element: <UpdateProfilePage />,
             },
             {
                 path: "/recipes",

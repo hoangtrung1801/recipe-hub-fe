@@ -7,7 +7,7 @@ export default function useGetUser(username) {
     const { data, error } = useSWR(endpoint);
 
     return {
-        user: data !== undefined ? data.data : null,
+        user: data !== undefined ? data.data : undefined,
         isLoading: !error && !data,
         error,
     };
