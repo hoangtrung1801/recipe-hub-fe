@@ -3,12 +3,12 @@ import { useParams } from "react-router-dom";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import useGetRecipe from "~/libs/apis/useGetRecipe";
+import CommentForm from "./CommentForm";
 import IngredientsList from "./IngredientsList";
 import RecipeDetail from "./RecipeDetail";
 
 const RecipePage = () => {
     const { recipeId } = useParams();
-
     const { recipe } = useGetRecipe(recipeId);
 
     if (!recipe) return <div></div>;
@@ -31,6 +31,7 @@ const RecipePage = () => {
                         <RecipeDetail recipe={recipe} />
                     </div>
                 </div>
+                <CommentForm />
             </div>
         </div>
     );
