@@ -1,13 +1,13 @@
 import useSWR from "swr";
 import constants from "../constants";
 
-export default function useGetRecipe(recipeId) {
-    const endpoint = `${constants.BACKEND_URL}/recipes/${recipeId}`;
+export default function useGetStars(recipeId) {
+    const endpoint = `${constants.BACKEND_URL}/recipes/${recipeId}/stars`;
 
     const { data, error, ...rest } = useSWR(endpoint);
 
     return {
-        recipe: data !== undefined ? data.data : null,
+        stars: data !== undefined ? data.data : undefined,
         isLoading: !error && !data,
         error,
         ...rest,

@@ -28,7 +28,7 @@ const RecipePage = () => {
                         </div>
                     </div>
                     <div className="col-span-7">
-                        <RecipeDetail recipe={recipe} />
+                        <RecipeDetail />
                     </div>
                 </div>
                 <CommentForm />

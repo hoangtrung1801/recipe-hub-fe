@@ -10,20 +10,25 @@ import postForkRecipe from "~/libs/apis/postForkRecipe";
 import postStar from "~/libs/apis/postStar";
 import postUnstar from "~/libs/apis/postUnstar";
 import useGetCurrentInstructions from "~/libs/apis/useGetCurrentInstructions";
+import useGetRecipe from "~/libs/apis/useGetRecipe";
+import useGetStars from "~/libs/apis/useGetStar";
 import constants from "~/libs/constants";
 import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
+import StarBlock from "../CreateRecipePage/StarBlock";
 import StartCookingModal from "./StartCookingModal";
 
-export default function RecipeDetail({ recipe }) {
+export default function RecipeDetail() {
     const navigate = useNavigate();
     const { recipeId } = useParams();
+
+    const { recipe } = useGetRecipe(recipeId);
 
     const { instructions } = useGetCurrentInstructions(recipe.id);
     const currentUser = useCurrentUserStore((state) => state.currentUser);
 
     const [isOpen, setIsOpen] = useState(false);
     const [stepNo, setStepNo] = useState(1);
-    const [isStarred, setIsStarred] = useState();
+    // const [isStarred, setIsStarred] = useState();
     const [forkValidationOpen, setForkValidationOpen] = useState(false);
 
     function closeModal() {
@@ -46,31 +51,6 @@ export default function RecipeDetail({ recipe }) {
         );
     }, [currentUser, recipeId]);
 
-    // const isStarred = useMemo(
-    //     () => recipe.stars.some((userStarred) => userStarred.id === user?.id),
-    //     [user, recipe]
-    // );
-
-    const onClickStar = () => {
-        if (isStarred) {
-            // unstar
-            setIsStarred(false);
-            postUnstar(recipe.id).then((response) => {
-                if (response.status !== constants.responseStatus.SUCCESS) {
-                    setIsStarred(true);
-                }
-            });
-        } else {
-            // star
-            setIsStarred(true);
-            postStar(recipe.id).then((response) => {
-                if (response.status !== constants.responseStatus.SUCCESS) {
-                    setIsStarred(false);
-                }
-            });
-        }
-    };
-
     const onFork = async (data) => {
         try {
             const response = await postForkRecipe(recipeId, data);
@@ -87,9 +67,9 @@ export default function RecipeDetail({ recipe }) {
         }
     };
 
-    useEffect(() => {
-        setIsStarred(recipe.stars.some((userStarred) => userStarred.id === currentUser?.id));
-    }, [recipe, currentUser, setIsStarred]);
+    // useEffect(() => {
+    //     setIsStarred(recipe.stars.some((userStarred) => userStarred.id === currentUser?.id));
+    // }, [recipe, currentUser, setIsStarred]);
 
     return (
         <div className="space-y-8 pt-12">
@@ -125,16 +105,7 @@ export default function RecipeDetail({ recipe }) {
             <div className="border-y border-dark-0">
                 <div className="flex justify-between space-x-4 py-6">
                     <div className="space-x-2">
-                        <Button variant="light" className="space-x-2" onClick={onClickStar}>
-                            <Star className="text-lg" weight={isStarred ? "fill" : "regular"} />
-                            <span>Star</span>
-                            <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
-                                {recipe.stars.length}
-                            </Badge>
-                            {/* <div>
-                            <span>0</span>
-                        </div> */}
-                        </Button>
+                        <StarBlock />
 
                         <Button
                             variant="light"
