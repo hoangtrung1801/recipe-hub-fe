@@ -1,6 +1,8 @@
-import { Popover } from "@mantine/core";
+import { Modal, Popover, TextInput } from "@mantine/core";
 import { ForkKnife, MagnifyingGlass, User } from "phosphor-react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import Button from "../buttons/Button";
 import UnderlineLink from "../links/UnderlineLink";
@@ -40,6 +42,17 @@ const Header = () => {
 };
 
 const HeaderMenu = () => {
+    const [searchModal, setSearchModal] = useState(false);
+    const { register, handleSubmit } = useForm();
+
+    const navigate = useNavigate();
+
+    const onSearch = (data) => {
+        const { value } = data;
+        navigate(`/search?q=${value}`);
+        setSearchModal(false);
+    };
+
     return (
         <>
             {router.map((route) => (
@@ -47,9 +60,20 @@ const HeaderMenu = () => {
                     {route.label}
                 </UnderlineLink>
             ))}
-            <UnderlineLink to={"#"} icon={<MagnifyingGlass className="text-xl" weight="light" />}>
+            <UnderlineLink
+                icon={<MagnifyingGlass className="text-xl" weight="light" />}
+                onClick={() => setSearchModal(true)}
+            >
                 Search
             </UnderlineLink>
+            <Modal opened={searchModal} onClose={() => setSearchModal(false)} title="Search">
+                <div>
+                    <form onSubmit={handleSubmit(onSearch)}>
+                        <TextInput rightSection={<MagnifyingGlass />} {...register("value")} />
+                        <input type="submit" className="sr-only" />
+                    </form>
+                </div>
+            </Modal>
         </>
     );
 };

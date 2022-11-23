@@ -10,7 +10,7 @@ import RecipeChangelogPage from "./components/pages/RecipeChangelog/RecipeChange
 import RecipeChangelogSpecificPage from "./components/pages/RecipeChangelogSpecific/RecipeChangelogSpecific";
 import RecipePage from "./components/pages/RecipePage/RecipePage";
 import RecipesPage from "./components/pages/RecipesPage/RecipesPage";
-import SearchPage from "./components/pages/SearchPage";
+import SearchPage from "./components/pages/SearchPage/SearchPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import UpdateProfilePage from "./components/pages/UpdateProfilePage/UpdateProfilePage";
 import UpdateRecipePage from "./components/pages/UpdateRecipePage/UpdateRecipePage";
