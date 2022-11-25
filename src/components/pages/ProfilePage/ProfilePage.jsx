@@ -1,5 +1,6 @@
 import { Listbox, Transition } from "@headlessui/react";
 import { Image } from "@mantine/core";
+import { AddressBook, House, Phone } from "phosphor-react";
 import React, { Fragment, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useGetUser from "~/libs/apis/useGetUser";
@@ -45,17 +46,30 @@ const ProfilePage = () => {
                         /> */}
                     </div>
                 </div>
-                <div className="mt-3 flex flex-col gap-3 px-2">
-                    <div>
-                        <p className="font-semibold text-dark-0">{user.name}</p>
-                        <p className="text-sm text-gray-600">{user.username}</p>
+                <div className="mt-3 flex flex-col space-y-2 px-2">
+                    <div className="space-y-2">
+                        <div>
+                            <p className="font-semibold text-dark-0">{user.name}</p>
+                            <p className="text-sm text-gray-600">{user.username}</p>
+                        </div>
+                        <div>
+                            <p className="text-gray-700">{user.description}</p>
+                        </div>
+                        <div>
+                            <div className="flex items-center space-x-2 text-gray-700">
+                                <House weight="bold" size={18} />
+                                <span>{user.address}</span>
+                            </div>
+                            <div className="flex items-center space-x-2 text-gray-700">
+                                <Phone weight="bold" size={18} />
+                                <span>{user.phone}</span>
+                            </div>
+                        </div>
                     </div>
                     <Link to={"/profile/update"}>
                         <Button className="w-full">Edit profile</Button>
                     </Link>
-                    <span className="font-semibold text-dark-0">
-                        Yours recipes: {user.recipes.length}
-                    </span>
+                    {/* <span className="text-dark-0">Yours recipes: {user.recipes.length}</span> */}
                 </div>
             </div>
             <div className="p-2 py-2 md:w-3/4">
