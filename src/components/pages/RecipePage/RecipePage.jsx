@@ -22,6 +22,10 @@ const RecipePage = () => {
                             <AspectRatio ratio={7 / 9}>
                                 <img src={recipe.imageUrl} alt={recipe.name} />
                             </AspectRatio>
+                            <div className="mt-16 space-y-2">
+                                <h2 className="text-3xl font-bold">Description</h2>
+                                <div className="text-gray-500">{recipe.description}</div>
+                            </div>
                             <div className="mt-16">
                                 <IngredientsList recipe={recipe} />
                             </div>

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { MultiSelect, Select, Textarea, TextInput } from "@mantine/core";
 import * as _ from "lodash";
 import { useMemo } from "react";

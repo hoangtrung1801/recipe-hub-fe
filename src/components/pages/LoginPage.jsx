@@ -20,7 +20,7 @@ const LoginPage = () => {
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
-        if (currentUser !== null) navigate("/");
+        if (currentUser) navigate("/");
     }, []);
 
     const onSubmit = async (data) => {

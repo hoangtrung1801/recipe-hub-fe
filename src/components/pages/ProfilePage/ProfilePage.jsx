@@ -46,7 +46,10 @@ const ProfilePage = () => {
                     </div>
                 </div>
                 <div className="mt-3 flex flex-col gap-3 px-2">
-                    <p className="font-semibold text-dark-0">{user.username}</p>
+                    <div>
+                        <p className="font-semibold text-dark-0">{user.name}</p>
+                        <p className="text-sm text-gray-600">{user.username}</p>
+                    </div>
                     <Link to={"/profile/update"}>
                         <Button className="w-full">Edit profile</Button>
                     </Link>

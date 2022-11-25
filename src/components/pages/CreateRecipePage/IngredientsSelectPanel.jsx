@@ -51,12 +51,10 @@ const allIngredients = [
     {
         value: "spinach",
         label: "Spinach",
-        name: "Spinach",
     },
     {
         value: "garlic-cloves",
         label: "Garlic cloves",
-        name: "Garlic cloves",
     },
     {
         value: "olive-oil",
@@ -67,7 +65,7 @@ const allIngredients = [
 const unitOfIngredients = ["g", "kg", "ml", "l", "tbsp"];
 
 const IngredientsSelectPanel = ({ defaultIngredients = [] }) => {
-    const { getValues, control } = useFormContext();
+    const { control } = useFormContext();
 
     const { fields, append, remove, replace } = useFieldArray({ control, name: "ingredients" });
 
@@ -85,7 +83,7 @@ const IngredientsSelectPanel = ({ defaultIngredients = [] }) => {
 
     useEffect(() => {
         replace(defaultIngredients);
-    }, [defaultIngredients]);
+    }, []);
 
     return (
         <div className="flex h-96 max-h-96 w-full flex-col space-y-4">

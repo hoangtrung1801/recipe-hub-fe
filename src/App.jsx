@@ -13,9 +13,9 @@ function App() {
         fetchUser();
     }, []);
 
-    // useEffect(() => {
-    //     console.log("current user", currentUser);
-    // }, [currentUser]);
+    useEffect(() => {
+        console.log("current user", currentUser);
+    }, [currentUser]);
 
     return (
         <MantineProvider withCSSVariables>
