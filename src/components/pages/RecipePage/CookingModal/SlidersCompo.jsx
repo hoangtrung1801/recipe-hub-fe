@@ -1,5 +1,5 @@
 import Counter from "~/components/Counter";
-import IngredientsComponent from "./IngredientsComponent";
+import IngredientBlock from "./IngredientBlock";
 
 const ingredients = [
     {
@@ -124,7 +124,7 @@ const SlidersCompo = () => {
                                         <ul>
                                             {ingredients.map((ingredient) => (
                                                 <div key={ingredient.text}>
-                                                    <IngredientsComponent card={ingredient} />
+                                                    <IngredientBlock card={ingredient} />
                                                 </div>
                                             ))}
                                         </ul>

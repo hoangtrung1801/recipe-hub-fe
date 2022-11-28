@@ -6,7 +6,7 @@ export default function useGetCurrentInstructions(recipeId) {
     const { data, error } = useSWR(endpoint);
 
     return {
-        instructions: data !== undefined ? data.data : null,
+        instructions: data !== undefined ? data.data : undefined,
         isLoading: !error && !data,
         error,
     };

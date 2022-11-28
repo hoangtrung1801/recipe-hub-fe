@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import * as _ from "lodash";
 import { DotsThree, GitFork, Pencil } from "phosphor-react";
+import { useEffect } from "react";
 import { useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -20,7 +21,7 @@ import useGetRecipe from "~/libs/apis/useGetRecipe";
 import constants from "~/libs/constants";
 import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import StarBlock from "../CreateRecipePage/StarBlock";
-import StartCookingModal from "./StartCookingModal";
+import StartCookingModal from "./CookingModal/StartCookingModal";
 
 export default function RecipeDetail() {
     const navigate = useNavigate();
@@ -31,17 +32,18 @@ export default function RecipeDetail() {
     const { instructions } = useGetCurrentInstructions(recipe.id);
     const currentUser = useCurrentUserStore((state) => state.currentUser);
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [isCookingOpened, setIsCookingOpened] = useState(false);
     const [stepNo, setStepNo] = useState(1);
     // const [isStarred, setIsStarred] = useState();
     const [forkValidationOpen, setForkValidationOpen] = useState(false);
 
-    function closeModal() {
-        setIsOpen(false);
+    function closeCookingModal() {
+        setIsCookingOpened(false);
     }
 
-    function openModal() {
-        setIsOpen(true);
+    function openCookingModal() {
+        setStepNo(1);
+        setIsCookingOpened(true);
     }
 
     const isOwnedOfCurrentUser = useMemo(() => {
@@ -75,6 +77,10 @@ export default function RecipeDetail() {
     // useEffect(() => {
     //     setIsStarred(recipe.stars.some((userStarred) => userStarred.id === currentUser?.id));
     // }, [recipe, currentUser, setIsStarred]);
+
+    useEffect(() => {
+        console.log(recipe);
+    }, [recipe]);
 
     return (
         <div className="space-y-8 pt-12">
@@ -207,15 +213,18 @@ export default function RecipeDetail() {
                 </div>
             </div>
             <div>
-                <ButtonStartCook onClick={openModal} className="w-full py-5 text-2xl font-medium">
+                <ButtonStartCook
+                    onClick={openCookingModal}
+                    className="w-full py-5 text-2xl font-medium"
+                >
                     Start cooking
                 </ButtonStartCook>
 
-                {/* slider */}
                 <div>
+                    {/* <Modal transition="slide-up" opened={isOpen} onClose={closeModal}></Modal> */}
                     <StartCookingModal
-                        closeModal={closeModal}
-                        isOpen={isOpen}
+                        closeModal={closeCookingModal}
+                        isOpen={isCookingOpened}
                         setStepNo={setStepNo}
                         stepNo={stepNo}
                     />

@@ -9,6 +9,7 @@ export default {
     },
 
     avatarDefault: "/avatar-default.jpg",
+    ingredientDefault: "/ingredient-default.png",
 
     recipeMode: [
         { value: "PUBLIC", label: "Public" },
