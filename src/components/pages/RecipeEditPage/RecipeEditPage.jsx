@@ -1,12 +1,10 @@
-import { MultiSelect, Select, Textarea, TextInput } from "@mantine/core";
-import * as _ from "lodash";
-import { useEffect, useMemo, useState } from "react";
+import { Select, Textarea, TextInput } from "@mantine/core";
+import { useEffect, useState } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "~/components/buttons/Button";
 import UploadImage from "~/components/UploadImage";
 import putRecipe from "~/libs/apis/putRecipe";
-import useGetCatalogs from "~/libs/apis/useGetCatalogs";
 import useGetRecipe from "~/libs/apis/useGetRecipe";
 import constants from "~/libs/constants";
 import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
@@ -18,16 +16,16 @@ export default function RecipeEditPage() {
     const currentUser = useCurrentUserStore((state) => state.currentUser);
 
     const { recipe } = useGetRecipe(recipeId);
-    const { catalogs } = useGetCatalogs();
+    // const { catalogs } = useGetCatalogs();
 
-    const dataCatalogs = useMemo(
-        () =>
-            catalogs.map((catalog) => ({
-                value: catalog.id,
-                label: _.capitalize(catalog.name),
-            })),
-        [catalogs]
-    );
+    // const dataCatalogs = useMemo(
+    //     () =>
+    //         catalogs.map((catalog) => ({
+    //             value: catalog.id,
+    //             label: _.capitalize(catalog.name),
+    //         })),
+    //     [catalogs]
+    // );
 
     const [loading, setLoading] = useState(false);
 
@@ -44,9 +42,7 @@ export default function RecipeEditPage() {
 
     const onSubmit = async (data) => {
         setLoading(true);
-
         try {
-            // const diffUserData = compareUserData(data, currentUser);
             const response = await putRecipe(recipe.id, data);
 
             if (response.status === constants.responseStatus.SUCCESS) {
@@ -74,8 +70,9 @@ export default function RecipeEditPage() {
     }, [recipe]);
 
     useEffect(() => {
-        console.log(recipe);
-    }, [recipe]);
+        if (!currentUser || !currentUser.recipes.some((recipe) => recipe.id === recipeId))
+            navigate("..");
+    }, [currentUser, recipeId]);
 
     return (
         <div className="container">
