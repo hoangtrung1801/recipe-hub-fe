@@ -8,6 +8,7 @@ import LoginPage from "./components/pages/LoginPage";
 import ProfilePage from "./components/pages/ProfilePage/ProfilePage";
 import RecipeChangelogPage from "./components/pages/RecipeChangelog/RecipeChangelog";
 import RecipeChangelogSpecificPage from "./components/pages/RecipeChangelogSpecific/RecipeChangelogSpecific";
+import RecipeEditPage from "./components/pages/RecipeEditPage/RecipeEditPage";
 import RecipePage from "./components/pages/RecipePage/RecipePage";
 import RecipesPage from "./components/pages/RecipesPage/RecipesPage";
 import SearchPage from "./components/pages/SearchPage/SearchPage";
@@ -42,8 +43,8 @@ const router = createBrowserRouter([
                         element: <RecipePage />,
                     },
                     {
-                        path: "update",
-                        element: <UpdateRecipePage />,
+                        path: "edit",
+                        element: <RecipeEditPage />,
                     },
                     {
                         path: "changelog",
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
                             {
                                 path: ":changelogId",
                                 element: <RecipeChangelogSpecificPage />,
+                            },
+                            {
+                                path: "update",
+                                element: <UpdateRecipePage />,
                             },
                         ],
                     },

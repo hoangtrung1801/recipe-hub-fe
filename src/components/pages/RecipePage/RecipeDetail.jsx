@@ -1,17 +1,22 @@
-import { Badge, Modal, Select, TextInput, useMantineTheme } from "@mantine/core";
+import {
+    ActionIcon,
+    Badge,
+    Modal,
+    Popover,
+    Select,
+    TextInput,
+    useMantineTheme,
+} from "@mantine/core";
 import * as _ from "lodash";
-import { GitFork, Pencil, Star } from "phosphor-react";
-import { useEffect, useMemo, useState } from "react";
+import { DotsThree, GitFork, Pencil } from "phosphor-react";
+import { useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "~/components/buttons/Button";
 import ButtonStartCook from "~/components/buttons/ButtonStartCook";
 import postForkRecipe from "~/libs/apis/postForkRecipe";
-import postStar from "~/libs/apis/postStar";
-import postUnstar from "~/libs/apis/postUnstar";
 import useGetCurrentInstructions from "~/libs/apis/useGetCurrentInstructions";
 import useGetRecipe from "~/libs/apis/useGetRecipe";
-import useGetStars from "~/libs/apis/useGetStar";
 import constants from "~/libs/constants";
 import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import StarBlock from "../CreateRecipePage/StarBlock";
@@ -45,7 +50,7 @@ export default function RecipeDetail() {
     }, [currentUser]);
 
     const isForked = useMemo(() => {
-        if (!currentUser || !recipeId) return false;
+        if (!currentUser) return false;
         return currentUser?.recipes.some(
             (recipe) => recipe.forkFrom?.id === recipeId || recipe.id === recipeId
         );
@@ -76,16 +81,38 @@ export default function RecipeDetail() {
             <div>
                 <h1 className="text-6xl font-medium">{recipe?.name}</h1>
 
-                {/* categories */}
-                <div className="mt-8 flex">
-                    {recipe.catalogs.map((catalog) => (
-                        <div
-                            key={catalog.id}
-                            className="select-none rounded-3xl border-[3px] border-primary-400 py-1 px-4"
-                        >
-                            <span>{_.capitalize(catalog.name)}</span>
-                        </div>
-                    ))}
+                <div className="mt-8 flex items-center justify-between">
+                    {/* categories */}
+                    <div className="flex">
+                        {recipe.catalogs.map((catalog) => (
+                            <div
+                                key={catalog.id}
+                                className="select-none rounded-3xl border-[3px] border-primary-400 py-1 px-4"
+                            >
+                                <span>{_.capitalize(catalog.name)}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <div>
+                        {isOwnedOfCurrentUser && (
+                            <Popover position="bottom-end" withArrow>
+                                <Popover.Target>
+                                    <ActionIcon variant="transparent">
+                                        <DotsThree className="text-2xl text-dark-0" weight="bold" />
+                                    </ActionIcon>
+                                </Popover.Target>
+                                <Popover.Dropdown className="min-w-[7rem] p-0">
+                                    <div className="h-full w-full py-1">
+                                        <div className=" px-3 py-1 hover:bg-gray-100">
+                                            <Link to="edit">
+                                                <p>Edit</p>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </Popover.Dropdown>
+                            </Popover>
+                        )}
+                    </div>
                 </div>
             </div>
             <div className="flex space-x-4">
@@ -104,7 +131,7 @@ export default function RecipeDetail() {
             </div>
             <div className="border-y border-dark-0">
                 <div className="flex justify-between space-x-4 py-6">
-                    <div className="space-x-2">
+                    <div className="flex space-x-2">
                         <StarBlock />
 
                         <Button
@@ -120,7 +147,7 @@ export default function RecipeDetail() {
                             </Badge>
                         </Button>
                     </div>
-                    <div className="space-x-2">
+                    <div className="flex space-x-2">
                         <Link to="changelog">
                             <Button variant="light" className="space-x-2">
                                 <Pencil className="text-lg" />
@@ -128,7 +155,7 @@ export default function RecipeDetail() {
                             </Button>
                         </Link>
                         {isOwnedOfCurrentUser && (
-                            <Link to="update">
+                            <Link to="changelog/update">
                                 <Button variant="light" className="space-x-2">
                                     <Pencil className="text-lg" />
                                     <span>Update</span>

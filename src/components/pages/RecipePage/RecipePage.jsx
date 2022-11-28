@@ -24,7 +24,7 @@ const RecipePage = () => {
                             </AspectRatio>
                             <div className="mt-16 space-y-2">
                                 <h2 className="text-3xl font-bold">Description</h2>
-                                <div className="text-gray-500">{recipe.description}</div>
+                                <div className="text-gray-700">{recipe.description}</div>
                             </div>
                             <div className="mt-16">
                                 <IngredientsList recipe={recipe} />

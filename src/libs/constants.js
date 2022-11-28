@@ -9,4 +9,9 @@ export default {
     },
 
     avatarDefault: "/avatar-default.jpg",
+
+    recipeMode: [
+        { value: "PUBLIC", label: "Public" },
+        { value: "PRIVATE", label: "Public" },
+    ],
 };
