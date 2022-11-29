@@ -49,7 +49,7 @@ const HeaderMenu = () => {
 
     const onSearch = (data) => {
         const { value } = data;
-        navigate(`/search?q=${value}`);
+        navigate(`/recipes?q=${value}`);
         setSearchModal(false);
     };
 

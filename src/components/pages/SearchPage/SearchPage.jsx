@@ -1,9 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 import Button from "~/components/buttons/Button";
 import RecipeCard from "~/components/RecipeCard";
 import useGetRecipes from "~/libs/apis/useGetRecipes";
-import { useMatch, useMatches, useParams, useSearchParams } from "react-router-dom";
-import { useMemo } from "react";
 
 const SearchPage = () => {
     const [searchParams] = useSearchParams();

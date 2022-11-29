@@ -18,6 +18,7 @@ import ButtonStartCook from "~/components/buttons/ButtonStartCook";
 import postForkRecipe from "~/libs/apis/postForkRecipe";
 import useGetCurrentInstructions from "~/libs/apis/useGetCurrentInstructions";
 import useGetRecipe from "~/libs/apis/useGetRecipe";
+import clsxm from "~/libs/clsxm";
 import constants from "~/libs/constants";
 import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import StarBlock from "../CreateRecipePage/StarBlock";
@@ -34,7 +35,6 @@ export default function RecipeDetail() {
 
     const [isCookingOpened, setIsCookingOpened] = useState(false);
     const [stepNo, setStepNo] = useState(1);
-    // const [isStarred, setIsStarred] = useState();
     const [forkValidationOpen, setForkValidationOpen] = useState(false);
 
     function closeCookingModal() {
@@ -85,19 +85,50 @@ export default function RecipeDetail() {
     return (
         <div className="space-y-8 pt-12">
             <div>
-                <h1 className="text-6xl font-medium">{recipe?.name}</h1>
+                <div className="space-y-2">
+                    <h1 className="text-6xl font-medium">{recipe?.name}</h1>
+                    {recipe.forkFrom && (
+                        <p className="italic text-gray-600">
+                            forked from{" "}
+                            <Link
+                                to={`/recipes/${recipe.forkFrom?.id}`}
+                                className="underline decoration-gray-600 underline-offset-2 hover:text-gray-900"
+                            >
+                                {recipe.forkFrom?.name}
+                            </Link>
+                        </p>
+                    )}
+                </div>
 
                 <div className="mt-8 flex items-center justify-between">
                     {/* categories */}
                     <div className="flex">
                         {recipe.catalogs.map((catalog) => (
-                            <div
-                                key={catalog.id}
-                                className="select-none rounded-3xl border-[3px] border-primary-400 py-1 px-4"
-                            >
-                                <span>{_.capitalize(catalog.name)}</span>
-                            </div>
+                            <Link to={`/recipes?c=${catalog.name}`} key={catalog.id}>
+                                <div className="select-none rounded-3xl border-[3px] border-primary-400 py-1 px-4 hover:bg-primary-400">
+                                    <span>{_.capitalize(catalog.name)}</span>
+                                </div>
+                            </Link>
                         ))}
+
+                        {/* {recipe?.catalogs &&
+                            recipe.catalogs.map((catalog) => (
+                                <li
+                                    className="cursor-pointer items-center  rounded-2xl bg-transparent py-4"
+                                    key={catalog.id}
+                                >
+                                    <div
+                                        className={clsxm(
+                                            "rounded-3xl border-y-2 border-x-2 border-primary-400 py-2 px-3 text-sm"
+                                        )}
+                                    >
+                                        <span className="text-md font-medium">
+                                            {catalog.name.charAt(0).toUpperCase() +
+                                                catalog.name.slice(1)}
+                                        </span>
+                                    </div>
+                                </li>
+                            ))} */}
                     </div>
                     <div>
                         {isOwnedOfCurrentUser && (
