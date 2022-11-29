@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import Button from "../buttons/Button";
 import UnderlineLink from "../links/UnderlineLink";
+import SearchModal from "./SearchModal";
 
 const router = [
     {
@@ -43,15 +44,6 @@ const Header = () => {
 
 const HeaderMenu = () => {
     const [searchModal, setSearchModal] = useState(false);
-    const { register, handleSubmit } = useForm();
-
-    const navigate = useNavigate();
-
-    const onSearch = (data) => {
-        const { value } = data;
-        navigate(`/recipes?q=${value}`);
-        setSearchModal(false);
-    };
 
     return (
         <>
@@ -66,14 +58,7 @@ const HeaderMenu = () => {
             >
                 Search
             </UnderlineLink>
-            <Modal opened={searchModal} onClose={() => setSearchModal(false)} title="Search">
-                <div>
-                    <form onSubmit={handleSubmit(onSearch)}>
-                        <TextInput rightSection={<MagnifyingGlass />} {...register("value")} />
-                        <input type="submit" className="sr-only" />
-                    </form>
-                </div>
-            </Modal>
+            <SearchModal searchModal={searchModal} setSearchModal={setSearchModal} />
         </>
     );
 };
