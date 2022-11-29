@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import postChangelogs from "~/libs/apis/postChangelogs";
@@ -11,7 +13,7 @@ import CreateInstructionsPanel from "../CreateRecipePage/CreateInstructionsPanel
 
 export default function UpdateRecipePage() {
     const methods = useForm();
-    const { handleSubmit, register } = methods;
+    const { handleSubmit, register, setValue } = methods;
 
     const { recipeId } = useParams();
     const navigate = useNavigate();
@@ -19,11 +21,16 @@ export default function UpdateRecipePage() {
     const { recipe, isLoading } = useGetRecipe(recipeId);
     const { instructions, isLoading: isLoadingInstructions } = useGetCurrentInstructions(recipeId);
 
+    const [submitLoading, setSubmitLoading] = useState(false);
+
     if (isLoading || isLoadingInstructions) {
         return <div></div>;
     }
 
     const onSubmit = async (data) => {
+        setSubmitLoading(true);
+
+        console.log(data);
         const { instructions: newInstructions } = data;
         const diffInstructions = compareInstructions(instructions, newInstructions);
         if (diffInstructions.length === 0) {
@@ -39,8 +46,16 @@ export default function UpdateRecipePage() {
             }
         } catch (err) {
             console.error(err);
+        } finally {
+            setSubmitLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (recipe) {
+            setValue("ingredients", recipe.ingredients);
+        }
+    }, []);
 
     return (
         <div>
@@ -64,7 +79,9 @@ export default function UpdateRecipePage() {
                         <CreateInstructionsPanel defaultInstructions={instructions} />
                     </div>
                     <div>
-                        <Button type="submit">Save changes</Button>
+                        <Button type="submit" loading={submitLoading}>
+                            Save changes
+                        </Button>
                     </div>
                 </form>
             </FormProvider>

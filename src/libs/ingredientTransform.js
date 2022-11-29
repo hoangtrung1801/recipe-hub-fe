@@ -1,14 +1,14 @@
 const toString = (data) => {
     const { name, unit, amount } = data;
-    return `${name}-${amount}-${unit}`;
+    return `${amount}${unit === "none" || unit === null ? "" : unit} ${name}`;
 };
 
 const toIngredient = (data) => {
-    const values = data.split("-");
+    const values = data.split(" ");
     return {
-        name: values[0],
-        amount: Number.parseFloat(values[1]),
-        unit: values[2],
+        name: values[2],
+        amount: Number.parseFloat(values[0]),
+        unit: values[1],
     };
 };
 

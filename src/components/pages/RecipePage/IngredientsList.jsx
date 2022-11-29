@@ -1,4 +1,6 @@
 import Counter from "~/components/Counter";
+import { Receipt } from "phosphor-react";
+import * as _ from "lodash";
 
 const ingredients = [
     {
@@ -37,21 +39,15 @@ export default function IngredientsList({ recipe }) {
             <div className="mt-8 space-y-3">
                 {recipe.ingredients.map((ingredient) => (
                     <div key={ingredient.name} className="flex space-x-4">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-300">
+                        {/* <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-300">
                             <div className="w-8">
                                 <div className="relative w-full pb-[100%]">
-                                    <img
-                                        className="absolute"
-                                        // className="absolute inset-0 h-full w-full rounded-full bg-primary-300 object-cover"
-                                        src="https://images.prismic.io/stryve/524c02ef-dac8-4f80-9525-db802bd59463_mushrooms-removebg-preview.png?auto=compress,format&fm=webp&lossless=false&q=75&w=64"
-                                        alt=""
-                                    />
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="flex flex-1 items-center text-lg">
                             <div className="flex-1">
-                                <p className="">{ingredient.name}</p>
+                                <p className="capitalize">{ingredient.name}</p>
                             </div>
                             <div>
                                 <p>{`${ingredient.amount}${ingredient.unit}`}</p>

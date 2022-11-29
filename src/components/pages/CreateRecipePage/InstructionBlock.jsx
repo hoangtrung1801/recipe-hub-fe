@@ -14,7 +14,6 @@ const Instructions = ({ stepNo, onRemoveInstruction }) => {
             ingredientsData.map((ingredientData) => ingredientTransform.toString(ingredientData))
         );
     };
-    // const { ingredients } = useContext(CreateRecipeContext);
 
     return (
         <div className="relative gap-6 space-y-4 rounded-lg bg-primary-300 shadow-sm">

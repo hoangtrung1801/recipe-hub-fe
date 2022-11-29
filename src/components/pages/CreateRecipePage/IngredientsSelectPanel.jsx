@@ -1,8 +1,10 @@
 import { ActionIcon, Select, TextInput } from "@mantine/core";
 import { X } from "phosphor-react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { Controller, useFieldArray, useFormContext } from "react-hook-form";
 import Button from "~/components/buttons/Button";
+import ingredientsData from "~/libs/ingredientsData";
 
 // const ingredients = [
 //     {
@@ -43,31 +45,15 @@ import Button from "~/components/buttons/Button";
 //     },
 // ];
 
-const allIngredients = [
-    {
-        value: "mushroom",
-        label: "Mushroom",
-    },
-    {
-        value: "spinach",
-        label: "Spinach",
-    },
-    {
-        value: "garlic-cloves",
-        label: "Garlic cloves",
-    },
-    {
-        value: "olive-oil",
-        label: "Olive oil",
-    },
-];
-
-const unitOfIngredients = ["g", "kg", "ml", "l", "tbsp"];
+const unitOfIngredients = ["g", "kg", "ml", "l", "tbsp", "none"];
 
 const IngredientsSelectPanel = ({ defaultIngredients = [] }) => {
-    const { control } = useFormContext();
+    const { control, setValue, getValues } = useFormContext();
 
     const { fields, append, remove, replace } = useFieldArray({ control, name: "ingredients" });
+
+    const [ingredients, setIngredients] = useState(ingredientsData);
+    const [units, setUnits] = useState(unitOfIngredients);
 
     const onAddIngredient = () => {
         append({
@@ -100,17 +86,26 @@ const IngredientsSelectPanel = ({ defaultIngredients = [] }) => {
                                 name={`ingredients.${index}.name`}
                                 render={({ field: { value, onChange } }) => (
                                     <Select
-                                        data={allIngredients}
-                                        placeholder="Select ingredient"
+                                        data={ingredients}
+                                        placeholder="Ingredient"
                                         onChange={(e) => onChange(e)}
                                         value={value}
+                                        className="capitalize"
+                                        searchable
+                                        creatable
+                                        getCreateLabel={(query) => `+ Create ${query}`}
+                                        onCreate={(query) => {
+                                            const item = { value: query, label: query };
+                                            setIngredients((current) => [...current, query]);
+                                            return item;
+                                        }}
                                     />
                                 )}
                             />
                         </div>
                         <div className="flex-1">
                             <TextInput
-                                placeholder="00.00"
+                                placeholder="Amount"
                                 type={"number"}
                                 {...control.register(`ingredients.${index}.amount`, {
                                     valueAsNumber: true,
@@ -123,10 +118,19 @@ const IngredientsSelectPanel = ({ defaultIngredients = [] }) => {
                                 name={`ingredients.${index}.unit`}
                                 render={({ field: { value, onChange } }) => (
                                     <Select
-                                        data={unitOfIngredients}
-                                        placeholder="kg, g, ml,..."
+                                        data={units}
+                                        placeholder="Unit"
                                         value={value}
                                         onChange={(e) => onChange(e)}
+                                        nothingFound="Nothing found"
+                                        searchable
+                                        creatable
+                                        getCreateLabel={(query) => `+ Create ${query}`}
+                                        onCreate={(query) => {
+                                            const item = { value: query, label: query };
+                                            setUnits((current) => [...current, query]);
+                                            return item;
+                                        }}
                                     />
                                 )}
                             />

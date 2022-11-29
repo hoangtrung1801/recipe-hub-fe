@@ -16,6 +16,12 @@ export default async function postRecipe(recipeData) {
     // MAP catalog Ids
     recipeData.catalogs = (recipeData?.catalogs && recipeData.catalogs.map((id) => ({ id }))) || [];
 
+    // MAP ingredients
+    recipeData.ingredients = recipeData?.ingredients.map((ingredient) => ({
+        ...ingredient,
+        unit: ingredient.unit === "none" || ingredient.unit === null ? "" : ingredient.unit,
+    }));
+
     // UPLOAD IMAGE AND GET URL
     const imageFormData = new FormData();
     const imageBlob = await fetch(URL.createObjectURL(recipeData.image)).then((res) => res.blob());

@@ -1,12 +1,14 @@
 import { MultiSelect, Select, Textarea, TextInput } from "@mantine/core";
 import * as _ from "lodash";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import UploadImage from "~/components/UploadImage";
 import postRecipe from "~/libs/apis/postRecipes";
 import useGetCatalogs from "~/libs/apis/useGetCatalogs";
+import useGetRecipes from "~/libs/apis/useGetRecipes";
 import constants from "~/libs/constants";
+import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import Button from "../../buttons/Button";
 import CreateInstructionsPanel from "./CreateInstructionsPanel";
 import IngredientsSelectPanel from "./IngredientsSelectPanel";
@@ -33,6 +35,9 @@ const CreateRecipePage = () => {
     } = methods;
 
     const { catalogs } = useGetCatalogs();
+    const fetchUser = useCurrentUserStore((state) => state.fetchUser);
+
+    const [submitLoading, setSubmitLoading] = useState(false);
 
     const dataCatalogs = useMemo(
         () =>
@@ -95,6 +100,8 @@ const CreateRecipePage = () => {
     ];
 
     const onSubmit = async (data) => {
+        setSubmitLoading(true);
+        console.log(data);
         if (errors.length > 0) {
             console.error(errors);
         }
@@ -104,6 +111,7 @@ const CreateRecipePage = () => {
 
             if (response.status === constants.responseStatus.SUCCESS) {
                 // return redirect("/");
+                fetchUser();
                 return navigate("/");
             } else {
                 console.error(response.message);
@@ -111,6 +119,8 @@ const CreateRecipePage = () => {
             // console.log(response);
         } catch (err) {
             console.error(err);
+        } finally {
+            setSubmitLoading(false);
         }
     };
 
@@ -162,7 +172,7 @@ const CreateRecipePage = () => {
                                                     <MultiSelect
                                                         data={dataCatalogs}
                                                         label="Catalogs"
-                                                        placeholder="Choose ingredients in this step"
+                                                        placeholder="Choose catalogs in this step"
                                                         onChange={(e) => onChange(e)}
                                                         value={value}
                                                     />
@@ -243,7 +253,12 @@ const CreateRecipePage = () => {
                     </div>
 
                     <div className="mt-6 flex">
-                        <Button variant="dark" className="ml-auto px-8 py-3" type="submit">
+                        <Button
+                            variant="dark"
+                            className="ml-auto px-8 py-3"
+                            type="submit"
+                            loading={submitLoading}
+                        >
                             Create
                         </Button>
                     </div>
