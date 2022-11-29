@@ -1,7 +1,13 @@
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
+        fontFamily: {
+            primary: ["Roboto", ...fontFamily.sans],
+            heading: ["Roboto", ...fontFamily.sans],
+        },
         extend: {
             colors: {
                 primary: {
@@ -20,25 +26,24 @@ module.exports = {
                     0: "#000",
                     1: "#333",
                 },
-                screens:{
-                    'rn':'370px',
-                   }
-            },
-            keyframes:{
-                slideUp:{
-                    '0%,50%' :{transform:'translateY(100%)'},
-                    '50%,100%':{transform:'translateY(0)'}
+                screens: {
+                    rn: "370px",
                 },
-                slideDown:{
-                    '100%,50%' :{transform:'translateY(100%)'},
-                    '50%,0%':{transform:'translateY(0)'}
-                }
             },
-            animation:{
-                slideUp: 'slideUp 1s both',
-                slideDown: 'slideDown 1s both'
-            }
-        
+            keyframes: {
+                slideUp: {
+                    "0%,50%": { transform: "translateY(100%)" },
+                    "50%,100%": { transform: "translateY(0)" },
+                },
+                slideDown: {
+                    "100%,50%": { transform: "translateY(100%)" },
+                    "50%,0%": { transform: "translateY(0)" },
+                },
+            },
+            animation: {
+                slideUp: "slideUp 1s both",
+                slideDown: "slideDown 1s both",
+            },
         },
     },
     plugins: [],

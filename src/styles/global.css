@@ -36,6 +36,15 @@
     hr {
         @apply border-dark-0 my-12
     }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-heading
+    }
+
+    p, span, i, b {
+        @apply font-primary
+    }
+
 }
 
 @layer utilities {
