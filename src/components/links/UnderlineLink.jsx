@@ -3,11 +3,7 @@ import clsxm from "~/libs/clsxm";
 
 const UnderlineLink = ({ className, to, icon, children, multiline = false, ...rest }) => {
     return (
-        <Link
-            to={to}
-            className={clsxm("group group flex items-center space-x-1", className)}
-            {...rest}
-        >
+        <Link to={to} className={clsxm("group flex items-center space-x-1", className)} {...rest}>
             {icon && <span className="text-2xl">{icon}</span>}
             <a
                 href="#"

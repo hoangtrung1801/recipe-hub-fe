@@ -14,29 +14,27 @@ const RecipePage = () => {
     if (!recipe) return <div></div>;
 
     return (
-        <div>
-            <div className="container mt-12 ">
-                <div className="grid grid-cols-12 gap-x-12">
-                    <div className="col-span-5">
-                        <div>
-                            <AspectRatio ratio={7 / 9}>
-                                <img src={recipe.imageUrl} alt={recipe.name} />
-                            </AspectRatio>
-                            <div className="mt-16 space-y-2">
-                                <h2 className="text-3xl font-bold">Description</h2>
-                                <div className="text-gray-700">{recipe.description}</div>
-                            </div>
-                            <div className="mt-16">
-                                <IngredientsList recipe={recipe} />
-                            </div>
+        <div className="container mt-12">
+            <div className="flex flex-col md:grid md:grid-cols-12 md:gap-x-12">
+                <div className="col-span-5">
+                    <div>
+                        <AspectRatio ratio={7 / 9}>
+                            <img src={recipe.imageUrl} alt={recipe.name} />
+                        </AspectRatio>
+                        <div className="mt-16 space-y-2">
+                            <h2 className="text-3xl font-bold">Description</h2>
+                            <div className="text-gray-700">{recipe.description}</div>
+                        </div>
+                        <div className="mt-16">
+                            <IngredientsList recipe={recipe} />
                         </div>
                     </div>
-                    <div className="col-span-7">
-                        <RecipeDetail />
-                    </div>
                 </div>
-                <CommentForm />
+                <div className="col-span-7">
+                    <RecipeDetail />
+                </div>
             </div>
+            <CommentForm />
         </div>
     );
 };

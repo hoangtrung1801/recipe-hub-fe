@@ -1,23 +1,16 @@
+import { Image, Overlay } from "@mantine/core";
 import { Clock, Leaf } from "phosphor-react";
+import { Link } from "react-router-dom";
 import UnderlineLink from "./links/UnderlineLink";
 
 const RecipeCard = ({ recipe }) => {
     return (
         <div className="">
-            <div className="article relative flex min-w-full cursor-pointer flex-col gap-3 overflow-hidden lg:mb-14">
-                <div className="overflow-hidden">
-                    <div className="aspect-[3/4] duration-300 hover:scale-105">
+            <div className="article group relative flex min-w-full cursor-pointer flex-col gap-3 overflow-hidden lg:mb-14">
+                <div className="relative overflow-hidden">
+                    <Overlay opacity={0} component={Link} to={`/recipes/${recipe.id}`} />
+                    <div className="aspect-[3/4] duration-300 hover:scale-105 group-hover:scale-105">
                         <img src={recipe.imageUrl} className="h-full w-full object-cover" alt="" />
-                        {/* <AspectRatio ratio={3 / 4} sx={{ maxWidth: 300 }} mx="auto">
-                            <Image
-                                src={recipe.imageUrl}
-                                placeholder
-                                className="h-full"
-                                height={"100%"}
-                                // fit="fill"
-                                // className="h-full w-full"
-                            />
-                        </AspectRatio> */}
                     </div>
                 </div>
                 <div className="textWrapper text-left text-xl font-medium lg:text-3xl">

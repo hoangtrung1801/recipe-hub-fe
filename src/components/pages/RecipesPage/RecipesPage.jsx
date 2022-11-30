@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import ListRecipeCards from "~/components/ListRecipeCards";
 import useGetRecipes from "~/libs/apis/useGetRecipes";
 import RecipeCard from "../../RecipeCard";
 
@@ -14,7 +15,10 @@ const RecipesPage = () => {
     const [selectedCatalog, setSelectedCatalog] = useState(-1);
     // const [filteredRecipes, setFileteredRecipes] = useState([]);
 
-    const { recipes } = useGetRecipes(q ? q : "", selectedCatalog === -1 ? "" : selectedCatalog);
+    const { recipes, isLoading: isLoadingRecipes } = useGetRecipes(
+        q ? q : "",
+        selectedCatalog === -1 ? "" : selectedCatalog
+    );
 
     useEffect(() => {
         if (c) {
@@ -39,13 +43,15 @@ const RecipesPage = () => {
                             </h1>
                             {q && <p className="mt-8 text-4xl font-semibold">with {`"${q}"`}</p>}
                         </div>
-                        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-4 lg:gap-8  ">
+
+                        {!isLoadingRecipes && <ListRecipeCards recipes={recipes} />}
+                        {/* <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-4 lg:gap-8  ">
                             {recipes.map((recipe) => (
                                 <div key={recipe.id}>
                                     <RecipeCard recipe={recipe} />
                                 </div>
                             ))}
-                        </div>
+                        </div> */}
                     </div>
                 </section>
             </div>

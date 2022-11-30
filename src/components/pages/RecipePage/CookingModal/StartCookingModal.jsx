@@ -40,10 +40,6 @@ const StartCookingModal = ({ isOpen, closeModal, stepNo, setStepNo }) => {
         setStepNo(stepNo !== 1 ? stepNo - 1 : 1);
     };
 
-    useEffect(() => {
-        console.log(instructions);
-    }, [instructions]);
-
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-50" onClose={closeModal}>
@@ -71,7 +67,7 @@ const StartCookingModal = ({ isOpen, closeModal, stepNo, setStepNo }) => {
                             leaveTo="translate-y-full"
                         >
                             <Dialog.Panel className="absolute inset-0 z-[100] overflow-hidden bg-primary-200">
-                                <div className="px-20">
+                                <div className="md:px-20">
                                     <div className="">
                                         <div className="headerIngredients relative flex max-h-20 border-b-[0.5px] border-black py-4">
                                             <div className=" headerIngredients_container grid grid-cols-[1fr,30fr,1fr]">
@@ -105,7 +101,7 @@ const StartCookingModal = ({ isOpen, closeModal, stepNo, setStepNo }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="ButtonContain absolute bottom-0 left-0 z-50 flex w-1/2 items-center justify-center p-8">
+                                        <div className="absolute bottom-0 left-0 right-0 z-50 flex items-center justify-center p-8 md:left-8 md:w-1/2">
                                             <button
                                                 onClick={() => nextStep()}
                                                 className="h-16 w-full bg-black text-center text-xl font-bold text-white hover:opacity-70"
@@ -124,7 +120,6 @@ const StartCookingModal = ({ isOpen, closeModal, stepNo, setStepNo }) => {
                                                 ))}
                                             <DoneCookingSlide recipe={recipe} />
                                         </Slider>
-                                        <div></div>
                                     </div>
                                 </div>
                             </Dialog.Panel>
@@ -138,40 +133,32 @@ const StartCookingModal = ({ isOpen, closeModal, stepNo, setStepNo }) => {
 
 const InitCookingSlide = ({ recipe }) => {
     return (
-        <div className="h-full w-full">
-            <div className="flex items-center justify-center text-center ">
-                <div className="slider-container justify-between text-center">
-                    <div className="containerCookingItem slide  grid h-full  w-full origin-[center_center] scale-100 snap-center grid-cols-2 justify-center border-black     ">
-                        <div className="containerCookingItem_left border-r-[1px] border-black ">
-                            <div className="containerCookingItem_left content ml-5 flex flex-col pt-[32px] pr-[32px] pb-[110px]  text-left ">
-                                <h1 className="mt-14 mb-5 text-7xl font-medium">Get Ready</h1>
-                                <p className="text-xl">
-                                    Before you start cooking, get everything ready – chop, drain,
-                                    rinse your ingredients!
-                                </p>
-                                <div className="servesArea mt-7 flex flex-row  items-center ">
-                                    <p className="mr-3 text-lg">Serves </p>
-                                    <Counter />
-                                </div>
-                            </div>
+        <div className="w-full">
+            <div className="slide flex min-h-[calc(100vh-80px)] w-full flex-col space-y-8 px-8 pb-8 md:flex-row md:px-0">
+                <div className="containerCookingItem_left space-y-4 border-black py-8 md:flex-1 md:border-r-[1px] md:pr-4">
+                    <h1 className="text-7xl font-medium">Get Ready</h1>
+                    <p className="text-xl">
+                        Before you start cooking, get everything ready – chop, drain, rinse your
+                        ingredients!
+                    </p>
+                    <div className="servesArea flex flex-row items-center ">
+                        <p className="mr-3 text-lg">Serves </p>
+                        <Counter />
+                    </div>
+                </div>
+                <div className="containerCookingItem_right overflow-y-auto py-8 md:flex-1 md:pl-4">
+                    <div className="cookingIngredients flex flex-col font-medium md:mx-12">
+                        <div className="cookingIngredients_header flex flex-row">
+                            <h1 className="text-3xl">Ingredients</h1>
                         </div>
-                        <div className="containerCookingItem_right max-h-[calc(100vh-80px)] overflow-y-auto">
-                            <div className="">
-                                <div className="cookingIngredients ml-11 mt-16 flex flex-col font-medium">
-                                    <div className="cookingIngredients_header flex flex-row">
-                                        <h1 className="text-3xl">Ingredients</h1>
+                        <div className="cookingIngredients_ul flex-1 py-[32px]">
+                            <ul>
+                                {recipe?.ingredients.map((ingredient) => (
+                                    <div key={ingredient.id}>
+                                        <IngredientBlock ingredient={ingredient} />
                                     </div>
-                                    <div className="cookingIngredients_ul flex-1 py-[32px]">
-                                        <ul>
-                                            {recipe?.ingredients.map((ingredient) => (
-                                                <div key={ingredient.id}>
-                                                    <IngredientBlock ingredient={ingredient} />
-                                                </div>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -182,18 +169,16 @@ const InitCookingSlide = ({ recipe }) => {
 
 const DoneCookingSlide = ({ recipe }) => {
     return (
-        <div className="h-full w-full">
-            <div className="flex items-center justify-center">
-                <div className="grid h-full w-full grid-cols-2">
-                    <div className="containerCookingItem_left w-full border-r-[1px] border-black p-8">
-                        <h2 className="text-3xl font-bold">All done!</h2>
-                    </div>
+        <div className="w-full">
+            <div className="slide flex min-h-[calc(100vh-80px)] w-full flex-col space-y-8 px-8 pb-8 md:flex-row md:px-0">
+                <div className="containerCookingItem_left w-full border-r-[1px] border-black p-8">
+                    <h1 className="text-7xl font-medium">All Done!!!</h1>
+                </div>
 
-                    <div className="containerCookingItem_right w-full overflow-y-auto p-8">
-                        <AspectRatio ratio={7 / 9}>
-                            <img src={recipe.imageUrl} className="h-full w-full" />
-                        </AspectRatio>
-                    </div>
+                <div className="containerCookingItem_right w-full overflow-y-auto p-8">
+                    <AspectRatio ratio={7 / 9}>
+                        <img src={recipe.imageUrl} className="h-full w-full" />
+                    </AspectRatio>
                 </div>
             </div>
         </div>
