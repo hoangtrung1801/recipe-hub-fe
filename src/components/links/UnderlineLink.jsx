@@ -6,7 +6,6 @@ const UnderlineLink = ({ className, to, icon, children, multiline = false, ...re
         <Link to={to} className={clsxm("group flex items-center space-x-1", className)} {...rest}>
             {icon && <span className="text-2xl">{icon}</span>}
             <a
-                href="#"
                 className={clsxm(
                     !multiline &&
                         "relative flex py-1 after:absolute after:bottom-1 after:left-0 after:right-0 after:h-[3px] after:w-0 after:bg-primary-500 after:transition-all after:duration-300 group-hover:after:w-full",

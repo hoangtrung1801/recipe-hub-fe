@@ -21,8 +21,11 @@ export default function SearchModal({ searchModal, setSearchModal }) {
             centered
             size={"lg"}
             withCloseButton={false}
+            classNames={{
+                modal: "p-0",
+            }}
         >
-            <div className="py-4 px-8">
+            <div className="rounded-lg bg-primary-200 py-6 px-10">
                 <form onSubmit={handleSubmit(onSearch)} className="space-y-6 text-center">
                     <div>
                         <h3 className="text-4xl font-semibold">Search</h3>

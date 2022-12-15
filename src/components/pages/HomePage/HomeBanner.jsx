@@ -2,7 +2,7 @@ import { Image } from "@mantine/core";
 
 export default function HomeBanner() {
     return (
-        <banner>
+        <div>
             <div className="home-page__banner relative">
                 <div className="max-h-[calc(100vh-80px)]">
                     {/* <img
@@ -25,6 +25,6 @@ export default function HomeBanner() {
                     </h3>
                 </div>
             </div>
-        </banner>
+        </div>
     );
 }
