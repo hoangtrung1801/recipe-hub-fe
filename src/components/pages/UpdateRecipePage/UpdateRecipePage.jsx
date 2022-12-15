@@ -58,8 +58,8 @@ export default function UpdateRecipePage() {
     }, []);
 
     return (
-        <div>
-            <h1 className="mb-4 text-2xl font-bold">Update recipe</h1>
+        <div className="mt-12">
+            <h1 className="mb-8">Update recipe {`"${recipe.name}"`}</h1>
             <FormProvider {...methods}>
                 <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
                     {/* <div>

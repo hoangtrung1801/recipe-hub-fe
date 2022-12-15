@@ -20,7 +20,7 @@ const SignUpPage = () => {
     const currentUser = useCurrentUserStore((state) => state.currentUser);
 
     useEffect(() => {
-        if (currentUser !== null) navigate("/");
+        if (currentUser) navigate("/");
     }, []);
 
     const onSubmit = async (data) => {

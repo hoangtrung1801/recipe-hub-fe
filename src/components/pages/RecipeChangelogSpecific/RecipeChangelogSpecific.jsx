@@ -13,8 +13,8 @@ export default function RecipeChangelogSpecificPage() {
     );
 
     return (
-        <div className="mx-auto max-w-2xl">
-            <h1 className="mb-8 text-3xl font-bold">Changelog in {changelogId.split("-")[0]}</h1>
+        <div className="mx-auto mt-12 max-w-2xl">
+            <h1 className="mb-8">Changelog: {`"${changelog.message}"`}</h1>
             <div className="space-y-4">
                 {!isLoadingChangelog &&
                     changelog.instructions.map((instruction) => (

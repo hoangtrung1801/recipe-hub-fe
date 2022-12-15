@@ -12,8 +12,8 @@ const IngredientBlock = ({ ingredient }) => {
     return (
         <li onClick={handleClick} className="list-none">
             <div>
-                <div className="formIngredients grid grid-cols-[1fr_3fr_2fr] items-center ">
-                    <div className="formIngredients_img h-12 w-12 rounded-full bg-primary-300 ">
+                <div className="flex flex-1 items-center rounded-xl bg-primary-300 px-4 py-2 text-lg">
+                    {/* <div className="formIngredients_img h-12 w-12 rounded-full bg-primary-300 ">
                         <div className="formIngredients_imgMain mt-2 flex justify-center">
                             <img
                                 className={`h-[32px] w-[32px] ${blurDiv}`}
@@ -21,8 +21,8 @@ const IngredientBlock = ({ ingredient }) => {
                                 alt=""
                             />
                         </div>
-                    </div>
-                    <div className="formIngredients_content ml-1 mr-2 text-left">
+                    </div> */}
+                    <div className="flex-1">
                         <div>
                             <span className={`text-[22px] font-normal ${lineText}`}>
                                 {_.capitalize(ingredient.name)}

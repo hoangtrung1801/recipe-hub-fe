@@ -22,7 +22,7 @@ const CommentForm = () => {
 
             if (response.status === constants.responseStatus.SUCCESS) {
                 setValue("message", "");
-                alert("Comment successfull");
+                // alert("Comment successfull");
                 mutate();
             } else {
                 console.error(response?.message);
@@ -92,7 +92,7 @@ const CommentPopup = ({ comment }) => {
                         width={48}
                         height={48}
                         className=""
-                        src={comment?.user.avatarurl || constants.avatarDefault}
+                        src={comment?.user.avatarUrl || constants.avatarDefault}
                         withPlaceholder
                     />
                 </div>

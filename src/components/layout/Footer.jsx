@@ -49,22 +49,27 @@ const Footer = () => {
     return (
         <div className="container mt-24 h-[80px] border-t border-black">
             <div className="grid grid-cols-5 items-start py-12">
-                <div className="">
-                    <h1 className="text-4xl font-bold ">Recipe Hub</h1>
-                </div>
-                <div className="col-span-2 grid grid-cols-2">
-                    {router.map((route) => (
-                        <UnderlineLink key={route.label} icon={route.icon}>
-                            {route.label}
-                        </UnderlineLink>
-                        // <Link
-                        //     to={route.path}
-                        //     className="flex items-center space-x-1"
-                        // >
-                        //     <span className="text-2xl">{route.icon}</span>
-                        //     <span>{route.label}</span>
-                        // </Link>
-                    ))}
+                <div className="col-span-3 flex h-full flex-col space-y-4">
+                    <div className="">
+                        <h1 className="text-4xl font-bold ">Recipe Hub</h1>
+                    </div>
+                    <div className="flex space-x-8">
+                        {router.map((route) => (
+                            <UnderlineLink key={route.label} icon={route.icon}>
+                                {route.label}
+                            </UnderlineLink>
+                            // <Link
+                            //     to={route.path}
+                            //     className="flex items-center space-x-1"
+                            // >
+                            //     <span className="text-2xl">{route.icon}</span>
+                            //     <span>{route.label}</span>
+                            // </Link>
+                        ))}
+                    </div>
+                    <div className="flex flex-1 flex-col-reverse">
+                        <p className="italic">Copyright © 2022 - Lê Kim Hoàng Trung</p>
+                    </div>
                 </div>
                 <div className="col-span-2 grid grid-cols-2 gap-6">
                     {members.map((member) => (

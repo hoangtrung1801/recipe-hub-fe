@@ -87,9 +87,9 @@ const StartCookingModal = ({ isOpen, closeModal, stepNo, setStepNo }) => {
                                                     }`}
                                                 >
                                                     <div className="tagPageIngredients flex items-center justify-center ">
-                                                        <p className="text-base">
+                                                        {/* <p className="text-base">
                                                             {stepNo}/{instructions?.length + 2}
-                                                        </p>
+                                                        </p> */}
                                                     </div>
                                                 </div>
 
@@ -152,7 +152,7 @@ const InitCookingSlide = ({ recipe }) => {
                             <h1 className="text-3xl">Ingredients</h1>
                         </div>
                         <div className="cookingIngredients_ul flex-1 py-[32px]">
-                            <ul>
+                            <ul className="space-y-2">
                                 {recipe?.ingredients.map((ingredient) => (
                                     <div key={ingredient.id}>
                                         <IngredientBlock ingredient={ingredient} />

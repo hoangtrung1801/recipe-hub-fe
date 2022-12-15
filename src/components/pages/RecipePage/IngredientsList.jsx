@@ -36,7 +36,7 @@ export default function IngredientsList({ recipe }) {
                 <h3 className="text-3xl font-bold">Ingredients</h3>
                 <Counter />
             </div>
-            <div className="mt-8 space-y-3">
+            <div className="mt-8 max-h-[75vh] space-y-2 overflow-y-auto">
                 {recipe.ingredients.map((ingredient) => (
                     <div key={ingredient.name} className="flex space-x-4">
                         {/* <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-300">
@@ -45,9 +45,11 @@ export default function IngredientsList({ recipe }) {
                                 </div>
                             </div>
                         </div> */}
-                        <div className="flex flex-1 items-center text-lg">
-                            <div className="flex-1">
-                                <p className="capitalize">{ingredient.name}</p>
+                        <div className="flex flex-1 items-center rounded-xl bg-primary-300 px-4 py-2 text-lg">
+                            <div className="flex flex-1">
+                                <div className="">
+                                    <p className="capitalize">{ingredient.name}</p>
+                                </div>
                             </div>
                             <div>
                                 <p>{`${ingredient.amount}${ingredient.unit}`}</p>

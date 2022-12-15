@@ -1,4 +1,4 @@
-import { Image, Overlay } from "@mantine/core";
+import { Overlay } from "@mantine/core";
 import { Clock, Leaf } from "phosphor-react";
 import { Link } from "react-router-dom";
 import UnderlineLink from "./links/UnderlineLink";
@@ -21,7 +21,8 @@ const RecipeCard = ({ recipe }) => {
                 <div className="contentWrapper flex gap-3 text-sm">
                     <div className="flex items-center justify-center">
                         <Clock className="mr-1 h-5 w-5" />
-                        <span>--m</span>
+                        {/* <span>--m</span> */}
+                        <span>15m</span>
                         {/* <span>+</span> */}
                     </div>
                     <div className="flex items-center justify-center">

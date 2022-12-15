@@ -6,7 +6,7 @@ const ComponentsPage = () => {
     const [openModal, setOpenModal] = useState(false);
 
     return (
-        <div className="mt-16 space-y-8">
+        <div className="mt-16 space-y-8 bg-white">
             <h1 className="text-4xl font-bold tracking-wide">Components</h1>
             <section>
                 <h3 className="text-2xl font-medium">Colors</h3>

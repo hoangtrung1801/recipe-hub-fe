@@ -75,7 +75,7 @@ export default function RecipeEditPage() {
     }, [currentUser, recipeId]);
 
     return (
-        <div className="container">
+        <div className="container mt-12">
             <h1 className="mb-4 text-4xl font-bold">Edit recipe</h1>
             <FormProvider {...methods}>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -135,11 +135,11 @@ export default function RecipeEditPage() {
                         </div>
                         <div className="basis-[300px]">
                             <UploadImage
-                                isCircle={true}
+                                // isCircle={true}
                                 height={300}
                                 width={300}
                                 attributeName="image"
-                                imageUrl={currentUser?.avatarUrl}
+                                imageUrl={recipe?.imageUrl}
                             />
                         </div>
                     </div>

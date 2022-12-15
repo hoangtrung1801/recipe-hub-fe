@@ -85,7 +85,7 @@ const UpdateProfilePage = () => {
     }, [currentUser]);
 
     return (
-        <div className="container">
+        <div className="container mt-12">
             <h1 className="mb-4 text-4xl font-bold">Public Profile</h1>
             <FormProvider {...methods}>
                 <form onSubmit={handleSubmit(onSubmit)}>

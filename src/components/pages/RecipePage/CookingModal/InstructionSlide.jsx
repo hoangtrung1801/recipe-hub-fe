@@ -19,7 +19,7 @@ export default function InstructionSlide({ instruction }) {
                         <h1 className="text-7xl font-medium">Ingrdients</h1>
 
                         <div className="cookingIngredients_ul flex-1 py-8">
-                            <ul>
+                            <ul className="space-y-2">
                                 {recipe?.ingredients.map((ingredient) => (
                                     <div key={ingredient.id}>
                                         <IngredientBlock ingredient={ingredient} />

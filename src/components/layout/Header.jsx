@@ -31,6 +31,7 @@ const Header = () => {
                         RecipeHub
                     </Link>
                 </div>
+
                 <div className="flex space-x-8">
                     <HeaderMenu />
                 </div>
