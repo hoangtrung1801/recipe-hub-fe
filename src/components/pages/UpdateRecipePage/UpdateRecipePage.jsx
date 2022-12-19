@@ -10,6 +10,7 @@ import constants from "~/libs/constants";
 import Button from "../../buttons/Button";
 import Input from "../../Input";
 import CreateInstructionsPanel from "../CreateRecipePage/CreateInstructionsPanel";
+import UnderlineLink from "~/components/links/UnderlineLink";
 
 export default function UpdateRecipePage() {
     const methods = useForm();
@@ -59,17 +60,13 @@ export default function UpdateRecipePage() {
 
     return (
         <div className="mt-12">
-            <h1 className="mb-8">Update recipe {`"${recipe.name}"`}</h1>
+            <h1 className="mb-8">Update Recipe</h1>
             <FormProvider {...methods}>
                 <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
-                    {/* <div>
-                        <IngredientsSelectPanel
-                            defaultIngredients={}
-                        />
-                    </div> */}
                     <div>
+                        <h3 className="text-lg font-medium">Message</h3>
                         <Input
-                            label="Message"
+                            // label="Message"
                             placeholder="Your message in this log"
                             required
                             {...register("message", { required: true })}

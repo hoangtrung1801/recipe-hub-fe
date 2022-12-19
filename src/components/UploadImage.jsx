@@ -27,7 +27,7 @@ export default function UploadImage({
                 src={image ? URL.createObjectURL(image) : imageUrl || null}
                 alt="Image"
                 withPlaceholder
-                className={clsxm(isCircle ? "overflow-hidden rounded-full" : "")}
+                className={clsxm(isCircle ? "overflow-hidden rounded-full" : "", "mx-auto")}
             />
             <div className="mt-2 flex justify-center">
                 <FileButton onChange={onSubmitFile} className="w-full">

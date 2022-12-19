@@ -50,14 +50,14 @@ const CommentForm = () => {
                                     {...register("message", { required: true })}
                                 ></textarea>
                             </div>
-                            <div className="flex w-full items-start px-3  md:w-full">
-                                <div className="mr-auto flex w-1/2 items-start px-2 text-gray-700">
+                            <div className="flex w-full flex-col space-y-2 px-3 md:w-full md:flex-row md:items-center md:justify-between">
+                                <div className="mr-auto flex w-full items-start text-gray-700 md:w-1/2">
                                     <p className="pt-px text-xs md:text-sm ">
                                         The comment will show up below here !
                                     </p>
                                 </div>
-                                <div className="-mr-1">
-                                    <Button variant="dark" className="px-12" type="submit">
+                                <div className="">
+                                    <Button variant="dark" className="w-full px-12" type="submit">
                                         Comment
                                     </Button>
                                 </div>

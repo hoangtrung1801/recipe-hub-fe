@@ -8,7 +8,7 @@ import {
     useMantineTheme,
 } from "@mantine/core";
 import * as _ from "lodash";
-import { DotsThree, GitFork, Pencil } from "phosphor-react";
+import { DotsThree, GitFork, Notepad, Pencil } from "phosphor-react";
 import { useEffect } from "react";
 import { useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -23,6 +23,8 @@ import constants from "~/libs/constants";
 import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import StarBlock from "../CreateRecipePage/StarBlock";
 import StartCookingModal from "./CookingModal/StartCookingModal";
+import IngredientsList from "./IngredientsList";
+import deleteRecipe from "~/libs/apis/deleteRecipe";
 
 export default function RecipeDetail() {
     const navigate = useNavigate();
@@ -32,6 +34,7 @@ export default function RecipeDetail() {
 
     const { instructions } = useGetCurrentInstructions(recipe.id);
     const currentUser = useCurrentUserStore((state) => state.currentUser);
+    const fetchUser = useCurrentUserStore((state) => state.fetchUser);
 
     const [isCookingOpened, setIsCookingOpened] = useState(false);
     const [stepNo, setStepNo] = useState(1);
@@ -63,8 +66,9 @@ export default function RecipeDetail() {
             const response = await postForkRecipe(recipeId, data);
 
             if (response.status === constants.responseStatus.SUCCESS) {
-                alert("Fork successfull");
+                // alert("Fork successfull");
                 const recipe = response.data;
+                fetchUser();
                 navigate(`/recipes/${recipe.id}`);
             } else {
                 console.error(response.message);
@@ -74,13 +78,24 @@ export default function RecipeDetail() {
         }
     };
 
+    const onDeleteRecipe = async () => {
+        try {
+            const response = await deleteRecipe(recipeId);
+
+            if (response.status === constants.responseStatus.SUCCESS) {
+                fetchUser();
+                navigate("/");
+            } else {
+                console.error(response.message);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     // useEffect(() => {
     //     setIsStarred(recipe.stars.some((userStarred) => userStarred.id === currentUser?.id));
     // }, [recipe, currentUser, setIsStarred]);
-
-    useEffect(() => {
-        console.log(recipe);
-    }, [recipe]);
 
     return (
         <div className="space-y-8 pt-12">
@@ -145,11 +160,22 @@ export default function RecipeDetail() {
                                                 <p>Edit</p>
                                             </Link>
                                         </div>
+                                        <div
+                                            className=" cursor-pointer px-3 py-1 hover:bg-gray-100"
+                                            onClick={onDeleteRecipe}
+                                        >
+                                            <p>Delete</p>
+                                        </div>
                                     </div>
                                 </Popover.Dropdown>
                             </Popover>
                         )}
                     </div>
+                </div>
+
+                <div className="mt-16 space-y-2 md:hidden">
+                    <h2 className="text-3xl font-bold">Description</h2>
+                    <div className="text-gray-700">{recipe.description}</div>
                 </div>
             </div>
             <div className="flex space-x-4">
@@ -166,42 +192,40 @@ export default function RecipeDetail() {
                     Cook <span className="font-medium">{recipe.cookTime.cook}m</span>
                 </p>
             </div>
-            <div className="border-y border-dark-0">
-                <div className="flex justify-between space-x-4 py-6">
-                    <div className="flex space-x-2">
-                        <StarBlock />
 
-                        <Button
-                            variant="light"
-                            className="space-x-2"
-                            disabled={isForked}
-                            onClick={() => setForkValidationOpen(true)}
-                        >
-                            <GitFork className="text-lg" />
-                            <span>Fork</span>
-                            <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
-                                {recipe.numberOfFork}
-                            </Badge>
+            <div className="border-y border-dark-0">
+                <div className="flex flex-wrap gap-2 py-6">
+                    <StarBlock />
+
+                    <Button
+                        variant="light"
+                        className="space-x-2"
+                        disabled={isForked}
+                        onClick={() => setForkValidationOpen(true)}
+                    >
+                        <GitFork className="text-lg" />
+                        <span>Fork</span>
+                        <Badge className="text-dark -mb-[2px] border-0 bg-primary-200 px-2 text-dark-0">
+                            {recipe.numberOfFork}
+                        </Badge>
+                    </Button>
+                    <Link to="changelog">
+                        <Button variant="light" className="space-x-2">
+                            <Notepad className="text-lg" />
+                            <span>Changelog</span>
                         </Button>
-                    </div>
-                    <div className="flex space-x-2">
-                        <Link to="changelog">
+                    </Link>
+                    {isOwnedOfCurrentUser && (
+                        <Link to="changelog/update">
                             <Button variant="light" className="space-x-2">
                                 <Pencil className="text-lg" />
-                                <span>Changelog</span>
+                                <span>Update</span>
                             </Button>
                         </Link>
-                        {isOwnedOfCurrentUser && (
-                            <Link to="changelog/update">
-                                <Button variant="light" className="space-x-2">
-                                    <Pencil className="text-lg" />
-                                    <span>Update</span>
-                                </Button>
-                            </Link>
-                        )}
-                    </div>
+                    )}
                 </div>
             </div>
+
             <div>
                 <h3 className="text-3xl font-bold">Nutrition</h3>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -223,6 +247,11 @@ export default function RecipeDetail() {
                     )}
                 </div>
             </div>
+
+            <div className="mt-16 md:hidden">
+                <IngredientsList recipe={recipe} />
+            </div>
+
             <div>
                 <h3 className="text-3xl font-bold">Instructions</h3>
                 <div className="mt-8 space-y-6">
@@ -243,6 +272,7 @@ export default function RecipeDetail() {
                         ))}
                 </div>
             </div>
+
             <div>
                 <ButtonStartCook
                     onClick={openCookingModal}

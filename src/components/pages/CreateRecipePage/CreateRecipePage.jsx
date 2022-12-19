@@ -132,7 +132,7 @@ const CreateRecipePage = () => {
             </div>
             <FormProvider {...methods}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="mt-3 grid grid-cols-1 gap-6 gap-y-4 md:grid-cols-2">
+                    <div className="mt-3 gap-6 gap-y-4 space-y-4 md:grid md:grid-cols-2">
                         <div className="flex flex-col gap-3 ">
                             <div className="flex flex-col">
                                 <div className="flex flex-col gap-3 space-y-px">

@@ -48,8 +48,8 @@ const router = [
 const Footer = () => {
     return (
         <div className="container mt-24 h-[80px] border-t border-black">
-            <div className="grid grid-cols-5 items-start py-12">
-                <div className="col-span-3 flex h-full flex-col space-y-4">
+            <div className="grid grid-cols-5 items-start space-y-8 py-12">
+                <div className="col-span-5 flex h-full flex-col space-y-4 md:col-span-3">
                     <div className="">
                         <h1 className="text-4xl font-bold ">Recipe Hub</h1>
                     </div>
@@ -67,11 +67,8 @@ const Footer = () => {
                             // </Link>
                         ))}
                     </div>
-                    <div className="flex flex-1 flex-col-reverse">
-                        <p className="italic">Copyright © 2022 - Lê Kim Hoàng Trung</p>
-                    </div>
                 </div>
-                <div className="col-span-2 grid grid-cols-2 gap-6">
+                <div className="col-span-5 grid grid-cols-2 gap-6 md:col-span-2">
                     {members.map((member) => (
                         <div className="" key={member.code}>
                             <div className="max-w-8 min-h-24 space-y-1 bg-primary-300 p-8">
@@ -81,6 +78,9 @@ const Footer = () => {
                             </div>
                         </div>
                     ))}
+                </div>
+                <div className="col-span-5 flex justify-center">
+                    <p className="italic">Copyright © 2022 - Lê Kim Hoàng Trung</p>
                 </div>
             </div>
         </div>

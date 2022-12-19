@@ -6,6 +6,8 @@ import { Link, useParams } from "react-router-dom";
 import useGetUser from "~/libs/apis/useGetUser";
 import Button from "../../buttons/Button";
 import RecipeCard from "../../RecipeCard";
+import Input from "~/components/Input";
+import { useMemo } from "react";
 
 const recipeList = [
     {
@@ -25,32 +27,32 @@ const ProfilePage = () => {
 
     const { user, isLoading: isLoadingUser } = useGetUser(username);
 
+    const userRecipes = useMemo(() =>
+        user?.recipes.filter((recipe) =>
+            searchRecipe === ""
+                ? true
+                : recipe.name.toLowerCase().includes(searchRecipe.toLowerCase())
+        )
+    );
+
     if (isLoadingUser) return <div></div>;
 
     return (
         <div className="container mt-3 flex flex-col gap-3 md:flex-row">
             <div className="py-2 md:w-1/4">
-                <div className="mt-5">
+                <div className="mt-6">
                     <div className="flex aspect-square w-full max-w-sm items-center justify-center overflow-hidden">
                         <img
                             src={user.avatarUrl || "/avatar-default.jpg"}
                             className="h-full w-full rounded-full object-cover"
                         />
-                        {/* <Image
-                            src={user.avatarUrl || "/avatar-default.jpg"}
-                            withPlaceholder
-                            width={240}
-                            height={240}
-                            fit="cover"
-                            className="overflow-hidden rounded-full"
-                        /> */}
                     </div>
                 </div>
-                <div className="mt-3 flex flex-col space-y-2 px-2">
+                <div className="mt-6 flex flex-col space-y-2 px-2">
                     <div className="space-y-2">
                         <div>
                             <p className="font-semibold text-dark-0">{user.name}</p>
-                            <p className="text-sm text-gray-600">{user.username}</p>
+                            <p className="text-sm text-gray-600">({user.username})</p>
                         </div>
                         <div>
                             <p className="text-gray-700">{user.description}</p>
@@ -72,14 +74,21 @@ const ProfilePage = () => {
                     {/* <span className="text-dark-0">Yours recipes: {user.recipes.length}</span> */}
                 </div>
             </div>
-            <div className="p-2 py-2 md:w-3/4">
+            <div className="space-y-4 px-4 md:w-3/4">
                 <div className="mt-2 flex items-center gap-2">
-                    <input
-                        type="text"
-                        className="block w-full rounded border border-gray-300 bg-primary-100 p-1.5 pl-3 text-sm text-gray-900 focus:outline-none md:w-3/5"
-                        placeholder="Your recipe"
-                        onChange={(e) => setSearchRecipe(e.target.value)}
-                    />
+                    <div className="flex-1">
+                        <Input
+                            placeholder="Search your recipes"
+                            value={searchRecipe}
+                            onChange={(e) => setSearchRecipe(e.target.value)}
+                        />
+                        {/* <input
+                            type="text"
+                            className="block w-full rounded border border-gray-300 bg-primary-100  text-sm text-gray-900 focus:outline-none md:w-3/5"
+                            placeholder="Your recipe"
+                            onChange={(e) => setSearchRecipe(e.target.value)}
+                        /> */}
+                    </div>
                     {/* <RecipleFilter /> */}
                     <Link to="/recipes/create">
                         <Button variant={"dark"} className="max-h-[34px] w-full md:w-[63px]">
@@ -87,8 +96,8 @@ const ProfilePage = () => {
                         </Button>
                     </Link>
                 </div>
-                <div className="gird-cols-2 mt-6 grid gap-6 px-3 md:grid-cols-3">
-                    {user.recipes.map((recipe) => (
+                <div className="gird-cols-2 grid gap-6 md:grid-cols-3">
+                    {userRecipes.map((recipe) => (
                         <RecipeCard recipe={recipe} key={recipe.id} />
                     ))}
                 </div>

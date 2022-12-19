@@ -1,5 +1,5 @@
-import { Modal, Popover, TextInput } from "@mantine/core";
-import { ForkKnife, MagnifyingGlass, User } from "phosphor-react";
+import { ActionIcon, Menu, Modal, Popover, TextInput } from "@mantine/core";
+import { ForkKnife, List, MagnifyingGlass, User } from "phosphor-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -32,11 +32,16 @@ const Header = () => {
                     </Link>
                 </div>
 
-                <div className="flex space-x-8">
+                <div className="hidden space-x-8 md:flex">
                     <HeaderMenu />
                 </div>
-                <div className="flex flex-1">
-                    <HeeaderRight />
+                <div className="hidden flex-1 md:flex">
+                    <HeaderRight />
+                </div>
+
+                {/* Mobile */}
+                <div className="md:hidden">
+                    <HeaderMobile />
                 </div>
             </div>
         </div>
@@ -64,7 +69,7 @@ const HeaderMenu = () => {
     );
 };
 
-const HeeaderRight = () => {
+const HeaderRight = () => {
     const currentUser = useCurrentUserStore((state) => state.currentUser);
 
     const logOut = useCurrentUserStore((state) => state.logOut);
@@ -138,6 +143,85 @@ const HeeaderRight = () => {
                 </div>
             )}
         </div>
+    );
+};
+
+const HeaderMobile = () => {
+    const [searchModal, setSearchModal] = useState(false);
+
+    const currentUser = useCurrentUserStore((state) => state.currentUser);
+    const logOut = useCurrentUserStore((state) => state.logOut);
+
+    const onLogOut = () => {
+        logOut();
+    };
+
+    return (
+        <Menu width={240}>
+            <Menu.Target>
+                <ActionIcon className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-[3px] border-primary-400 transition-colors hover:bg-primary-400/30">
+                    <List className="text-black" weight="bold" />
+                </ActionIcon>
+            </Menu.Target>
+
+            <Menu.Dropdown>
+                <Menu.Label>Pages</Menu.Label>
+                {router.map((route) => (
+                    // <UnderlineLink to={route.path} icon={route.icon} key={route.label}>
+                    //     {route.label}
+                    // </UnderlineLink>
+                    <Link to={route.path} key={route.label}>
+                        <Menu.Item icon={route.icon}>{route.label}</Menu.Item>
+                    </Link>
+                ))}
+                <Menu.Item icon={<MagnifyingGlass />} onClick={() => setSearchModal(true)}>
+                    Search
+                </Menu.Item>
+
+                <Menu.Divider />
+                {currentUser && (
+                    <>
+                        <Menu.Label>Profile</Menu.Label>
+                        <Link to={`/${currentUser?.username}`}>
+                            <Menu.Item
+                                icon={
+                                    <div className="h-8 w-8 overflow-hidden rounded-full">
+                                        <img
+                                            src={currentUser?.avatarUrl || "/avatar-default.jpg"}
+                                            alt="Randy Robertson"
+                                        />
+                                    </div>
+                                }
+                            >
+                                <p className="font-medium">Logged in as</p>
+                                <p>{currentUser?.username}</p>
+                            </Menu.Item>
+                        </Link>
+                        <Link to={`/${currentUser?.username}`}>
+                            <Menu.Item>Your profile</Menu.Item>
+                        </Link>
+                        <Link to={`/${currentUser.username}`}>
+                            <Menu.Item>Your recipes</Menu.Item>
+                        </Link>
+
+                        <Menu.Divider />
+                        <Menu.Item onClick={onLogOut}>Log out</Menu.Item>
+                    </>
+                )}
+                {!currentUser && (
+                    <>
+                        <Link to="/login">
+                            <Menu.Item>Login</Menu.Item>
+                        </Link>
+                        <Link to="/signup">
+                            <Menu.Item>Sign up</Menu.Item>
+                        </Link>
+                    </>
+                )}
+            </Menu.Dropdown>
+
+            <SearchModal searchModal={searchModal} setSearchModal={setSearchModal} />
+        </Menu>
     );
 };
 

@@ -79,8 +79,8 @@ export default function RecipeEditPage() {
             <h1 className="mb-4 text-4xl font-bold">Edit recipe</h1>
             <FormProvider {...methods}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="flex">
-                        <div className="py-2 md:w-3/4 md:pr-10">
+                    <div className="flex flex-col md:flex-row">
+                        <div className="order-2 py-2 md:w-3/4 md:pr-10">
                             <div className="flex flex-col space-y-4">
                                 {/* <Textarea
                                             key={item.value}
@@ -133,7 +133,7 @@ export default function RecipeEditPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="basis-[300px]">
+                        <div className="order-1 basis-[300px] md:order-2">
                             <UploadImage
                                 // isCircle={true}
                                 height={300}
@@ -143,9 +143,16 @@ export default function RecipeEditPage() {
                             />
                         </div>
                     </div>
-                    <Button variant="dark" type="submit" loading={loading}>
-                        Save changes
-                    </Button>
+                    <div className="flex">
+                        <Button
+                            variant="dark"
+                            type="submit"
+                            loading={loading}
+                            className="mt-4 px-12 md:ml-auto"
+                        >
+                            Save changes
+                        </Button>
+                    </div>
                 </form>
             </FormProvider>
         </div>

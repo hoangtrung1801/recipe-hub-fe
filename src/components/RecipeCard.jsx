@@ -22,12 +22,12 @@ const RecipeCard = ({ recipe }) => {
                     <div className="flex items-center justify-center">
                         <Clock className="mr-1 h-5 w-5" />
                         {/* <span>--m</span> */}
-                        <span>{recipe?.cookTime.total}m</span>
+                        <span>{recipe?.cookTime?.total}m</span>
                         {/* <span>+</span> */}
                     </div>
                     <div className="flex items-center justify-center">
                         <Leaf className="mr-1 h-5 w-5" />
-                        <span>6 plants</span>
+                        <span>-- plants</span>
                     </div>
                 </div>
             </div>
