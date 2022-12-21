@@ -1,18 +1,17 @@
-import { MultiSelect, Select, Textarea, TextInput } from "@mantine/core";
+import { MultiSelect, Select, TextInput, Textarea } from "@mantine/core";
 import * as _ from "lodash";
 import { useMemo, useState } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import Modal from "~/components/Modal";
 import UploadImage from "~/components/UploadImage";
 import postRecipe from "~/libs/apis/postRecipes";
 import useGetCatalogs from "~/libs/apis/useGetCatalogs";
-import useGetRecipes from "~/libs/apis/useGetRecipes";
 import constants from "~/libs/constants";
 import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import Button from "../../buttons/Button";
 import CreateInstructionsPanel from "./CreateInstructionsPanel";
 import IngredientsSelectPanel from "./IngredientsSelectPanel";
-import Modal from "~/components/Modal";
 
 const modeInput = {
     label: "Mode",
@@ -144,7 +143,8 @@ const CreateRecipePage = () => {
                                             key={"name"}
                                             label="Name"
                                             placeholder={"Your name"}
-                                            {...register("name")}
+                                            {...register("name", { required: true })}
+                                            required
                                         />
                                     </div>
                                     <div>
@@ -152,7 +152,8 @@ const CreateRecipePage = () => {
                                             key={"description"}
                                             label={"Description"}
                                             placeholder={"Description of this recipe"}
-                                            {...register("description")}
+                                            {...register("description", { required: true })}
+                                            required
                                         />
                                     </div>
 
@@ -163,7 +164,8 @@ const CreateRecipePage = () => {
                                                 placeholder={modeInput.placeholder}
                                                 data={modeInput.data}
                                                 defaultValue={"PUBLIC"}
-                                                {...register(modeInput.field)}
+                                                {...register(modeInput.field, { required: true })}
+                                                required
                                                 className="w-full"
                                             />
                                         </div>
@@ -212,7 +214,9 @@ const CreateRecipePage = () => {
                                             }
                                             {...register(`cookTime.${cookTime.field}`, {
                                                 valueAsNumber: true,
+                                                required: true,
                                             })}
+                                            required
                                         />
                                     ))}
                                 </div>
@@ -237,7 +241,9 @@ const CreateRecipePage = () => {
                                             }
                                             {...register(`nutrition.${nutrition.field}`, {
                                                 valueAsNumber: true,
+                                                required: true,
                                             })}
+                                            required
                                         />
                                     ))}
                                 </div>
