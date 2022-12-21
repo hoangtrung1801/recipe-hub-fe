@@ -17,8 +17,13 @@ import UpdateProfilePage from "./components/pages/UpdateProfilePage/UpdateProfil
 import UpdateRecipePage from "./components/pages/UpdateRecipePage/UpdateRecipePage";
 import fetchUser from "./libs/apis/fetchUser";
 import constants from "./libs/constants";
+import AdminPage from "./components/pages/Admin/Admin";
 
 const router = createBrowserRouter([
+    {
+        path: "/admin-page",
+        element: <AdminPage />,
+    },
     {
         path: "/",
         element: <Layout />,
@@ -93,6 +98,7 @@ const router = createBrowserRouter([
                 path: "/search",
                 element: <SearchPage />,
             },
+
             {
                 path: "/:username",
                 element: <ProfilePage />,

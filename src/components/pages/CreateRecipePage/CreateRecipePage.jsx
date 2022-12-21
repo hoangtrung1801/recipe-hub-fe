@@ -12,6 +12,7 @@ import useCurrentUserStore from "~/libs/stores/useCurrentUserStore";
 import Button from "../../buttons/Button";
 import CreateInstructionsPanel from "./CreateInstructionsPanel";
 import IngredientsSelectPanel from "./IngredientsSelectPanel";
+import Modal from "~/components/Modal";
 
 const modeInput = {
     label: "Mode",
@@ -38,6 +39,7 @@ const CreateRecipePage = () => {
     const fetchUser = useCurrentUserStore((state) => state.fetchUser);
 
     const [submitLoading, setSubmitLoading] = useState(false);
+    const [errorModal, setErrorModal] = useState(false);
 
     const dataCatalogs = useMemo(
         () =>
@@ -118,6 +120,7 @@ const CreateRecipePage = () => {
             }
             // console.log(response);
         } catch (err) {
+            setErrorModal(true);
             console.error(err);
         } finally {
             setSubmitLoading(false);
@@ -264,6 +267,9 @@ const CreateRecipePage = () => {
                     </div>
                 </form>
             </FormProvider>
+            <Modal isOpen={errorModal} setIsOpen={setErrorModal} title={"Error"}>
+                <p>Please input again!</p>
+            </Modal>
         </div>
     );
 };

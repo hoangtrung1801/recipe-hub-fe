@@ -9,6 +9,10 @@ const fetcherGet = (input, ...config) =>
     axios
         .get(input, {
             withCredentials: true,
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
             ...config,
         })
         .then((res) => res.data)

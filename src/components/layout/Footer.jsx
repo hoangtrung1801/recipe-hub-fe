@@ -80,7 +80,7 @@ const Footer = () => {
                     ))}
                 </div>
                 <div className="col-span-5 flex justify-center">
-                    <p className="italic">Copyright © 2022 - Lê Kim Hoàng Trung</p>
+                    <p className="italic">Copyright © 2022</p>
                 </div>
             </div>
         </div>
