@@ -25,6 +25,7 @@ import StarBlock from "../CreateRecipePage/StarBlock";
 import StartCookingModal from "./CookingModal/StartCookingModal";
 import IngredientsList from "./IngredientsList";
 import deleteRecipe from "~/libs/apis/deleteRecipe";
+import PrintRecipe from "./PrintRecipe/PrintRecipe";
 
 export default function RecipeDetail() {
     const navigate = useNavigate();
@@ -253,7 +254,10 @@ export default function RecipeDetail() {
             </div>
 
             <div>
-                <h3 className="text-3xl font-bold">Instructions</h3>
+                <div className="flex justify-between">
+                    <h3 className="text-3xl font-bold">Instructions</h3>
+                    <PrintRecipe />
+                </div>
                 <div className="mt-8 space-y-6">
                     {instructions &&
                         instructions.map((instruction) => (
