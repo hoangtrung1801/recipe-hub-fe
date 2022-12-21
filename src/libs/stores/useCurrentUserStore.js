@@ -20,6 +20,28 @@ const useCurrentUserStore = create((set, get) => ({
         await get().fetchUser();
         return response;
     },
+    loginWithGoogle: async (resGoogle) => {
+        const { profileObj } = resGoogle;
+        const username = profileObj.email.split("@")[0];
+        const { name, googleId: password, imageUrl } = profileObj;
+
+        let response;
+        try {
+            await get().signUp({
+                username,
+                password,
+                name,
+                phone: "012345678",
+                address: "@",
+                avatarUrl: imageUrl,
+            });
+        } finally {
+            response = await login(username, password);
+        }
+
+        await get().fetchUser();
+        return response;
+    },
     signUp: async (userData) => {
         const response = await signUp(userData);
         await get().fetchUser();
