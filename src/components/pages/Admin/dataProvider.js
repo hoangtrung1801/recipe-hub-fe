@@ -36,12 +36,13 @@ const dataProvider = {
         };
     },
     update: async function (resource, params) {
-        let updateData = {};
-        Object.keys(params.data).map((key) => {
-            const value = params.data[key];
-            const previousValue = params.previousData[key];
-            if (JSON.stringify(value) !== JSON.stringify(previousValue)) updateData[key] = value;
-        });
+        console.log("update", resource, params);
+        // let updateData = {};
+        // Object.keys(params.data).map((key) => {
+        //     const value = params.data[key];
+        //     const previousValue = params.previousData[key];
+        //     if (JSON.stringify(value) !== JSON.stringify(previousValue)) updateData[key] = value;
+        // });
 
         const data = await fetcherPut(`${apiUrl}/${resource}/${params.id}`, updateData);
 

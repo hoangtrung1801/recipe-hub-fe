@@ -1,6 +1,7 @@
 import {
     ArrayInput,
     ChipField,
+    Create,
     Datagrid,
     DateInput,
     Edit,
@@ -32,14 +33,13 @@ export const RecipeList = () => (
 );
 
 export const RecipeEdit = (props) => {
-    console.log(props);
     return (
         <Edit>
             <SimpleForm>
                 {/* <TextInput source="id" /> */}
                 {/* <DateInput source="createdAt" />
             <DateInput source="updatedAt" /> */}
-                <TextInput source="name" />
+                {/* <TextInput source="name" /> */}
                 {/* <TextInput source="description" /> */}
                 {/* <NumberInput source="numberOfFork" />
             <TextInput source="mode" />
@@ -88,5 +88,64 @@ export const RecipeEdit = (props) => {
             </ArrayInput> */}
             </SimpleForm>
         </Edit>
+    );
+};
+
+export const RecipeCreate = (props) => {
+    return (
+        <Create>
+            <SimpleForm>
+                {/* <TextInput source="id" /> */}
+                {/* <DateInput source="createdAt" />
+            <DateInput source="updatedAt" /> */}
+                {/* <TextInput source="name" /> */}
+                {/* <TextInput source="description" /> */}
+                {/* <NumberInput source="numberOfFork" />
+            <TextInput source="mode" />
+            <ImageInput source="imageUrl" /> */}
+                {/* <ArrayInput source="ingredients">
+                <SimpleFormIterator>
+                    <TextInput source="id" />
+                    <TextInput source="name" />
+                    <NumberInput source="amount" />
+                    <TextInput source="unit" />
+                </SimpleFormIterator>
+            </ArrayInput>
+            <TextInput source="cookTime.id" />
+            <TextInput source="nutrition.id" />
+            <ArrayInput source="comments">
+                <SimpleFormIterator>
+                    <TextInput source="id" />
+                    <DateInput source="createdAt" />
+                    <DateInput source="updatedAt" />
+                    <TextInput source="message" />
+                </SimpleFormIterator>
+            </ArrayInput>
+            <ArrayInput source="catalogs">
+                <SimpleFormIterator>
+                    <TextInput source="id" />
+                    <DateInput source="createdAt" />
+                    <DateInput source="updatedAt" />
+                    <TextInput source="name" />
+                    <TextInput source="description" />
+                </SimpleFormIterator>
+            </ArrayInput>
+            <TextInput source="user.id" />
+            <ArrayInput source="stars">
+                <SimpleFormIterator>
+                    <TextInput source="id" />
+                    <DateInput source="createdAt" />
+                    <DateInput source="updatedAt" />
+                    <TextInput source="username" />
+                    <TextInput source="name" />
+                    <TextInput source="phone" />
+                    <TextInput source="address" />
+                    <TextInput source="role" />
+                    <TextInput source="description" />
+                    <TextInput source="avatarUrl" />
+                </SimpleFormIterator>
+            </ArrayInput> */}
+            </SimpleForm>
+        </Create>
     );
 };

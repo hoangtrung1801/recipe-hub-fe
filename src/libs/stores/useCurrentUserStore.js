@@ -51,7 +51,7 @@ const useCurrentUserStore = create((set, get) => ({
         if (!get().currentUser) return false;
 
         await logOut();
-        set({ currentUser: null });
+        set({ currentUser: undefined });
         return true;
     },
 }));
